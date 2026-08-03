@@ -1,0 +1,158 @@
+{
+  "config": {
+    "base": "models/sft_compress_e2_merged",
+    "model": "models/grpo_e2_lr5",
+    "datasets": "IoT_Original_Distribution.csv,UNSW_NB15.csv,UNSW_2018_IoT_Botnet_Final_10_Best.csv",
+    "data_dir": "/home/chibuike/quantum-ml-iot-nid",
+    "num_qubits": 6,
+    "train_size": 32,
+    "test_size": 32,
+    "noise_p1": 0.01,
+    "max_new_tokens": 1800,
+    "seed": 42,
+    "output": "results/ensemble_compression_lr5.json"
+  },
+  "component_metrics": {
+    "Z_1_full": {
+      "orig_2q": 0,
+      "comp_2q": 0,
+      "compressed_ok": true
+    },
+    "ZZ_2_full": {
+      "orig_2q": 60,
+      "comp_2q": 2,
+      "compressed_ok": true
+    },
+    "Pauli_1_full": {
+      "orig_2q": 30,
+      "comp_2q": 2,
+      "compressed_ok": true
+    },
+    "Custom_1_full": {
+      "orig_2q": 15,
+      "comp_2q": 1,
+      "compressed_ok": true
+    },
+    "ZZ_2_linear": {
+      "orig_2q": 20,
+      "comp_2q": 2,
+      "compressed_ok": true
+    }
+  },
+  "datasets": {
+    "IoT_Original_Distribution.csv": {
+      "QVE3": {
+        "n_maps": 3,
+        "mode": "majority",
+        "orig_acc": 0.90625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.90625,
+        "comp_mcc": 0.35986374603287324,
+        "retention": 1.0,
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556
+      },
+      "QVE5": {
+        "n_maps": 5,
+        "mode": "majority",
+        "orig_acc": 0.90625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.90625,
+        "comp_mcc": 0.35986374603287324,
+        "retention": 1.0,
+        "ensemble_2q_orig": 125,
+        "ensemble_2q_comp": 7,
+        "ensemble_comp_pct": 94.4
+      },
+      "QWE3": {
+        "n_maps": 3,
+        "mode": "weighted",
+        "orig_acc": 0.90625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.90625,
+        "comp_mcc": 0.35986374603287324,
+        "retention": 1.0,
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556
+      }
+    },
+    "UNSW_NB15.csv": {
+      "QVE3": {
+        "n_maps": 3,
+        "mode": "majority",
+        "orig_acc": 0.625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.75,
+        "comp_mcc": 0.4666666666666667,
+        "retention": 1.2,
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556
+      },
+      "QVE5": {
+        "n_maps": 5,
+        "mode": "majority",
+        "orig_acc": 0.625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.75,
+        "comp_mcc": 0.4666666666666667,
+        "retention": 1.2,
+        "ensemble_2q_orig": 125,
+        "ensemble_2q_comp": 7,
+        "ensemble_comp_pct": 94.4
+      },
+      "QWE3": {
+        "n_maps": 3,
+        "mode": "weighted",
+        "orig_acc": 0.625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.75,
+        "comp_mcc": 0.4666666666666667,
+        "retention": 1.2,
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556
+      }
+    },
+    "UNSW_2018_IoT_Botnet_Final_10_Best.csv": {
+      "QVE3": {
+        "n_maps": 3,
+        "mode": "majority",
+        "orig_acc": 0.90625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.96875,
+        "comp_mcc": 0.8509629433967631,
+        "retention": 1.0689655172413792,
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556
+      },
+      "QVE5": {
+        "n_maps": 5,
+        "mode": "majority",
+        "orig_acc": 0.90625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.96875,
+        "comp_mcc": 0.8509629433967631,
+        "retention": 1.0689655172413792,
+        "ensemble_2q_orig": 125,
+        "ensemble_2q_comp": 7,
+        "ensemble_comp_pct": 94.4
+      },
+      "QWE3": {
+        "n_maps": 3,
+        "mode": "weighted",
+        "orig_acc": 0.90625,
+        "orig_mcc": 0.0,
+        "comp_acc": 0.96875,
+        "comp_mcc": 0.8509629433967631,
+        "retention": 1.0689655172413792,
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556
+      }
+    }
+  }
+}

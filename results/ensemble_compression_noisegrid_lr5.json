@@ -1,0 +1,357 @@
+{
+  "config": {
+    "base": "models/sft_compress_e2_merged",
+    "model": "models/grpo_e2_lr5",
+    "datasets": "IoT_Original_Distribution.csv,UNSW_NB15.csv,UNSW_2018_IoT_Botnet_Final_10_Best.csv",
+    "data_dir": "/home/chibuike/quantum-ml-iot-nid",
+    "num_qubits": 6,
+    "train_size": 32,
+    "test_size": 32,
+    "noise_p1": 0.01,
+    "noise_grid": "0.0,0.01,0.03,0.05,0.1",
+    "max_new_tokens": 1800,
+    "seed": 42,
+    "output": "results/ensemble_compression_noisegrid_lr5.json"
+  },
+  "component_metrics": {
+    "Z_1_full": {
+      "orig_2q": 0,
+      "comp_2q": 0,
+      "compressed_ok": true
+    },
+    "ZZ_2_full": {
+      "orig_2q": 60,
+      "comp_2q": 2,
+      "compressed_ok": true
+    },
+    "Pauli_1_full": {
+      "orig_2q": 30,
+      "comp_2q": 2,
+      "compressed_ok": true
+    },
+    "Custom_1_full": {
+      "orig_2q": 15,
+      "comp_2q": 1,
+      "compressed_ok": true
+    },
+    "ZZ_2_linear": {
+      "orig_2q": 20,
+      "comp_2q": 2,
+      "compressed_ok": true
+    }
+  },
+  "datasets": {
+    "IoT_Original_Distribution.csv": {
+      "QVE3": {
+        "n_maps": 3,
+        "mode": "majority",
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.9375,
+            "comp_acc": 0.9375,
+            "retention": 1.0
+          },
+          "0.01": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.03": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.875,
+            "retention": 0.9655172413793104
+          },
+          "0.05": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          }
+        }
+      },
+      "QVE5": {
+        "n_maps": 5,
+        "mode": "majority",
+        "ensemble_2q_orig": 125,
+        "ensemble_2q_comp": 7,
+        "ensemble_comp_pct": 94.4,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.9375,
+            "comp_acc": 0.9375,
+            "retention": 1.0
+          },
+          "0.01": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.03": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.875,
+            "retention": 0.9655172413793104
+          },
+          "0.05": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          }
+        }
+      },
+      "QWE3": {
+        "n_maps": 3,
+        "mode": "weighted",
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.9375,
+            "comp_acc": 0.9375,
+            "retention": 1.0
+          },
+          "0.01": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.03": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.875,
+            "retention": 0.9655172413793104
+          },
+          "0.05": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          }
+        }
+      }
+    },
+    "UNSW_NB15.csv": {
+      "QVE3": {
+        "n_maps": 3,
+        "mode": "majority",
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.78125,
+            "comp_acc": 0.75,
+            "retention": 0.96
+          },
+          "0.01": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.78125,
+            "retention": 1.25
+          },
+          "0.03": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.78125,
+            "retention": 1.25
+          },
+          "0.05": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.625,
+            "retention": 1.0
+          }
+        }
+      },
+      "QVE5": {
+        "n_maps": 5,
+        "mode": "majority",
+        "ensemble_2q_orig": 125,
+        "ensemble_2q_comp": 7,
+        "ensemble_comp_pct": 94.4,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.78125,
+            "comp_acc": 0.75,
+            "retention": 0.96
+          },
+          "0.01": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.78125,
+            "retention": 1.25
+          },
+          "0.03": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.78125,
+            "retention": 1.25
+          },
+          "0.05": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.625,
+            "retention": 1.0
+          }
+        }
+      },
+      "QWE3": {
+        "n_maps": 3,
+        "mode": "weighted",
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.78125,
+            "comp_acc": 0.75,
+            "retention": 0.96
+          },
+          "0.01": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.78125,
+            "retention": 1.25
+          },
+          "0.03": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.78125,
+            "retention": 1.25
+          },
+          "0.05": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.625,
+            "comp_acc": 0.625,
+            "retention": 1.0
+          }
+        }
+      }
+    },
+    "UNSW_2018_IoT_Botnet_Final_10_Best.csv": {
+      "QVE3": {
+        "n_maps": 3,
+        "mode": "majority",
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.01": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.03": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.05": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          }
+        }
+      },
+      "QVE5": {
+        "n_maps": 5,
+        "mode": "majority",
+        "ensemble_2q_orig": 125,
+        "ensemble_2q_comp": 7,
+        "ensemble_comp_pct": 94.4,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.9375,
+            "comp_acc": 0.96875,
+            "retention": 1.0333333333333334
+          },
+          "0.01": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.03": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.05": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          }
+        }
+      },
+      "QWE3": {
+        "n_maps": 3,
+        "mode": "weighted",
+        "ensemble_2q_orig": 90,
+        "ensemble_2q_comp": 4,
+        "ensemble_comp_pct": 95.55555555555556,
+        "by_noise": {
+          "0.0": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.01": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.03": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.96875,
+            "retention": 1.0689655172413792
+          },
+          "0.05": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          },
+          "0.1": {
+            "orig_acc": 0.90625,
+            "comp_acc": 0.90625,
+            "retention": 1.0
+          }
+        }
+      }
+    }
+  }
+}

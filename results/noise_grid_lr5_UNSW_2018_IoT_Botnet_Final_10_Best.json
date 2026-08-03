@@ -1,0 +1,82 @@
+{
+  "config": {
+    "base": "models/sft_compress_e2_merged",
+    "model": [
+      "sft:",
+      "lr5:models/grpo_e2_lr5"
+    ],
+    "dataset": "UNSW_2018_IoT_Botnet_Final_10_Best.csv",
+    "data_dir": "/home/chibuike/quantum-ml-iot-nid",
+    "num_qubits": 6,
+    "train_size": 32,
+    "test_size": 32,
+    "noise_grid": "0.0,0.01,0.03,0.05,0.1",
+    "gate_mode": "or",
+    "max_new_tokens": 1800,
+    "seed": 42,
+    "output": "results/noise_grid_lr5_UNSW_2018_IoT_Botnet_Final_10_Best.json"
+  },
+  "noises": [
+    0.0,
+    0.01,
+    0.03,
+    0.05,
+    0.1
+  ],
+  "models": {
+    "sft": {
+      "0.0": {
+        "mean_comp_pct": 22.138535621681687,
+        "mean_acc": 0.96875,
+        "mean_retention": 1.0086206896551724
+      },
+      "0.01": {
+        "mean_comp_pct": 22.138535621681687,
+        "mean_acc": 0.9453125,
+        "mean_retention": 1.0086206896551724
+      },
+      "0.03": {
+        "mean_comp_pct": 22.138535621681687,
+        "mean_acc": 0.9296875,
+        "mean_retention": 1.0
+      },
+      "0.05": {
+        "mean_comp_pct": 22.138535621681687,
+        "mean_acc": 0.9296875,
+        "mean_retention": 1.0
+      },
+      "0.1": {
+        "mean_comp_pct": 22.138535621681687,
+        "mean_acc": 0.921875,
+        "mean_retention": 1.0
+      }
+    },
+    "lr5": {
+      "0.0": {
+        "mean_comp_pct": 62.346583859116265,
+        "mean_acc": 0.9296875,
+        "mean_retention": 0.9708872126436782
+      },
+      "0.01": {
+        "mean_comp_pct": 62.346583859116265,
+        "mean_acc": 0.9296875,
+        "mean_retention": 0.9946381395995549
+      },
+      "0.03": {
+        "mean_comp_pct": 62.346583859116265,
+        "mean_acc": 0.9296875,
+        "mean_retention": 1.0024245689655171
+      },
+      "0.05": {
+        "mean_comp_pct": 62.346583859116265,
+        "mean_acc": 0.8984375,
+        "mean_retention": 0.9679418103448276
+      },
+      "0.1": {
+        "mean_comp_pct": 62.346583859116265,
+        "mean_acc": 0.90625,
+        "mean_retention": 0.9838709677419355
+      }
+    }
+  }
+}

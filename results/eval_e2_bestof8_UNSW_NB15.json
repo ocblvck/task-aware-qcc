@@ -1,0 +1,467 @@
+{
+  "config": {
+    "base": "models/sft_compress_e2_merged",
+    "model": [
+      "sft:",
+      "e2_or:models/grpo_e2_or",
+      "e2_big:models/grpo_e2_big",
+      "e2_hot:models/grpo_e2_hot"
+    ],
+    "dataset": "UNSW_NB15.csv",
+    "data_dir": "/home/chibuike/quantum-ml-iot-nid",
+    "num_qubits": 6,
+    "train_size": 32,
+    "test_size": 16,
+    "noise_p1": 0.01,
+    "gate_mode": "or",
+    "max_new_tokens": 1800,
+    "samples": 8,
+    "temperature": 1.1,
+    "seed": 42,
+    "output": "results/eval_e2_bestof8_UNSW_NB15.json"
+  },
+  "baseline_by_spec": {
+    "ZZ_2_full": {
+      "orig_metrics": {
+        "depth": 49,
+        "gates": 114,
+        "two_qubit": 60,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.625
+    },
+    "ZZ_2_linear": {
+      "orig_metrics": {
+        "depth": 25,
+        "gates": 54,
+        "two_qubit": 20,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.625
+    },
+    "Z_1_full": {
+      "orig_metrics": {
+        "depth": 2,
+        "gates": 12,
+        "two_qubit": 0,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.875
+    },
+    "Z_1_linear": {
+      "orig_metrics": {
+        "depth": 2,
+        "gates": 12,
+        "two_qubit": 0,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.875
+    },
+    "Pauli_1_full": {
+      "orig_metrics": {
+        "depth": 29,
+        "gates": 57,
+        "two_qubit": 30,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.625
+    },
+    "Pauli_1_linear": {
+      "orig_metrics": {
+        "depth": 17,
+        "gates": 27,
+        "two_qubit": 10,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.6875
+    },
+    "Custom_1_full": {
+      "orig_metrics": {
+        "depth": 12,
+        "gates": 33,
+        "two_qubit": 15,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.625
+    },
+    "Custom_1_linear": {
+      "orig_metrics": {
+        "depth": 8,
+        "gates": 23,
+        "two_qubit": 5,
+        "num_qubits": 6
+      },
+      "baseline_accuracy": 0.875
+    }
+  },
+  "models": {
+    "sft": {
+      "summary": {
+        "validity_rate": 1.0,
+        "mean_compression_pct": 22.138535621681687,
+        "mean_equivalence": 0.6522970827075716,
+        "mean_accuracy": 0.765625,
+        "mean_accuracy_retention": 1.0625,
+        "mean_reward": 0.9932026102734395
+      },
+      "per_spec": [
+        {
+          "spec": "ZZ_2_full",
+          "valid": 1.0,
+          "equiv": 0.023830854969426888,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.6153846153846154,
+          "gate": 0.25,
+          "reward": 0.7936877180292896
+        },
+        {
+          "spec": "ZZ_2_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999998,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999998,
+          "reward": 0.6249999999999993
+        },
+        {
+          "spec": "Z_1_full",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Z_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Pauli_1_full",
+          "valid": 1.0,
+          "equiv": 0.04004127745293674,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.41250000000000003,
+          "compression_gain": 0.5842696629213483,
+          "gate": 0.41250000000000003,
+          "reward": 1.1412960911010495
+        },
+        {
+          "spec": "Pauli_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999991,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.375,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999991,
+          "reward": 0.6874999999999998
+        },
+        {
+          "spec": "Custom_1_full",
+          "valid": 1.0,
+          "equiv": 0.15450452923821473,
+          "candidate_accuracy": 0.875,
+          "utility": 0.8250000000000001,
+          "compression_gain": 0.5714285714285714,
+          "gate": 0.8250000000000001,
+          "reward": 2.073137073057179
+        },
+        {
+          "spec": "Custom_1_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999999,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999999,
+          "reward": 0.8749999999999998
+        }
+      ]
+    },
+    "e2_or": {
+      "summary": {
+        "validity_rate": 1.0,
+        "mean_compression_pct": 23.32196757434441,
+        "mean_equivalence": 0.6517168655195034,
+        "mean_accuracy": 0.765625,
+        "mean_accuracy_retention": 1.0625,
+        "mean_reward": 1.0019042847619894
+      },
+      "per_spec": [
+        {
+          "spec": "ZZ_2_full",
+          "valid": 1.0,
+          "equiv": 0.019189117464882097,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.7100591715976331,
+          "gate": 0.25,
+          "reward": 0.8633011139376894
+        },
+        {
+          "spec": "ZZ_2_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999998,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999998,
+          "reward": 0.6249999999999993
+        },
+        {
+          "spec": "Z_1_full",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Z_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Pauli_1_full",
+          "valid": 1.0,
+          "equiv": 0.04004127745293674,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.41250000000000003,
+          "compression_gain": 0.5842696629213483,
+          "gate": 0.41250000000000003,
+          "reward": 1.1412960911010495
+        },
+        {
+          "spec": "Pauli_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999991,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.375,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999991,
+          "reward": 0.6874999999999998
+        },
+        {
+          "spec": "Custom_1_full",
+          "valid": 1.0,
+          "equiv": 0.15450452923821473,
+          "candidate_accuracy": 0.875,
+          "utility": 0.8250000000000001,
+          "compression_gain": 0.5714285714285714,
+          "gate": 0.8250000000000001,
+          "reward": 2.073137073057179
+        },
+        {
+          "spec": "Custom_1_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999999,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999999,
+          "reward": 0.8749999999999998
+        }
+      ]
+    },
+    "e2_big": {
+      "summary": {
+        "validity_rate": 1.0,
+        "mean_compression_pct": 22.138535621681687,
+        "mean_equivalence": 0.6509315622264928,
+        "mean_accuracy": 0.765625,
+        "mean_accuracy_retention": 1.0625,
+        "mean_reward": 0.992792954129116
+      },
+      "per_spec": [
+        {
+          "spec": "ZZ_2_full",
+          "valid": 1.0,
+          "equiv": 0.01290669112079737,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.6153846153846154,
+          "gate": 0.25,
+          "reward": 0.7904104688747008
+        },
+        {
+          "spec": "ZZ_2_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999998,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999998,
+          "reward": 0.6249999999999993
+        },
+        {
+          "spec": "Z_1_full",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Z_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Pauli_1_full",
+          "valid": 1.0,
+          "equiv": 0.04004127745293674,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.41250000000000003,
+          "compression_gain": 0.5842696629213483,
+          "gate": 0.41250000000000003,
+          "reward": 1.1412960911010495
+        },
+        {
+          "spec": "Pauli_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999991,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.375,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999991,
+          "reward": 0.6874999999999998
+        },
+        {
+          "spec": "Custom_1_full",
+          "valid": 1.0,
+          "equiv": 0.15450452923821473,
+          "candidate_accuracy": 0.875,
+          "utility": 0.8250000000000001,
+          "compression_gain": 0.5714285714285714,
+          "gate": 0.8250000000000001,
+          "reward": 2.073137073057179
+        },
+        {
+          "spec": "Custom_1_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999999,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999999,
+          "reward": 0.8749999999999998
+        }
+      ]
+    },
+    "e2_hot": {
+      "summary": {
+        "validity_rate": 1.0,
+        "mean_compression_pct": 23.32196757434441,
+        "mean_equivalence": 0.6517168655195034,
+        "mean_accuracy": 0.765625,
+        "mean_accuracy_retention": 1.0625,
+        "mean_reward": 1.0019042847619894
+      },
+      "per_spec": [
+        {
+          "spec": "ZZ_2_full",
+          "valid": 1.0,
+          "equiv": 0.019189117464882097,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.7100591715976331,
+          "gate": 0.25,
+          "reward": 0.8633011139376894
+        },
+        {
+          "spec": "ZZ_2_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999998,
+          "candidate_accuracy": 0.625,
+          "utility": 0.25,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999998,
+          "reward": 0.6249999999999993
+        },
+        {
+          "spec": "Z_1_full",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Z_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999989,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999989,
+          "reward": 0.8749999999999997
+        },
+        {
+          "spec": "Pauli_1_full",
+          "valid": 1.0,
+          "equiv": 0.04004127745293674,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.41250000000000003,
+          "compression_gain": 0.5842696629213483,
+          "gate": 0.41250000000000003,
+          "reward": 1.1412960911010495
+        },
+        {
+          "spec": "Pauli_1_linear",
+          "valid": 1.0,
+          "equiv": 0.9999999999999991,
+          "candidate_accuracy": 0.6875,
+          "utility": 0.375,
+          "compression_gain": 0.0,
+          "gate": 0.9999999999999991,
+          "reward": 0.6874999999999998
+        },
+        {
+          "spec": "Custom_1_full",
+          "valid": 1.0,
+          "equiv": 0.15450452923821473,
+          "candidate_accuracy": 0.875,
+          "utility": 0.8250000000000001,
+          "compression_gain": 0.5714285714285714,
+          "gate": 0.8250000000000001,
+          "reward": 2.073137073057179
+        },
+        {
+          "spec": "Custom_1_linear",
+          "valid": 1.0,
+          "equiv": 0.999999999999999,
+          "candidate_accuracy": 0.875,
+          "utility": 0.75,
+          "compression_gain": 0.0,
+          "gate": 0.999999999999999,
+          "reward": 0.8749999999999998
+        }
+      ]
+    }
+  }
+}

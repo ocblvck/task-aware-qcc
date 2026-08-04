@@ -1,0 +1,42 @@
+{
+  "ZZ_2_full": {
+    "orig_2q": 60,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "ZZ_2_linear": {
+    "orig_2q": 20,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "Z_1_full": {
+    "orig_2q": 0,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "Z_1_linear": {
+    "orig_2q": 0,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "Pauli_1_full": {
+    "orig_2q": 30,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "Pauli_1_linear": {
+    "orig_2q": 10,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "Custom_1_full": {
+    "orig_2q": 15,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "Custom_1_linear": {
+    "orig_2q": 5,
+    "comp_2q": 0,
+    "compressed_ok": true
+  }
+}

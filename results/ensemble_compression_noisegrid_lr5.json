@@ -51,27 +51,37 @@
         "by_noise": {
           "0.0": {
             "orig_acc": 0.9375,
-            "comp_acc": 0.9375,
-            "retention": 1.0
+            "comp_acc": 0.8125,
+            "orig_mcc": 0.5584155773160767,
+            "comp_mcc": 0.15686368416817548,
+            "retention": 0.8666666666666667
           },
           "0.01": {
             "orig_acc": 0.90625,
-            "comp_acc": 0.90625,
-            "retention": 1.0
+            "comp_acc": 0.78125,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.12017278061240778,
+            "retention": 0.8620689655172413
           },
           "0.03": {
             "orig_acc": 0.90625,
-            "comp_acc": 0.875,
-            "retention": 0.9655172413793104
+            "comp_acc": 0.75,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.08914849883204186,
+            "retention": 0.8275862068965517
           },
           "0.05": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -85,27 +95,37 @@
         "by_noise": {
           "0.0": {
             "orig_acc": 0.9375,
-            "comp_acc": 0.9375,
-            "retention": 1.0
+            "comp_acc": 0.8125,
+            "orig_mcc": 0.5584155773160767,
+            "comp_mcc": 0.15686368416817548,
+            "retention": 0.8666666666666667
           },
           "0.01": {
             "orig_acc": 0.90625,
-            "comp_acc": 0.90625,
-            "retention": 1.0
+            "comp_acc": 0.78125,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.12017278061240778,
+            "retention": 0.8620689655172413
           },
           "0.03": {
             "orig_acc": 0.90625,
-            "comp_acc": 0.875,
-            "retention": 0.9655172413793104
+            "comp_acc": 0.75,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.08914849883204186,
+            "retention": 0.8275862068965517
           },
           "0.05": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -119,27 +139,37 @@
         "by_noise": {
           "0.0": {
             "orig_acc": 0.9375,
-            "comp_acc": 0.9375,
-            "retention": 1.0
+            "comp_acc": 0.625,
+            "orig_mcc": 0.5584155773160767,
+            "comp_mcc": -0.007053982594841415,
+            "retention": 0.6666666666666666
           },
           "0.01": {
             "orig_acc": 0.90625,
-            "comp_acc": 0.90625,
-            "retention": 1.0
+            "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": -0.007053982594841415,
+            "retention": 0.6896551724137931
           },
           "0.03": {
             "orig_acc": 0.90625,
-            "comp_acc": 0.875,
-            "retention": 0.9655172413793104
+            "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": -0.007053982594841415,
+            "retention": 0.6896551724137931
           },
           "0.05": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -154,28 +184,38 @@
         "ensemble_comp_pct": 95.55555555555556,
         "by_noise": {
           "0.0": {
-            "orig_acc": 0.78125,
+            "orig_acc": 0.84375,
             "comp_acc": 0.75,
-            "retention": 0.96
+            "orig_mcc": 0.6640043458717375,
+            "comp_mcc": 0.4666666666666667,
+            "retention": 0.8888888888888888
           },
           "0.01": {
             "orig_acc": 0.625,
-            "comp_acc": 0.78125,
-            "retention": 1.25
+            "comp_acc": 0.75,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.4666666666666667,
+            "retention": 1.2
           },
           "0.03": {
             "orig_acc": 0.625,
             "comp_acc": 0.78125,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.5266354311522131,
             "retention": 1.25
           },
           "0.05": {
             "orig_acc": 0.625,
             "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.625,
             "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -188,28 +228,38 @@
         "ensemble_comp_pct": 94.4,
         "by_noise": {
           "0.0": {
-            "orig_acc": 0.78125,
+            "orig_acc": 0.8125,
             "comp_acc": 0.75,
-            "retention": 0.96
+            "orig_mcc": 0.5918640302493726,
+            "comp_mcc": 0.4666666666666667,
+            "retention": 0.9230769230769231
           },
           "0.01": {
             "orig_acc": 0.625,
-            "comp_acc": 0.78125,
-            "retention": 1.25
+            "comp_acc": 0.75,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.4666666666666667,
+            "retention": 1.2
           },
           "0.03": {
             "orig_acc": 0.625,
             "comp_acc": 0.78125,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.5266354311522131,
             "retention": 1.25
           },
           "0.05": {
             "orig_acc": 0.625,
             "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.625,
             "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -222,28 +272,38 @@
         "ensemble_comp_pct": 95.55555555555556,
         "by_noise": {
           "0.0": {
-            "orig_acc": 0.78125,
+            "orig_acc": 0.84375,
             "comp_acc": 0.75,
-            "retention": 0.96
+            "orig_mcc": 0.6640043458717375,
+            "comp_mcc": 0.4666666666666667,
+            "retention": 0.8888888888888888
           },
           "0.01": {
             "orig_acc": 0.625,
-            "comp_acc": 0.78125,
-            "retention": 1.25
+            "comp_acc": 0.75,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.4666666666666667,
+            "retention": 1.2
           },
           "0.03": {
             "orig_acc": 0.625,
             "comp_acc": 0.78125,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.5266354311522131,
             "retention": 1.25
           },
           "0.05": {
             "orig_acc": 0.625,
             "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.625,
             "comp_acc": 0.625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -260,26 +320,36 @@
           "0.0": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.01": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.03": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.05": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -294,26 +364,36 @@
           "0.0": {
             "orig_acc": 0.9375,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.5584155773160767,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0333333333333334
           },
           "0.01": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.03": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.05": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }
@@ -328,26 +408,36 @@
           "0.0": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.01": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.03": {
             "orig_acc": 0.90625,
             "comp_acc": 0.96875,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.8509629433967631,
             "retention": 1.0689655172413792
           },
           "0.05": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           },
           "0.1": {
             "orig_acc": 0.90625,
             "comp_acc": 0.90625,
+            "orig_mcc": 0.0,
+            "comp_mcc": 0.0,
             "retention": 1.0
           }
         }

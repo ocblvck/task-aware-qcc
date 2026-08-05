@@ -191,6 +191,10 @@ def main():
                     "comp_acc": [float(np.mean(accs)), float(np.std(accs))],
                     "comp_mcc": [float(np.mean(mccs)), float(np.std(mccs))],
                     "retention": [float(np.mean(rets)), float(np.std(rets))],
+                    "seeds": seeds,
+                    "comp_acc_seeds": [float(v) for v in accs],
+                    "comp_mcc_seeds": [float(v) for v in mccs],
+                    "retention_seeds": [float(v) for v in rets],
                 }
             model_out[label] = {"comp_pct": comp_pct, "by_noise": by_noise}
             line = " ".join(

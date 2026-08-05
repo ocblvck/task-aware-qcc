@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import csv
 from typing import Tuple
+from functools import partial
 
 import numpy as np
 import pandas as pd
@@ -104,8 +105,10 @@ class DataProcessor:
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> "DataProcessor":
         if X.shape[1] > self.num_qubits * 2:
+            # Bind a fixed random_state so mutual-information estimation is deterministic.
+            score_fn = partial(mutual_info_classif, random_state=self.random_seed)
             self.selector = SelectKBest(
-                mutual_info_classif, k=min(self.num_qubits * 2, X.shape[1])
+                score_fn, k=min(self.num_qubits * 2, X.shape[1])
             )
             X = self.selector.fit_transform(X, y)
         self.pre_pca_scaler = StandardScaler()

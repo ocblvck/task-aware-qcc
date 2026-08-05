@@ -172,6 +172,11 @@ def main():
                     "comp_acc": [float(np.mean(ca)), float(np.std(ca))],
                     "orig_mcc": [float(np.mean(om)), float(np.std(om))],
                     "comp_mcc": [float(np.mean(cm)), float(np.std(cm))],
+                    "seeds": seeds,
+                    "orig_acc_seeds": [float(v) for v in oa],
+                    "comp_acc_seeds": [float(v) for v in ca],
+                    "orig_mcc_seeds": [float(v) for v in om],
+                    "comp_mcc_seeds": [float(v) for v in cm],
                 }
             ens_out[name] = {"n_maps": len(maps), "mode": mode,
                              "ensemble_comp_pct": comp_pct, "by_noise": by_noise}

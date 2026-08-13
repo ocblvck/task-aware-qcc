@@ -1,0 +1,27 @@
+{
+  "Z_1_full": {
+    "orig_2q": 0,
+    "comp_2q": 0,
+    "compressed_ok": true
+  },
+  "ZZ_2_full": {
+    "orig_2q": 60,
+    "comp_2q": 60,
+    "compressed_ok": true
+  },
+  "Pauli_1_full": {
+    "orig_2q": 30,
+    "comp_2q": 30,
+    "compressed_ok": true
+  },
+  "Custom_1_full": {
+    "orig_2q": 15,
+    "comp_2q": 15,
+    "compressed_ok": true
+  },
+  "ZZ_2_linear": {
+    "orig_2q": 20,
+    "comp_2q": 20,
+    "compressed_ok": true
+  }
+}

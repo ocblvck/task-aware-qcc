@@ -1,14 +1,14 @@
-"""R1 — exact equivalence verification for circuits small enough to simulate.
+"""R1, exact equivalence verification for circuits small enough to simulate.
 
 For a *parameterized* feature map, the only thing the downstream quantum kernel
 sees is the encoded state ``|psi(x)> = U(x)|0>`` (because the fidelity kernel is
 ``K(x, z) = |<psi(x)|psi(z)>|^2``). Two feature maps therefore induce the *same*
-kernel iff their encoded states coincide up to a global phase for every ``x`` —
+kernel iff their encoded states coincide up to a global phase for every ``x``,
 i.e. state fidelity ``= 1``.
 
 We verify this by sampling several random parameter assignments in ``[0, pi]^n``
 and averaging the state fidelity ``|<orig|cand>|^2``. This is exact (statevector,
-no shots) and is only attempted when ``num_qubits <= max_exact_qubits`` — the
+no shots) and is only attempted when ``num_qubits <= max_exact_qubits``. The
 "subset of circuits small enough to simulate exactly" in the proposal.
 
 Returns a value in ``[0, 1]`` (1.0 = provably kernel-equivalent on the sample),

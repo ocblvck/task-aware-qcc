@@ -3,14 +3,14 @@
 This module does the plumbing to train Qwen2.5-Coder-3B + LoRA + GRPO with the
 two-part task-aware reward, **without modifying either source project**:
 
-  * :func:`build_feature_map_dataset` — turns the paper's feature maps into a
+  * :func:`build_feature_map_dataset`: turns the paper's feature maps into a
     GRPO dataset of *compression tasks* (prompt asks to shorten a given QASM
     feature map; ``solution`` carries the original QASM for the reward).
-  * :func:`make_grpo_reward` — a TRL reward ``fn(prompts, completions, **kwargs)``
+  * :func:`make_grpo_reward`: a TRL reward ``fn(prompts, completions, **kwargs)``
     that reads the per-sample original feature map from ``kwargs['solution']``,
     caches a :class:`~taqcc.reward.TaskContext` per unique original (with baseline
     accuracy), and scores each completion with :func:`taqcc.reward.score_candidate`.
-  * :class:`TaskAwareGRPOTrainer` — subclass of ``ComplexityAwareGRPOTrainer``
+  * :class:`TaskAwareGRPOTrainer`: subclass of ``ComplexityAwareGRPOTrainer``
     that swaps in the task-aware reward (optionally blended with cheap
     format/syntax rewards for training stability).
 
@@ -154,7 +154,7 @@ def _compressed_target(nq: int, map_type: str, reps: int, ent: str):
     """A genuinely SMALLER target circuit that teaches a compression prior.
 
     For full-entanglement sources we target the linear-entanglement version of
-    the same map (~half the two-qubit gates) — a legitimate, cheaper kernel that
+    the same map (~half the two-qubit gates), a legitimate cheaper kernel that
     the paper finds is often *more* noise-robust. For sources that are already
     minimal (linear / single-qubit Z), we fall back to the L3-equivalent target.
     Returns (target_qasm, is_compressed).
@@ -291,7 +291,7 @@ def _completion_text(completion) -> str:
 
 
 # --------------------------------------------------------------------------- #
-# Trainer subclass — swaps in the task-aware reward.
+# Trainer subclass. Swaps in the task-aware reward.
 # --------------------------------------------------------------------------- #
 def make_task_aware_trainer_class():
     """Return a ``TaskAwareGRPOTrainer`` subclass (lazy import of the GRPO env)."""

@@ -44,7 +44,9 @@ def cache_compressed_maps(base, model_path, num_qubits, cache_dir, max_new_token
     import torch
     import transformers
     from peft import PeftModel
-    from taqcc.feature_maps import make_feature_map, circuit_metrics
+    from taqcc.feature_maps import (
+        make_feature_map, circuit_metrics, is_valid_feature_map,
+    )
     from taqcc.grpo_integration import (
         _compression_prompt, _TASK_SYSTEM_PROMPT, feature_map_to_qasm,
     )
@@ -85,7 +87,7 @@ def cache_compressed_maps(base, model_path, num_qubits, cache_dir, max_new_token
         gen = tok.decode(out[0][ids.shape[1]:], skip_special_tokens=True)
         cc = parse_candidate(gen)
         key = f"{mt}_{reps}_{ent}"
-        ok = cc is not None and cc.num_qubits == num_qubits and cc.num_parameters == num_qubits
+        ok = is_valid_feature_map(cc, num_qubits)
         # Cache the source (original) and the compressed QASM (or original as fallback).
         (cache_dir / f"{key}.orig.qasm").write_text(src)
         (cache_dir / f"{key}.comp.qasm").write_text(gen if ok else src)

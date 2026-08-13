@@ -6,7 +6,7 @@ odd-committee ensembles (>=3 heterogeneous feature maps). For each ensemble we
 compare the ORIGINAL (uncompressed) component maps against their lr5-COMPRESSED
 versions, measuring ensemble accuracy retention and the ensemble-level two-qubit
 compression. The Z branch (no 2q gates) is kept; the entangling ZZ/Pauli/Custom
-branches — which supply ensemble diversity but are deep/noisy — are compressed.
+branches, which supply ensemble diversity but are deep and noisy, are compressed.
 
 Ensembles (component maps = (map_type, reps, entanglement)):
   QVE3  hard majority: Z, ZZ(full), Pauli(full)                  [3 -> genuine vote]
@@ -70,7 +70,7 @@ def main():
         DownstreamConfig, downstream_accuracy_ensemble,
         downstream_accuracy_weighted_ensemble,
     )
-    from taqcc.feature_maps import make_feature_map, circuit_metrics
+    from taqcc.feature_maps import make_feature_map, circuit_metrics, is_valid_feature_map
     from taqcc.grpo_integration import (
         _compression_prompt, _TASK_SYSTEM_PROMPT, feature_map_to_qasm,
     )
@@ -102,7 +102,7 @@ def main():
         gen = tok.decode(out[0][ids.shape[1]:], skip_special_tokens=True)
         c = parse_candidate(gen)
         # Fall back to the original map if the compressed circuit is unusable.
-        if c is None or c.num_qubits != args.num_qubits or c.num_parameters != args.num_qubits:
+        if not is_valid_feature_map(c, args.num_qubits):
             return fm, False
         return c, True
 

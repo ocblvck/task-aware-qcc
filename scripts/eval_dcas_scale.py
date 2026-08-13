@@ -98,7 +98,7 @@ def main():
     from sklearn.model_selection import train_test_split
 
     from taqcc.data import load_split_multiclass
-    from taqcc.feature_maps import make_feature_map, circuit_metrics
+    from taqcc.feature_maps import make_feature_map, circuit_metrics, is_valid_feature_map
     from taqcc.grpo_integration import (_compression_prompt, _TASK_SYSTEM_PROMPT,
                                         feature_map_to_qasm)
     from taqcc.qasm_adapter import parse_candidate
@@ -129,7 +129,7 @@ def main():
                                  pad_token_id=tok.eos_token_id)
         gen = tok.decode(out[0][ids.shape[1]:], skip_special_tokens=True)
         c = parse_candidate(gen)
-        ok = c is not None and c.num_qubits == nq and c.num_parameters == nq
+        ok = is_valid_feature_map(c, nq)
         orig_map[(mt, reps, ent)] = fm
         comp_map[(mt, reps, ent)] = c if ok else fm
         mo, mc = circuit_metrics(fm), circuit_metrics(c if ok else fm)

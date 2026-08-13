@@ -1,4 +1,4 @@
-# Large model artifacts (LoRA adapters, merged bases) — do not track
+# Large model artifacts (LoRA adapters, merged bases). Do not track.
 models/
 *.safetensors
 *.bin
@@ -12,6 +12,7 @@ __pycache__/
 # Local scratch
 pilots/*.json
 *.log
+logs/
 
 # HF / torch caches
 .cache/

@@ -12,7 +12,7 @@ helpers self-contained lets the reward run in any env that has Qiskit.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, Optional
 
 import numpy as np
 from qiskit import QuantumCircuit, transpile
@@ -24,7 +24,7 @@ from qiskit.circuit.library import PauliFeatureMap, ZFeatureMap, ZZFeatureMap
 # so two-qubit count == CX count and metrics match the hardware ladder.
 _METRIC_BASIS = ["u", "cx", "rz", "sx", "x"]
 
-# Feature-map recipe per model — matches device_noise_validation.MODEL_MAPS and
+# Feature-map recipe per model, matches device_noise_validation.MODEL_MAPS and
 # run_hardware_kernel.MODEL_MAPS (committee-size ablation variants included).
 MODEL_MAPS: Dict[str, list] = {
     "QSVC": [("ZZ", 2)],
@@ -65,6 +65,42 @@ def make_feature_map(num_qubits: int, map_type: str, reps: int, entanglement: st
                         fm.cx(i, j)
         return fm
     raise ValueError(f"Unknown map_type {map_type!r}")
+
+
+def used_parameter_names(circuit: QuantumCircuit) -> set:
+    """Names of the parameters that actually appear in a gate argument.
+
+    ``QuantumCircuit.num_parameters`` counts *declared* parameters, including any that
+    sit in the OpenQASM header and are never used. So a candidate can declare all ``n``
+    data parameters, bind two of them, and still look like a full ``n``-feature encoding.
+    """
+    used = set()
+    for inst in circuit.data:
+        for prm in inst.operation.params:
+            if hasattr(prm, "parameters"):
+                used |= {p.name for p in prm.parameters}
+    return used
+
+
+def touched_qubit_indices(circuit: QuantumCircuit) -> set:
+    """Indices of the qubits any instruction acts on (idle wires excluded)."""
+    return {circuit.find_bit(q).index for inst in circuit.data for q in inst.qubits}
+
+
+def is_valid_feature_map(circuit: Optional[QuantumCircuit], num_qubits: int) -> bool:
+    """Whether a candidate really encodes all ``num_qubits`` data features.
+
+    On top of parsing as an ``n``-qubit circuit with ``n`` declared parameters, every
+    parameter has to be *used* and every qubit acted on. Without those last two checks a
+    policy can max out the compression term by dropping most of the input.
+    """
+    if circuit is None or circuit.num_qubits != num_qubits:
+        return False
+    if circuit.num_parameters != num_qubits:
+        return False
+    if len(used_parameter_names(circuit)) != num_qubits:
+        return False
+    return len(touched_qubit_indices(circuit)) == num_qubits
 
 
 def circuit_metrics(circuit: QuantumCircuit) -> Dict[str, int]:

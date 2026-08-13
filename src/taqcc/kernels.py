@@ -3,9 +3,9 @@
 Mirrors the kernel math used across ``quantum-ml-iot-nid`` but in a compact,
 self-contained form:
 
-  * Exact path  — ``ideal_gram`` / ``ideal_rect`` (statevector inner products),
+  * Exact path, ``ideal_gram`` / ``ideal_rect`` (statevector inner products),
     copied from ``run_hardware_kernel.py``.
-  * Noisy path  — depolarizing density-matrix kernel using the measurement-free
+  * Noisy path, depolarizing density-matrix kernel using the measurement-free
     Hilbert-Schmidt overlap  K(x, z) = Tr(rho(x) rho(z))  exactly as the paper's
     ``NoisyFidelityKernel`` defines it (so reward numbers are comparable).
 
@@ -29,7 +29,7 @@ _BASIS = ["u", "cx", "rz", "sx", "x"]
 
 
 # --------------------------------------------------------------------------- #
-# Exact (noiseless) statevector kernel — exact reference rung.
+# Exact (noiseless) statevector kernel, the reference rung.
 # --------------------------------------------------------------------------- #
 def _statevectors(fm: QuantumCircuit, X: np.ndarray):
     return [Statevector(fm.assign_parameters(x)) for x in X]
@@ -52,7 +52,7 @@ def ideal_rect(fm: QuantumCircuit, X_test: np.ndarray, X_train: np.ndarray) -> n
 
 
 # --------------------------------------------------------------------------- #
-# Depolarizing noise model (uniform) — matches the main-study noise sweep knob.
+# Depolarizing noise model (uniform), matching the main-study noise sweep knob.
 # --------------------------------------------------------------------------- #
 def depolarizing_noise_model(p1: float, p2: Optional[float] = None) -> NoiseModel:
     """Uniform depolarizing channel: ``p1`` on 1q gates, ``p2`` (default 10*p1) on 2q."""

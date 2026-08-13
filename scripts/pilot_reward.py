@@ -4,10 +4,10 @@
 Demonstrates that the two-part reward behaves as designed, on a handful of
 candidate compressions of the QSVC ZZ feature map:
 
-  * ``identity``      — the original map (sanity: equiv=1, compression=0)
-  * ``transpiled_l3`` — Qiskit L3 of the original (should stay equivalent, smaller)
-  * ``linear_zz``     — ZZ with linear entanglement (fewer 2q gates, NOT equivalent)
-  * ``z_only``        — Z map, no entanglement (cheapest, least faithful)
+  * ``identity``: the original map (sanity: equiv=1, compression=0)
+  * ``transpiled_l3``: Qiskit L3 of the original (should stay equivalent, smaller)
+  * ``linear_zz``: ZZ with linear entanglement (fewer 2q gates, NOT equivalent)
+  * ``z_only``: Z map, no entanglement (cheapest, least faithful)
 
 Run (uses the project conda env that has qiskit-aer + sklearn):
   /home/chibuike/miniconda/envs/qiskit/bin/python scripts/pilot_reward.py \

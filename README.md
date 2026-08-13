@@ -11,7 +11,7 @@ train a model to shrink circuits by optimizing a **structural proxy** reward
 whether the circuit still does anything useful. We replace that proxy with a
 **task-aware, noise-aware** objective: a compression is rewarded only when it is
 **(R1) provably correct** on circuits small enough to simulate exactly, **and/or
-(R2) practically useful** — i.e. a QSVC/QVE quantum-kernel classifier built from
+(R2) practically useful**, i.e. a QSVC/QVE quantum-kernel classifier built from
 the compressed feature map still detects IoT network intrusions accurately under
 **depolarizing density-matrix noise** (our `quantum-ml-iot-nid` project). The
 contribution is the first **end-to-end task-aware compression objective** for
@@ -38,27 +38,27 @@ reward = w_valid * valid
        + w_comp  * compression_gain * gate # compression, GATED
 ```
 
-- **R1 — equivalence** ([`equivalence.py`](src/taqcc/equivalence.py)): for a
+- **R1, equivalence** ([`equivalence.py`](src/taqcc/equivalence.py)): for a
   *parameterized* feature map, the kernel only sees `|psi(x)> = U(x)|0>`, so two
   maps induce the same kernel iff state fidelity `= 1` for all `x`. We verify by
-  sampling random `x in [0,pi]^n` and averaging `|<orig|cand>|^2` — exact, no
-  shots — only when `n <= max_exact_qubits` ("small enough to simulate exactly").
-- **R2 — utility** ([`downstream.py`](src/taqcc/downstream.py)): build a
+  sampling random `x in [0,pi]^n` and averaging `|<orig|cand>|^2`. Exact and
+  shot-free, and only attempted when `n <= max_exact_qubits`.
+- **R2, utility** ([`downstream.py`](src/taqcc/downstream.py)): build a
   precomputed-kernel SVC (QSVC) from the candidate map, evaluate accuracy/MCC on
   a small IoT-NID / UNSW split under a **depolarizing density-matrix** channel
-  ([`kernels.py`](src/taqcc/kernels.py), Hilbert–Schmidt overlap
+  ([`kernels.py`](src/taqcc/kernels.py), Hilbert-Schmidt overlap
   `K=Tr(rho_a rho_b)`, matching the paper's measurement-free `NoisyFidelityKernel`).
   `utility = clip(cand_acc / orig_acc, 0, cap)` with an absolute-accuracy floor.
 - **Compression** is `1 - cost(cand)/cost(orig)` with `cost = depth + 2*n_2q`,
   counted on the **decomposed** circuit (paper basis `u,cx,rz,sx,x`).
 
-### Gate semantics — a key design decision (configurable)
+### Gate semantics (configurable)
 
 `TaskAwareRewardConfig.gate_mode`:
 - `"and"` (strict, default): `gate = correctness * utility`. Shrink rewarded only
   when **both** provably equivalent **and** useful. Matches the literal proposal.
 - `"or"` (task-aware): `gate = max(correctness, utility)`. Shrink rewarded if the
-  circuit is **either** provably equivalent **or** retains downstream accuracy —
+  circuit is **either** provably equivalent **or** retains downstream accuracy,
   this admits *better, non-equivalent* kernels, arguably the real point of
   task-aware compression. **Recommended to ablate both** and report.
 
@@ -81,14 +81,14 @@ intended task-aware behavior. Raw JSON saved under `pilots/`.
 
 ## 5. Objectives / paper structure
 
-1. **Objective 1 — Task-aware reward (this repo's core).** Extend
+1. **Objective 1, task-aware reward (this repo's core).** Extend
    Qwen2.5-Coder-3B + LoRA + GRPO with the R1+R2 reward; show LLM-compressed
    feature maps preserve IoT-NID / UNSW intrusion-detection accuracy under noise.
-2. **Objective 2 — Feature-map × error-mitigation study.** QVE/QWE across
+2. **Objective 2, feature-map × error-mitigation study.** QVE/QWE across
    ZZFeatureMap / PauliFeatureMap / Custom entanglement-heavy map, with and
    without error mitigation, identifying the most NISQ-resilient combinations;
    validate ≥1 config on real hardware (reuses the existing hardware ladder).
-3. **Objective 3 — Error-aware reward design** feeds Objective 2's findings back
+3. **Objective 3, error-aware reward design.** feeds Objective 2's findings back
    into the reward's noise model (device-calibrated channels).
 
 ## 6. Environments (important)

@@ -5,7 +5,7 @@ Wires ``taqcc`` into ``quantum-cirq-opt``'s ``ComplexityAwareGRPOTrainer`` witho
 modifying either source project. Requires the GRPO env (torch-CUDA + trl + peft +
 bitsandbytes) AND the quantum stack (qiskit + qiskit-aer + sklearn).
 
-Smoke test (few steps, tiny data — verifies the whole loop end to end):
+Smoke test (few steps, tiny data; verifies the whole loop end to end):
   python scripts/train_taskaware_grpo.py --smoke \
       --dataset UNSW_NB15.csv --data-dir /home/chibuike/quantum-ml-iot-nid
 
@@ -62,6 +62,19 @@ def main():
     ap.add_argument("--w-comp", type=float, default=None, help="compression weight (default 3.0)")
     ap.add_argument("--w-equiv", type=float, default=None, help="equivalence weight (default 0.3)")
     ap.add_argument("--w-util", type=float, default=None, help="utility weight (default 0.5)")
+    ap.add_argument("--auto-resume", action="store_true",
+                    help="Resume from the newest checkpoint under --output if one "
+                         "exists (this box reboots unpredictably)")
+    ap.add_argument("--save-steps", type=int, default=25,
+                    help="Checkpoint interval; small values bound the work lost to a "
+                         "machine reboot mid-run")
+    ap.add_argument("--util-metric", default="accuracy", choices=["accuracy", "mcc"],
+                    help="Downstream metric the reward's retention term is computed against. "
+                         "'mcc' prices majority-class collapse at zero, which accuracy does "
+                         "not do on an imbalanced problem.")
+    ap.add_argument("--seed", type=int, default=42,
+                    help="Training seed. Vary across otherwise-identical runs to measure "
+                         "run-to-run variance in what the policy emits.")
     ap.add_argument("--output", default="models/taqcc_grpo_v1")
     ap.add_argument("--smoke", action="store_true",
                     help="Tiny end-to-end validation (few steps, small maps)")
@@ -97,19 +110,22 @@ def main():
         max_completion_length=args.max_completion_length,
         temperature=args.temperature,
         learning_rate=args.lr,
+        save_steps=args.save_steps,
         reward_weights=reward_weights,
+        seed=args.seed,
         # anti-mode-collapse defaults (dapo, beta=0) come from the config.
     )
 
-    reward_cfg = TaskAwareRewardConfig(gate_mode=args.gate_mode)
+    reward_cfg = TaskAwareRewardConfig(gate_mode=args.gate_mode, util_metric=args.util_metric)
     if args.w_comp is not None:
         reward_cfg.w_comp = args.w_comp
     if args.w_equiv is not None:
         reward_cfg.w_equiv = args.w_equiv
     if args.w_util is not None:
         reward_cfg.w_util = args.w_util
-    print(f"[reward] gate_mode={reward_cfg.gate_mode} w_comp={reward_cfg.w_comp} "
-          f"w_equiv={reward_cfg.w_equiv} w_util={reward_cfg.w_util}", flush=True)
+    print(f"[reward] gate_mode={reward_cfg.gate_mode} util_metric={reward_cfg.util_metric} "
+          f"w_comp={reward_cfg.w_comp} w_equiv={reward_cfg.w_equiv} "
+          f"w_util={reward_cfg.w_util} seed={args.seed}", flush=True)
     task_reward = make_grpo_reward(
         dataset_path=str(Path(args.data_dir) / args.dataset),
         num_qubits=args.num_qubits,
@@ -134,7 +150,15 @@ def main():
           f"reward_funcs={'format+syntax+task' if blend else 'task-only'} "
           f"weights={reward_weights}", flush=True)
 
-    trainer.train(dataset=dataset)
+    resume = None
+    if args.auto_resume:
+        ckpts = sorted(Path(args.output).glob("checkpoint-*"),
+                       key=lambda p: int(p.name.split("-")[1]))
+        if ckpts:
+            resume = str(ckpts[-1])
+            print(f"[resume] continuing from {resume}", flush=True)
+
+    trainer.train(dataset=dataset, resume_from_checkpoint=resume)
     print(f"[done] model saved under {args.output}", flush=True)
 
 

@@ -2,9 +2,9 @@
 
 This package glues two existing projects on this machine:
 
-  * ``quantum-cirq-opt``  — Qwen2.5-Coder-3B + LoRA + GRPO that emits/compresses
+  * ``quantum-cirq-opt``: Qwen2.5-Coder-3B + LoRA + GRPO that emits/compresses
     OpenQASM circuits with an 11-component *proxy* reward (``src/qcc``).
-  * ``quantum-ml-iot-nid`` — QSVC/QVE/QWE quantum-kernel IoT intrusion detection
+  * ``quantum-ml-iot-nid``: QSVC/QVE/QWE quantum-kernel IoT intrusion detection
     under depolarizing noise (feature maps, exact + noisy kernels, IoT-NID / UNSW).
 
 The novel contribution lives in :mod:`taqcc.reward`: a **two-part, task-aware**

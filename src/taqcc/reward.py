@@ -37,7 +37,7 @@ from qiskit import QuantumCircuit
 
 from .downstream import DownstreamConfig, downstream_accuracy
 from .equivalence import equivalence_score
-from .feature_maps import circuit_metrics
+from .feature_maps import circuit_metrics, is_valid_feature_map
 from .qasm_adapter import parse_candidate
 
 
@@ -46,7 +46,7 @@ from .qasm_adapter import parse_candidate
 # --------------------------------------------------------------------------- #
 @dataclass
 class TaskAwareRewardConfig:
-    # weights — COMPRESSION-FIRST (task-aware) defaults.
+    # Weights. Compression-first (task-aware) defaults.
     # Rationale: with a large w_equiv, an equivalent *reproduction* of the source
     # is already a safe high-reward optimum, and real compression of fixed-2q
     # feature maps requires sacrificing equivalence -> the model never compresses.
@@ -63,6 +63,13 @@ class TaskAwareRewardConfig:
     # utility shaping
     util_cap: float = 1.1          # retention is allowed to slightly exceed 1
     util_floor_acc: float = 0.5    # below this absolute acc, utility -> 0 (chance level)
+    # Metric behind the retention term.
+    #   "accuracy": original setting. With a 90% majority class a circuit that keeps only a
+    #               third of the features still scores ~0.9, which is how an early policy
+    #               reward-hacked by truncating features.
+    #   "mcc":      chance sits at 0 instead of the majority rate, so majority-class collapse
+    #               is priced in directly and util_floor_acc is no longer needed.
+    util_metric: str = "accuracy"
     # gate semantics for the compression bonus:
     #   "and" (strict)  -> gate = correctness * utility
     #                      shrink only rewarded when BOTH equivalent AND useful.
@@ -79,7 +86,7 @@ class TaskAwareRewardConfig:
 
 
 # --------------------------------------------------------------------------- #
-# Task context — holds the data + the original (reference) feature map and its
+# Task context. Holds the data + the original (reference) feature map and its
 # pre-computed baseline accuracy, so per-candidate scoring is cheap-ish.
 # --------------------------------------------------------------------------- #
 @dataclass
@@ -91,6 +98,7 @@ class TaskContext:
     y_test: np.ndarray
     downstream: DownstreamConfig
     baseline_accuracy: Optional[float] = None
+    baseline_mcc: Optional[float] = None
 
     def ensure_baseline(self) -> float:
         if self.baseline_accuracy is None:
@@ -99,6 +107,7 @@ class TaskContext:
                 self.X_test, self.y_test, self.downstream,
             )
             self.baseline_accuracy = res["accuracy"]
+            self.baseline_mcc = res.get("mcc")
         return self.baseline_accuracy
 
 
@@ -126,16 +135,15 @@ def score_candidate(
         "utility": 0.0, "compression_gain": 0.0, "gate": 0.0,
         "reward": cfg.invalid_penalty,
     }
-    if circ is None or circ.num_qubits != ctx.original.num_qubits:
-        return out
-    # A usable feature map must encode exactly the data features; a different
-    # parameter count can't be bound to the data (and would let the policy hack
-    # the reward by dropping encodings).
-    if circ.num_parameters != ctx.X_train.shape[1]:
+    # A usable feature map has to encode all the data features: n qubits, n declared
+    # parameters, every parameter bound to a gate, every qubit acted on. Checking the
+    # declared count alone let the policy declare all n parameters while encoding only
+    # the first few, so truncation scored as compression.
+    if not is_valid_feature_map(circ, ctx.X_train.shape[1]):
         return out
     out["valid"] = 1.0
 
-    # R1 — exact equivalence (None if too large to verify).
+    # R1, exact equivalence (None if too large to verify).
     equiv = equivalence_score(
         ctx.original, circ,
         num_samples=cfg.equiv_samples,
@@ -144,7 +152,7 @@ def score_candidate(
     )
     out["equiv"] = equiv
 
-    # R2 — downstream accuracy retention under noise.
+    # R2, downstream accuracy retention under noise.
     baseline = ctx.ensure_baseline()
     try:
         res = downstream_accuracy(
@@ -155,12 +163,20 @@ def score_candidate(
         return out
     acc = res["accuracy"]
     out["candidate_accuracy"] = acc
-    retention = acc / max(baseline, 1e-6)
-    # Absolute-accuracy floor: collapsing to chance kills utility regardless.
-    abs_factor = np.clip(
-        (acc - cfg.util_floor_acc) / max(1.0 - cfg.util_floor_acc, 1e-6), 0.0, 1.0
-    )
-    utility = float(np.clip(retention, 0.0, cfg.util_cap) * abs_factor)
+    out["candidate_mcc"] = res.get("mcc")
+    if cfg.util_metric == "mcc":
+        # MCC is 0 at chance, so no separate absolute floor is needed here.
+        cand = max(float(res.get("mcc") or 0.0), 0.0)
+        base = max(float(ctx.baseline_mcc or 0.0), 0.0)
+        retention = cand / max(base, 1e-6)
+        utility = float(np.clip(retention, 0.0, cfg.util_cap))
+    else:
+        retention = acc / max(baseline, 1e-6)
+        # Absolute-accuracy floor: collapsing to chance kills utility regardless.
+        abs_factor = np.clip(
+            (acc - cfg.util_floor_acc) / max(1.0 - cfg.util_floor_acc, 1e-6), 0.0, 1.0
+        )
+        utility = float(np.clip(retention, 0.0, cfg.util_cap) * abs_factor)
     out["utility"] = utility
 
     # Compression gain (shrinkage), gated by correctness * utility.

@@ -54,11 +54,14 @@ def cache_model_maps(base, label, adapter, specs, num_qubits, cache_dir,
     import torch
     import transformers
     from peft import PeftModel
-    from taqcc.feature_maps import make_feature_map, circuit_metrics
+    from taqcc.feature_maps import (
+        make_feature_map, circuit_metrics, is_valid_feature_map,
+    )
     from taqcc.grpo_integration import (
         _compression_prompt, _TASK_SYSTEM_PROMPT, feature_map_to_qasm,
     )
     from taqcc.qasm_adapter import parse_candidate
+    from taqcc.feature_maps import is_valid_feature_map
 
     cache_dir = Path(cache_dir)
     cache_dir.mkdir(parents=True, exist_ok=True)
@@ -90,8 +93,7 @@ def cache_model_maps(base, label, adapter, specs, num_qubits, cache_dir,
                                  pad_token_id=tok.eos_token_id)
         gen = tok.decode(out[0][ids.shape[1]:], skip_special_tokens=True)
         cc = parse_candidate(gen)
-        ok = (cc is not None and cc.num_qubits == num_qubits
-              and cc.num_parameters == num_qubits)
+        ok = is_valid_feature_map(cc, num_qubits)
         (cache_dir / f"{label}__{key}.comp.qasm").write_text(gen if ok else src)
         (cache_dir / f"{label}__{key}.orig.qasm").write_text(src)
         meta[key] = {"orig_2q": circuit_metrics(fm)["two_qubit"],

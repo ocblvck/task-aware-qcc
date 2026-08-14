@@ -268,5 +268,50 @@
     ],
     "passes_syntactic_check": true,
     "gamed": false
+  },
+  "sft_warmup__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "sft_warmup__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "sft_warmup__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
   }
 }

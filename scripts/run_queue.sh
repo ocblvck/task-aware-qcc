@@ -40,9 +40,16 @@ finished(){
   return 1
 }
 
+# True when a training process for this run is alive right now.
+alive(){ pgrep -f "output models/$1( |$)" >/dev/null 2>&1; }
+
 launch(){ # name lr seed gpu metric
   local name=$1 lr=$2 seed=$3 gpu=$4 metric=$5
   if finished "$name"; then log "skip $name (already complete)"; return; fi
+  # Do not disturb a run that is already going. This makes the supervisor safe to restart
+  # at any moment, which matters because editing this script while bash is part-way
+  # through it is not safe and a restart is the clean way to pick up a change.
+  if alive "$name"; then log "attach $name (already running)"; return; fi
   tmux -S "$SOCK" kill-session -t "$name" 2>/dev/null
   log "launch $name  lr=$lr seed=$seed metric=$metric gpu=$gpu"
   setsid tmux -S "$SOCK" new-session -d -s "$name" -c /home/chibuike/task-aware-qcc \
@@ -114,23 +121,31 @@ if grep -qx stage1 "$STATE" && ! grep -qx emit1 "$STATE"; then
   log "stage-1 circuits banked in results/replicates_structure.json"
 fi
 
-# ---- stage 2: seed 44, accuracy reward ----
-stage stage2 accuracy 44 rep_lr5_s44 rep_lr75_s44 rep_lr10_s44
+# Stages 2 and 3 are off by default. Two seeds per learning rate already answer the
+# question qualitatively (do repeated runs emit the same circuits?), and on a supply that
+# cuts every few hours the marginal third seed is not worth the risk of landing nothing.
+# Re-enable with:  RUN_FULL=1 bash scripts/run_queue.sh
+if [ "${RUN_FULL:-0}" = "1" ]; then
+  # ---- stage 2: seed 44, accuracy reward ----
+  stage stage2 accuracy 44 rep_lr5_s44 rep_lr75_s44 rep_lr10_s44
 
-# ---- stage 3: seed 42, MCC reward (the reward-metric counterfactual) ----
-stage stage3 mcc 42 mcc_lr5_s42 mcc_lr75_s42 mcc_lr10_s42
+  # ---- stage 3: seed 42, MCC reward (the reward-metric counterfactual) ----
+  stage stage3 mcc 42 mcc_lr5_s42 mcc_lr75_s42 mcc_lr10_s42
+else
+  log "stages 2 and 3 skipped (set RUN_FULL=1 to enable)"
+fi
 
 # ---- stage 4: emit committee circuits and summarise structure ----
 if ! grep -qx stage4 "$STATE"; then
   log "stage 4: emitting committee circuits from every new policy"
   export CUDA_VISIBLE_DEVICES=0
   export PYTHONPATH=src:/home/chibuike/quantum-cirq-opt/src
-  $PY scripts/emit_replicate_circuits.py \
-    --models models/grpo_fix_lr5 models/grpo_fix_lr75 models/grpo_fix_lr10 \
-             models/rep_lr5_s43 models/rep_lr75_s43 models/rep_lr10_s43 \
-             models/rep_lr5_s44 models/rep_lr75_s44 models/rep_lr10_s44 \
-             models/mcc_lr5_s42 models/mcc_lr75_s42 models/mcc_lr10_s42 \
-    --output results/replicates_structure.json 2>&1
+  # emit_replicate_circuits.py skips adapters that do not exist, so this covers whichever
+  # stages actually ran.
+  emit models/grpo_fix_lr5 models/grpo_fix_lr75 models/grpo_fix_lr10 \
+       models/rep_lr5_s43 models/rep_lr75_s43 models/rep_lr10_s43 \
+       models/rep_lr5_s44 models/rep_lr75_s44 models/rep_lr10_s44 \
+       models/mcc_lr5_s42 models/mcc_lr75_s42 models/mcc_lr10_s42
   echo stage4 >> "$STATE"
   log "stage 4 complete"
 fi

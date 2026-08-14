@@ -1,0 +1,272 @@
+{
+  "grpo_fix_lr10__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr10__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr10__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr5__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr5__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr5__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr75__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr75__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "grpo_fix_lr75__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rep_lr10_s43__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rep_lr10_s43__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rep_lr10_s43__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rep_lr5_s43__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 2,
+    "per_param": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    "passes_syntactic_check": true,
+    "gamed": true
+  },
+  "rep_lr5_s43__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 2,
+    "per_param": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    "passes_syntactic_check": true,
+    "gamed": true
+  },
+  "rep_lr5_s43__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 4,
+    "per_param": [
+      true,
+      true,
+      false,
+      false,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": true
+  },
+  "rep_lr75_s43__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rep_lr75_s43__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rep_lr75_s43__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  }
+}

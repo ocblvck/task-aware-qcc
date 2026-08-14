@@ -1,0 +1,103 @@
+{
+  "config": {
+    "datasets": "IoT_Original_Distribution.csv,UNSW_NB15.csv,UNSW_2018_IoT_Botnet_Final_10_Best.csv",
+    "data_dir": "/home/chibuike/quantum-ml-iot-nid",
+    "num_qubits": 6,
+    "train_size": 200,
+    "test_size": 400,
+    "seeds": "0,1,2,3,4",
+    "output": "results/member_agreement.json"
+  },
+  "datasets": {
+    "IoT_Original_Distribution.csv": {
+      "member_mcc": {
+        "Z": 0.5484721139737198,
+        "ZZ": 0.6617819428134772,
+        "Pauli": 0.6750266400253021
+      },
+      "majority_mcc": 0.6750266400253021,
+      "best_member_mcc": 0.6822161985955953,
+      "oracle_mcc": 0.8024620186047763,
+      "pairs": {
+        "Z-ZZ": {
+          "agree": 0.908,
+          "both_wrong": 0.0315,
+          "q": 0.849617509670038,
+          "disagree": 0.092
+        },
+        "Z-Pauli": {
+          "agree": 0.9195,
+          "both_wrong": 0.037000000000000005,
+          "q": 0.9347267838365234,
+          "disagree": 0.08049999999999999
+        },
+        "ZZ-Pauli": {
+          "agree": 0.9884999999999999,
+          "both_wrong": 0.045,
+          "q": 0.9978018808546748,
+          "disagree": 0.011500000000000002
+        }
+      }
+    },
+    "UNSW_NB15.csv": {
+      "member_mcc": {
+        "Z": 0.6486639240262717,
+        "ZZ": 0.6585087863549253,
+        "Pauli": 0.6703647761949675
+      },
+      "majority_mcc": 0.6672296802307953,
+      "best_member_mcc": 0.6846849735902876,
+      "oracle_mcc": 0.7726306727495713,
+      "pairs": {
+        "Z-ZZ": {
+          "agree": 0.892,
+          "both_wrong": 0.11100000000000002,
+          "q": 0.9211215157393975,
+          "disagree": 0.10800000000000001
+        },
+        "Z-Pauli": {
+          "agree": 0.9059999999999999,
+          "both_wrong": 0.1145,
+          "q": 0.9435402547113283,
+          "disagree": 0.094
+        },
+        "ZZ-Pauli": {
+          "agree": 0.967,
+          "both_wrong": 0.141,
+          "q": 0.993180481783712,
+          "disagree": 0.033
+        }
+      }
+    },
+    "UNSW_2018_IoT_Botnet_Final_10_Best.csv": {
+      "member_mcc": {
+        "Z": 0.8390991714446875,
+        "ZZ": 0.8337422626898319,
+        "Pauli": 0.8424251355108232
+      },
+      "majority_mcc": 0.8455491546040431,
+      "best_member_mcc": 0.878174660890345,
+      "oracle_mcc": 0.9275611016827925,
+      "pairs": {
+        "Z-ZZ": {
+          "agree": 0.969,
+          "both_wrong": 0.012,
+          "q": 0.9513292197782384,
+          "disagree": 0.031
+        },
+        "Z-Pauli": {
+          "agree": 0.977,
+          "both_wrong": 0.0155,
+          "q": 0.9756212296722608,
+          "disagree": 0.023
+        },
+        "ZZ-Pauli": {
+          "agree": 0.991,
+          "both_wrong": 0.0215,
+          "q": 0.9988486301836057,
+          "disagree": 0.009000000000000001
+        }
+      }
+    }
+  }
+}

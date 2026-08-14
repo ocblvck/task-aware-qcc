@@ -6,9 +6,16 @@
 #   stage 3  seed 42, MCC reward        -- the reward-metric counterfactual
 #   stage 4  emit committee circuits from every new policy and summarise the structure
 #
-# Three runs per stage, one per GPU, roughly 80 minutes per run. The script is idempotent:
-# a stage whose models already carry a completed trainer_state is skipped, so it can be
-# restarted after a reboot with the same command and will pick up where it stopped.
+# Three runs per stage, one per GPU. Checkpoints land every 25 steps because the mains
+# supply on this box trips; a coarser interval throws away the whole segment on a cut.
+#
+# The script is idempotent. A finished run is detected from its trainer_state, and a stage
+# already recorded in the state file is skipped, so after a power cut you rerun the same
+# command and it resumes from the last checkpoint.
+#
+# STAGGER: the three cards are brought up 90s apart. Three A6000s hitting full draw at the
+# same moment is an inrush spike, and this supply has already tripped twice under the
+# three-way load.
 #
 #   setsid tmux -S ~/.tmux-taqcc.sock new-session -d -s queue \
 #     'bash scripts/run_queue.sh 2>&1 | tee logs/queue.log; sleep 604800'
@@ -43,7 +50,7 @@ launch(){ # name lr seed gpu metric
        PYTHONPATH=src:/home/chibuike/quantum-cirq-opt/src; \
      $PY scripts/train_taskaware_grpo.py \
        --base-model $BASE --num-qubits 6 --max-steps 250 --gate-mode or \
-       --lr $lr --seed $seed --util-metric $metric --save-steps 125 --auto-resume \
+       --lr $lr --seed $seed --util-metric $metric --save-steps 25 --auto-resume \
        --output models/$name 2>&1 | tee logs/$name.log; echo EXIT=\$?; sleep 604800"
 }
 
@@ -69,7 +76,11 @@ stage(){ # tag metric seed  name1 name2 name3
   local tag=$1 metric=$2 seed=$3; shift 3
   if grep -qx "$tag" "$STATE"; then log "stage $tag already recorded, skipping"; return; fi
   local lrs=(5e-6 7.5e-6 1e-5) i=0
-  for n in "$@"; do launch "$n" "${lrs[$i]}" "$seed" "$i" "$metric"; i=$((i+1)); done
+  for n in "$@"; do
+    launch "$n" "${lrs[$i]}" "$seed" "$i" "$metric"
+    i=$((i+1))
+    [ $i -lt 3 ] && sleep 90   # stagger the spin-up, see STAGGER note at the top
+  done
   wait_for "$@"
   # one retry pass for anything the reboot or an OOM killed
   local retry=0
@@ -85,11 +96,23 @@ stage(){ # tag metric seed  name1 name2 name3
 
 log "queue started"
 
-# ---- stage 1: seed 43, accuracy reward (already launched by hand) ----
-log "stage 1: waiting on the three seed-43 runs already in flight"
-wait_for rep_lr5_s43 rep_lr75_s43 rep_lr10_s43
-grep -qx stage1 "$STATE" || echo stage1 >> "$STATE"
-log "stage 1 complete"
+# ---- stage 1: seed 43, accuracy reward ----
+stage stage1 accuracy 43 rep_lr5_s43 rep_lr75_s43 rep_lr10_s43
+
+# ---- bank the stage-1 result immediately: emission is cheap and the supply is unreliable
+emit(){
+  export CUDA_VISIBLE_DEVICES=0
+  export PYTHONPATH=src:/home/chibuike/quantum-cirq-opt/src
+  $PY scripts/emit_replicate_circuits.py --models "$@" \
+      --output results/replicates_structure.json 2>&1
+}
+if grep -qx stage1 "$STATE" && ! grep -qx emit1 "$STATE"; then
+  log "banking stage-1 circuits"
+  emit models/grpo_fix_lr5 models/grpo_fix_lr75 models/grpo_fix_lr10 \
+       models/rep_lr5_s43 models/rep_lr75_s43 models/rep_lr10_s43
+  echo emit1 >> "$STATE"
+  log "stage-1 circuits banked in results/replicates_structure.json"
+fi
 
 # ---- stage 2: seed 44, accuracy reward ----
 stage stage2 accuracy 44 rep_lr5_s44 rep_lr75_s44 rep_lr10_s44

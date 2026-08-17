@@ -1,142 +1,161 @@
 # Task-Aware, Noise-Aware RL for Quantum Circuit Compression (`taqcc`)
 
-> Target venue: **AAAI 2027 / NeurIPS 2026**. This project fuses two existing
-> experiments on this machine into one new, end-to-end contribution.
+Code and results for the SN Computer Science article **"Noise-Aware Quantum Ensembles
+and Learned Feature-Map Compression for IoT Intrusion Detection"**, an extended version
+of our IEEE DCAS 2026 paper (DOI 10.1109/dcas69364.2026.11544356).
 
-## 1. One-paragraph thesis
+Everything behind every table and figure in the article is in `results/`, already
+computed. Nothing needs to be rerun to inspect the numbers.
 
-Existing LLM-based quantum-circuit compressors (our `quantum-cirq-opt` project)
-train a model to shrink circuits by optimizing a **structural proxy** reward
-(syntax + KL output-similarity + gate/depth reduction) that only *loosely* tracks
-whether the circuit still does anything useful. We replace that proxy with a
-**task-aware, noise-aware** objective: a compression is rewarded only when it is
-**(R1) provably correct** on circuits small enough to simulate exactly, **and/or
-(R2) practically useful**, i.e. a QSVC/QVE quantum-kernel classifier built from
-the compressed feature map still detects IoT network intrusions accurately under
-**depolarizing density-matrix noise** (our `quantum-ml-iot-nid` project). The
-contribution is the first **end-to-end task-aware compression objective** for
-quantum circuits trained with RL, and the first demonstration that LLM-compressed
-circuits preserve downstream NISQ classification accuracy.
+## Verify the article in one command
 
-## 2. What this repo combines
+```bash
+python scripts/verify_paper_numbers.py
+```
 
-| Source project | Reused here | How |
+Reads only `results/*.json`, no GPU, about a second. It compares 195 values typed from
+the printed tables against the JSON that produced them and reports any disagreement.
+Expected output:
+
+```
+[OK] all 195 published values reproduce from results/
+```
+
+## Where each table and figure comes from
+
+| Article item | Produced by | Result file |
 |---|---|---|
-| `quantum-cirq-opt` (`src/qcc`) | GRPO trainer, QASM parsing/sanitizing, 11-component proxy reward | The new reward is a drop-in for `ComplexityAwareGRPOTrainer`; QASM parsing reused via `taqcc.qasm_adapter` |
-| `quantum-ml-iot-nid` | Feature maps, exact + noisy kernels, IoT-NID / UNSW-NB15 preprocessing, QSVC/QVE protocol | Ported minimally (sklearn/qiskit-only) so the reward never imports cuML and never disturbs the **running hardware ladder** |
+| Table 1, training configuration | `scripts/train_taskaware_grpo.py` | see the command below |
+| Table 2, committee structure | `scripts/emit_replicate_circuits.py`, `scripts/audit_effective_params.py` | `replicates_structure.json`, `effective_params.json` |
+| Table 3, compression arms on IoTID20 | `scripts/eval_compression_matched.py` | `compression_matched_cmpIoT.json` |
+| Table 4, fusion under the coupled family | `scripts/eval_fusion_full.py` | `fusion_v2_IoT_Orig.json`, `fusion_v2_UNSW_NB1.json`, `fusion_v2_UNSW_201.json` |
+| Table 5, gate threshold sensitivity | same run as Table 4 | the `NWE3@<tau>` keys in the same three files |
+| Table 6, hardware-realistic noise | `scripts/eval_fusion_full.py` | `fusion_realistic_8q.json`, `fusion_realistic_10q.json` |
+| Table 7, fifteen paired splits | merge of three runs | `fusion_10q_merged15.json` (its `source_files` key lists the three) |
+| Table 8, member agreement | `scripts/analyze_member_agreement.py` | `member_agreement.json` |
+| Table 9, classical reference | `scripts/eval_classical_baseline.py` | `classical_baseline_200.json` |
+| Tables A1, A2, remaining datasets | `scripts/eval_compression_matched.py` | `compression_matched_cmpUNSW.json`, `compression_matched_cmpBot.json` |
+| Figure 1, pipeline | TikZ schematic, no data | |
+| Figures 2 to 4 | `make_figures_v2.py` in the manuscript directory | same files as Tables 2, 4, 6 and 8 |
 
-Neither source project is modified.
+`results/replicate_circuits/` holds the emitted OpenQASM 3.0 for every policy, both the
+source circuit (`.orig.qasm`) and the compressed one (`.comp.qasm`), so the compression
+claims can be checked by reading the circuits rather than trusting the gate counts.
 
-## 3. The two-part reward (the scientific core)
+## The reward
 
 Implemented in [`src/taqcc/reward.py`](src/taqcc/reward.py):
 
 ```
 reward = w_valid * valid
-       + w_equiv * equiv                  # R1: provable correctness (statevector)
-       + w_util  * utility                # R2: retained accuracy under noise
-       + w_comp  * compression_gain * gate # compression, GATED
+       + w_equiv * equiv                    # provable correctness (statevector)
+       + w_util  * utility                  # retained accuracy under noise
+       + w_comp  * compression_gain * gate   # compression, gated
 ```
 
-- **R1, equivalence** ([`equivalence.py`](src/taqcc/equivalence.py)): for a
-  *parameterized* feature map, the kernel only sees `|psi(x)> = U(x)|0>`, so two
-  maps induce the same kernel iff state fidelity `= 1` for all `x`. We verify by
-  sampling random `x in [0,pi]^n` and averaging `|<orig|cand>|^2`. Exact and
-  shot-free, and only attempted when `n <= max_exact_qubits`.
-- **R2, utility** ([`downstream.py`](src/taqcc/downstream.py)): build a
-  precomputed-kernel SVC (QSVC) from the candidate map, evaluate accuracy/MCC on
-  a small IoT-NID / UNSW split under a **depolarizing density-matrix** channel
-  ([`kernels.py`](src/taqcc/kernels.py), Hilbert-Schmidt overlap
-  `K=Tr(rho_a rho_b)`, matching the paper's measurement-free `NoisyFidelityKernel`).
-  `utility = clip(cand_acc / orig_acc, 0, cap)` with an absolute-accuracy floor.
-- **Compression** is `1 - cost(cand)/cost(orig)` with `cost = depth + 2*n_2q`,
-  counted on the **decomposed** circuit (paper basis `u,cx,rz,sx,x`).
+- **Equivalence** ([`equivalence.py`](src/taqcc/equivalence.py)): for a parameterized
+  feature map the kernel only sees `|psi(x)> = U(x)|0>`, so two maps induce the same
+  kernel iff state fidelity is 1 for all `x`. Verified by sampling random
+  `x in [0,pi]^n` and averaging `|<orig|cand>|^2`. Attempted only when
+  `n <= max_exact_qubits`.
+- **Utility** ([`downstream.py`](src/taqcc/downstream.py)): a precomputed-kernel SVC
+  built from the candidate map, scored on an IoT-NID or UNSW split under a depolarizing
+  density-matrix channel ([`kernels.py`](src/taqcc/kernels.py), Hilbert-Schmidt overlap
+  `K = Tr(rho_a rho_b)`). `utility = clip(cand/orig, 0, cap)` with an absolute floor.
+  `--util-metric mcc` switches the retention term to Matthews correlation; the runs
+  reported in the article all use the accuracy formulation.
+- **Compression** is `1 - cost(cand)/cost(orig)` with `cost = depth + 2*n_2q`, counted
+  on the decomposed circuit in the basis `u, cx, rz, sx, x`.
+- **Gate semantics** (`TaskAwareRewardConfig.gate_mode`): `"and"` gives
+  `gate = correctness * utility`, so shrink pays only when the circuit is both
+  equivalent and useful. `"or"` gives `gate = max(correctness, utility)`, which admits
+  better but non-equivalent kernels. The article uses `"or"`.
 
-### Gate semantics (configurable)
+## Admissibility, and two ways it was gamed
 
-`TaskAwareRewardConfig.gate_mode`:
-- `"and"` (strict, default): `gate = correctness * utility`. Shrink rewarded only
-  when **both** provably equivalent **and** useful. Matches the literal proposal.
-- `"or"` (task-aware): `gate = max(correctness, utility)`. Shrink rewarded if the
-  circuit is **either** provably equivalent **or** retains downstream accuracy,
-  this admits *better, non-equivalent* kernels, arguably the real point of
-  task-aware compression. **Recommended to ablate both** and report.
+A candidate is scored only if it passes an admissibility check. Both of the checks we
+tried first were defeated by a policy that respected their letter, and the article
+reports this as a finding.
 
-## 4. Pilot result (validated)
+1. **Declared parameter count.** An early policy reached an apparent 95 percent gate
+   reduction by declaring six parameters and binding two, leaving four qubits idle. The
+   check tested the QASM header, not the body.
+2. **Structural use** (`is_valid_feature_map`): every declared parameter must appear in
+   a gate argument and every qubit must be acted on. The seed-43 policy at lr 5e-6
+   satisfied this and still discarded four of six features, by writing phase rotations
+   onto qubits it had not put into superposition, where they act as the identity.
+3. **Effective parameters** (`scripts/audit_effective_params.py`): perturb each
+   parameter and measure self-fidelity. A parameter counts only if it changes the state
+   the kernel sees. This is applied as a post-hoc audit in the article, not inside the
+   training loop, and 3 of 21 emitted circuits fail it.
 
-`scripts/pilot_reward.py` on a 6-qubit, 16-train/8-test UNSW split at depolarizing
-`p1=0.01` (density-matrix), original = QSVC `ZZ(full)`:
+```bash
+python scripts/audit_effective_params.py     # prints the per-circuit table
+```
 
-| candidate | depth | 2q | comp% | equiv | acc | reward |
-|---|---|---|---|---|---|---|
-| identity | 49 | 60 | 0.0 | 1.000 | 0.625 | 1.450 |
-| transpiled_l3 | 49 | 60 | 0.0 | 1.000 | 0.625 | 1.450 |
-| linear_zz | 25 | 20 | 61.5 | 0.013 | 0.625 | 0.465 |
-| z_only | 4 | 0 | 97.6 | 0.044 | 0.875 | 1.104 |
+## Environments
 
-The reward correctly (a) rewards equivalent circuits, (b) **withholds** the
-compression bonus from `linear_zz` (61% smaller but not equivalent, strict mode),
-and (c) gives `z_only` partial credit because it *retains* accuracy. This is the
-intended task-aware behavior. Raw JSON saved under `pilots/`.
+Two conda envs, because the quantum stack and the training stack conflict.
 
-## 5. Objectives / paper structure
+- **Quantum / evaluation:** `/home/chibuike/miniconda/envs/qiskit`, qiskit 1.4.4,
+  qiskit-aer, qiskit-machine-learning, sklearn, cupy. Runs every `eval_*` and
+  `analyze_*` script. torch here is CPU-only, so it cannot train.
+- **GRPO training:** `taqcc-grpo`, cloned from the above plus GPU torch 2.6.0+cu124,
+  trl 0.26.2, peft, bitsandbytes, liger-kernel, qiskit-qasm3-import.
 
-1. **Objective 1, task-aware reward (this repo's core).** Extend
-   Qwen2.5-Coder-3B + LoRA + GRPO with the R1+R2 reward; show LLM-compressed
-   feature maps preserve IoT-NID / UNSW intrusion-detection accuracy under noise.
-2. **Objective 2, feature-map × error-mitigation study.** QVE/QWE across
-   ZZFeatureMap / PauliFeatureMap / Custom entanglement-heavy map, with and
-   without error mitigation, identifying the most NISQ-resilient combinations;
-   validate ≥1 config on real hardware (reuses the existing hardware ladder).
-3. **Objective 3, error-aware reward design.** feeds Objective 2's findings back
-   into the reward's noise model (device-calibrated channels).
+Training, one policy, roughly 80 minutes on one A6000:
 
-## 6. Environments (important)
+```bash
+python scripts/train_taskaware_grpo.py \
+  --base-model models/sft_compress_e2_merged --num-qubits 6 \
+  --max-steps 250 --gate-mode or --lr 5e-6 --seed 42 \
+  --util-metric accuracy --save-steps 25 --auto-resume \
+  --output models/grpo_fix_lr5
+```
 
-This machine has **3x RTX A6000 (49 GB)**, currently idle (the hardware ladder is
-queue-bound). Two envs are needed:
+`scripts/run_queue.sh` drives the full replication unattended. It checkpoints every 25
+steps and resumes from the last one, because the mains supply on this machine trips.
 
-- **Reward / quantum env (ready now):** `/home/chibuike/miniconda/envs/qiskit`
-  has qiskit 1.4.4, qiskit-aer 0.15.1, qiskit-machine-learning, cupy, sklearn,
-  datasets. **torch here is CPU-only and trl/peft/bitsandbytes are missing**, so
-  it runs the reward + pilots but **not** GRPO training.
-- **GRPO / LLM env (BUILT):** conda env `taqcc-grpo` (cloned from `qiskit`, then
-  GPU torch 2.6.0+cu124 + trl 0.26.2 + peft + bitsandbytes + liger-kernel +
-  qiskit-qasm3-import; networkx pinned >=3.4). `torch.cuda.is_available()=True`,
-  3 GPUs. Runs `ComplexityAwareGRPOTrainer` via
-  [scripts/train_taskaware_grpo.py](scripts/train_taskaware_grpo.py) with
-  `taqcc.grpo_integration.make_grpo_reward`. Anti-collapse settings kept:
-  **lr=1e-6, DAPO loss, beta=0, soft penalties**. A 2-step smoke test passes
-  end-to-end (reward fires each step; `reward_std>0`, no collapse).
-
-## 7. Layout
+## Layout
 
 ```
 task-aware-qcc/
-  README.md                 <- this design doc
+  scripts/
+    verify_paper_numbers.py     # checks every published value against results/
+    audit_effective_params.py   # perturbation test for inert parameters
+    analyze_member_agreement.py # Yule's Q, both-wrong rate, oracle ceiling
+    eval_fusion_full.py         # QVE / QWE / NWE across the noise grid
+    eval_compression_matched.py # the eight compression arms
+    eval_classical_baseline.py  # random forest, SVM-RBF, logistic regression
+    emit_replicate_circuits.py  # emit and audit a policy's committee
+    train_taskaware_grpo.py     # GRPO training entry point
+    train_sft_warmup.py         # supervised warm-up
+    run_queue.sh                # unattended replication supervisor
   src/taqcc/
-    feature_maps.py          # parameterized maps + decomposed metrics
-    data.py                  # paper-faithful, sklearn-only loader (no cuML)
-    kernels.py               # exact statevector + noisy density-matrix Gram
-    equivalence.py           # R1 exact equivalence
-    downstream.py            # R2 QSVC/QVE accuracy under noise
-    reward.py                # combined task-aware reward (TRL-compatible)
-    qasm_adapter.py          # parse LLM QASM (reuses qcc helpers if present)
-  scripts/pilot_reward.py    # end-to-end R1+R2 pilot on tiny data
-  pilots/                    # pilot output JSON
+    feature_maps.py             # parameterized maps, decomposed metrics, validity
+    data.py                     # sklearn-only loader, seeded MI feature selection
+    kernels.py                  # exact statevector and noisy density-matrix Gram
+    equivalence.py              # state-fidelity equivalence
+    downstream.py               # QSVC accuracy and MCC under noise
+    reward.py                   # the task-aware reward
+    qasm_adapter.py             # parse and sanitize model-emitted QASM
+  results/                      # every JSON behind the article, plus emitted circuits
 ```
 
-## 8. Next steps
+## What is not in this repository
 
-1. **SFT warmup (highest priority).** The smoke test shows raw Qwen2.5-Coder-3B
-   emits QASM that doesn't parse as a valid 6-qubit feature map, so the task
-   reward is a flat -0.3 (no gradient). Warm-start the policy on feature-map
-   compression examples (or start from a QASM-aware SFT/merged checkpoint) so the
-   task reward produces signal. `scripts/train_taskaware_grpo.py --sft-adapter`
-   already merges an SFT adapter before RL.
-2. Scale the run: `accelerate launch --num_processes 3` on the 3x A6000, larger
-   `--train-size/--test-size`, `--max-steps`, and the full feature-map spec set.
-3. Performance: cache per-candidate Gram matrices, subsample R2 during RL, and
-   only run R2 on candidates that pass a cheap validity/equivalence pre-filter.
-4. Ablations: `gate_mode` and/vs or; noise grid; feature-map family (Objective 2).
-```
+- **Trained adapters and merged bases** (`models/`, about 91 GB). Excluded by
+  `.gitignore`. Every circuit those policies emitted is committed under
+  `results/replicate_circuits/`, so the compression results can be checked without them.
+- **The datasets.** All three are public and cited from their original sources in the
+  article. `src/taqcc/data.py` documents the preprocessing: stratified split, seeded
+  mutual-information selection of one feature per qubit, min-max scaling to `[0, pi]`.
+- **The manuscript source.** Kept with the submission, not here.
+
+## Scope
+
+Results come from density-matrix simulation, not hardware, at six to ten qubits. The
+article states the limits in full: the learning-rate sweep does not reproduce across
+seeds, fusion never exceeds its best member, and a random forest on the same six
+features matches or beats the quantum ensemble on all three datasets. Nothing here
+claims a quantum advantage.

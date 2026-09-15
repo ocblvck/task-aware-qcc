@@ -103,6 +103,62 @@ def is_valid_feature_map(circuit: Optional[QuantumCircuit], num_qubits: int) -> 
     return len(touched_qubit_indices(circuit)) == num_qubits
 
 
+# Perturbation sizes for the effective-parameter test (Eq. 9 in the article). Angles in
+# these maps carry factors of two and products of features, so a single delta can land on
+# a period of the rotation; three unrelated sizes avoid a false "inert" verdict.
+EFFECTIVE_DELTAS = (0.7, 1.9, -1.1)
+EFFECTIVE_TOL = 1e-9
+
+
+def effective_parameter_mask(circuit: QuantumCircuit, deltas=EFFECTIVE_DELTAS,
+                             tol: float = EFFECTIVE_TOL, seed: int = 0):
+    """Per parameter (sorted by name): does perturbing it change the encoded state?
+
+    The fidelity kernel is |<psi(x)|psi(z)>|^2, blind to global phase, so a parameter
+    reaches the kernel only if perturbing it drops the self-fidelity below 1. A phase
+    rotation on a qubit that never saw a Hadamard passes the syntactic checks and fails
+    this one. Statevector only; a few dozen simulations per circuit at six qubits.
+    """
+    from qiskit.quantum_info import Statevector
+
+    order = list(circuit.parameters)
+    if not order:
+        return []
+    rng = np.random.default_rng(seed)
+    base = rng.uniform(0.2, 2.8, len(order))
+
+    def state(vals):
+        return Statevector.from_instruction(
+            circuit.assign_parameters(dict(zip(order, vals)))).data
+
+    v0 = state(base)
+    mask = []
+    for prm in sorted(order, key=lambda q: q.name):
+        i = order.index(prm)
+        worst = 1.0
+        for d in deltas:
+            pert = base.copy()
+            pert[i] += d
+            worst = min(worst, abs(np.vdot(v0, state(pert))) ** 2)
+        mask.append(bool(worst < 1 - tol))
+    return mask
+
+
+def is_effective_feature_map(circuit: Optional[QuantumCircuit], num_qubits: int,
+                             seed: int = 0) -> bool:
+    """Eq. 9: every one of the ``num_qubits`` parameters must move the encoded state.
+
+    Stronger than :func:`is_valid_feature_map`, which it assumes has already passed.
+    """
+    if circuit is None:
+        return False
+    try:
+        mask = effective_parameter_mask(circuit, seed=seed)
+    except Exception:
+        return False
+    return len(mask) == num_qubits and all(mask)
+
+
 def circuit_metrics(circuit: QuantumCircuit) -> Dict[str, int]:
     """Depth / total-gate / two-qubit-gate counts on a DECOMPOSED circuit.
 

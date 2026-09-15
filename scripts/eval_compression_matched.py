@@ -57,10 +57,16 @@ def circuit_key(circ) -> str:
     return hashlib.md5(qasm3.dumps(circ).encode()).hexdigest()
 
 
-def build_arms(nq):
-    """Return {arm: [circuit per committee member]} plus per-arm two-qubit counts."""
+def build_arms(nq, extra_models=(), cache_dirs=None, require_effective=False):
+    """Return {arm: [circuit per committee member]} plus per-arm two-qubit counts.
+
+    ``extra_models`` adds learned arms beyond LEARNED (for example the corrected
+    policies); ``cache_dirs`` prepends directories to search for their circuits.
+    """
     from qiskit import qasm3, transpile
-    from taqcc.feature_maps import make_feature_map, circuit_metrics, is_valid_feature_map
+    from taqcc.feature_maps import (make_feature_map, circuit_metrics, is_valid_feature_map,
+                                    effective_parameter_mask)
+    dirs = list(cache_dirs or []) + CACHE_DIRS
 
     arms = {}
     arms["uncompressed"] = [make_feature_map(nq, *m) for m in COMMITTEE]
@@ -76,10 +82,10 @@ def build_arms(nq):
     arms["linear"] = [make_feature_map(nq, m[0], m[1], "linear") for m in COMMITTEE]
     arms["zonly"] = [make_feature_map(nq, "Z", 1, "full") for _ in COMMITTEE]
 
-    for model in LEARNED:
+    for model in list(LEARNED) + list(extra_models):
         circs, ok = [], True
         for tag in CACHE_TAGS:
-            path = next((Path(d) / f"{model}__{tag}.comp.qasm" for d in CACHE_DIRS
+            path = next((Path(d) / f"{model}__{tag}.comp.qasm" for d in dirs
                          if (Path(d) / f"{model}__{tag}.comp.qasm").exists()), None)
             if path is None:
                 ok = False
@@ -93,6 +99,9 @@ def build_arms(nq):
             print(f"[skip] {model}: {len(bad)} circuit(s) fail the validity criterion",
                   flush=True)
             continue
+        if require_effective and any(not all(effective_parameter_mask(c)) for c in circs):
+            print(f"[skip] {model}: fails the effective-parameter test", flush=True)
+            continue
         arms[model] = circs
 
     meta = {}
@@ -101,11 +110,13 @@ def build_arms(nq):
         depth = [circuit_metrics(c)["depth"] for c in circs]
         base = [circuit_metrics(c)["two_qubit"] for c in arms["uncompressed"]]
         tot_o, tot_c = sum(base), sum(two_q)
+        eff = [int(sum(effective_parameter_mask(c))) for c in circs]
         meta[arm] = {
             "two_qubit": two_q, "depth": depth,
             "two_qubit_total": tot_c,
             "reduction_pct": 0.0 if tot_o == 0 else 100.0 * (tot_o - tot_c) / tot_o,
             "distinct_members": len({circuit_key(c) for c in circs}),
+            "effective_params": eff, "effective_total": int(sum(eff)),
         }
     return arms, meta
 
@@ -123,6 +134,11 @@ def main():
     ap.add_argument("--noise-pairs", default=None)
     ap.add_argument("--primary-frac", type=float, default=0.05)
     ap.add_argument("--no-gpu", action="store_true")
+    ap.add_argument("--extra-models", default="",
+                    help="Comma list of additional learned arms to score (circuit caches "
+                         "found via --cache-dirs)")
+    ap.add_argument("--cache-dirs", default="",
+                    help="Comma list of directories searched first for <model>__<tag>.comp.qasm")
     ap.add_argument("--output", required=True)
     args = ap.parse_args()
 
@@ -135,7 +151,10 @@ def main():
     from taqcc.kernels import gram_pair
 
     nq = args.num_qubits
-    arms, meta = build_arms(nq)
+    arms, meta = build_arms(
+        nq,
+        extra_models=[m for m in args.extra_models.split(",") if m],
+        cache_dirs=[d for d in args.cache_dirs.split(",") if d])
     print(f"[arms] {len(arms)}: " + ", ".join(
         f"{a}({meta[a]['two_qubit_total']}x2q, {meta[a]['distinct_members']} distinct)"
         for a in arms), flush=True)

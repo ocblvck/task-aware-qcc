@@ -72,6 +72,15 @@ def main():
                     help="Downstream metric the reward's retention term is computed against. "
                          "'mcc' prices majority-class collapse at zero, which accuracy does "
                          "not do on an imbalanced problem.")
+    ap.add_argument("--require-effective", action="store_true",
+                    help="Eq. 9 inside the admissibility check: a candidate with any inert "
+                         "parameter is inadmissible (corrected objective)")
+    ap.add_argument("--util-reference", default="clean_source",
+                    choices=["clean_source", "noisy_source"],
+                    help="Reference for MCC retention. The source maps sit at MCC 0 under the "
+                         "reward noise, so 'noisy_source' is degenerate there.")
+    ap.add_argument("--reward-log", default=None,
+                    help="JSONL path; every reward evaluation is appended with its breakdown")
     ap.add_argument("--seed", type=int, default=42,
                     help="Training seed. Vary across otherwise-identical runs to measure "
                          "run-to-run variance in what the policy emits.")
@@ -116,7 +125,12 @@ def main():
         # anti-mode-collapse defaults (dapo, beta=0) come from the config.
     )
 
-    reward_cfg = TaskAwareRewardConfig(gate_mode=args.gate_mode, util_metric=args.util_metric)
+    reward_cfg = TaskAwareRewardConfig(gate_mode=args.gate_mode, util_metric=args.util_metric,
+                                       util_reference=args.util_reference,
+                                       require_effective=args.require_effective)
+    if args.reward_log:
+        import os
+        os.environ["TAQCC_REWARD_LOG"] = args.reward_log
     if args.w_comp is not None:
         reward_cfg.w_comp = args.w_comp
     if args.w_equiv is not None:
@@ -124,8 +138,10 @@ def main():
     if args.w_util is not None:
         reward_cfg.w_util = args.w_util
     print(f"[reward] gate_mode={reward_cfg.gate_mode} util_metric={reward_cfg.util_metric} "
-          f"w_comp={reward_cfg.w_comp} w_equiv={reward_cfg.w_equiv} "
-          f"w_util={reward_cfg.w_util} seed={args.seed}", flush=True)
+          f"util_reference={reward_cfg.util_reference} require_effective={reward_cfg.require_effective} "
+          f"w_comp={reward_cfg.w_comp} w_equiv={reward_cfg.w_equiv} w_util={reward_cfg.w_util} "
+          f"train_size={args.train_size} test_size={args.test_size} pool={args.pool_size} "
+          f"noise_p1={args.noise_p1} seed={args.seed}", flush=True)
     task_reward = make_grpo_reward(
         dataset_path=str(Path(args.data_dir) / args.dataset),
         num_qubits=args.num_qubits,

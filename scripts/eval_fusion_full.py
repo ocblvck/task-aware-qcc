@@ -14,7 +14,7 @@ Supersedes ``eval_fusion_rules.py``. Three changes make it submission-grade:
      noise-free spread, and sweep that fraction to show the choice is not load-bearing.
   3. *Encoding ablation.* Branch diagnostics cover a depth-matched, entanglement-free
      encoding (Z with reps=2) alongside the entangling maps, which separates "shallow
-     helps" from "no entanglement helps" -- the confound the conference paper flagged.
+     helps" from "no entanglement helps" , the confound the conference paper flagged.
 
 Paired Wilcoxon tests across shared seeds compare the fusion rules.
 
@@ -74,6 +74,12 @@ def main():
                     help="Score only the committee (skips the depth-matched encodings)")
     ap.add_argument("--no-gpu", action="store_true",
                     help="Force the density-matrix simulator onto CPU Aer")
+    ap.add_argument("--c-values", default=None,
+                    help="Comma list of SVM C values; when given, fusion and branch results "
+                         "are stored per C under 'by_C' as well as at the default C=1")
+    ap.add_argument("--resume", action="store_true",
+                    help="Skip (dataset, noise) cells already present in --output. Ten-qubit "
+                         "cells take hours each and this box loses power.")
     ap.add_argument("--output", default="results/fusion_full.json")
     args = ap.parse_args()
 
@@ -99,23 +105,38 @@ def main():
         noises = [(float(x), None) for x in args.noise_grid.split(",")]
     fracs = [float(x) for x in args.spread_fracs.split(",")]
 
-    def fit_predict(K_tr, K_te, y_tr, seed):
-        svc = SVC(kernel="precomputed", class_weight="balanced", random_state=seed)
+    def fit_predict(K_tr, K_te, y_tr, seed, C=1.0):
+        svc = SVC(kernel="precomputed", class_weight="balanced", random_state=seed, C=C)
         svc.fit(K_tr, y_tr)
         return svc.predict(K_te)
 
+    c_values = [float(c) for c in args.c_values.split(",")] if args.c_values else []
     out = {"config": vars(args), "floor_2_pow_-n": 2.0 ** (-nq), "datasets": {}}
+    if args.resume and Path(args.output).exists():
+        prev = json.loads(Path(args.output).read_text())
+        out["datasets"] = prev.get("datasets", {})
+        print(f"[resume] {sum(len(d['by_noise']) for d in out['datasets'].values())} "
+              f"cells already in {args.output}", flush=True)
 
     for ds in args.datasets.split(","):
         ds = ds.strip()
         print(f"\n[dataset] {ds}", flush=True)
-        # Noise-free spread per branch per seed — the reference the cutoff scales.
+        # Noise-free spread per branch per seed , the reference the cutoff scales.
         ref_spread = {lab: {} for lab in labels}
-        ds_rec = {"by_noise": {}, "tests": {}}
+        ds_rec = out["datasets"].get(ds, {"by_noise": {}, "tests": {}}) if args.resume else {"by_noise": {}, "tests": {}}
+        ds_rec.setdefault("by_noise", {}); ds_rec.setdefault("tests", {})
 
         for p1, p2 in noises:
             key_p = f"{p1}:{p2}" if p2 is not None else f"{p1}"
             noiseless = (p1 == 0.0 and (p2 in (0.0, None)))
+            if args.resume and key_p in ds_rec["by_noise"] and not noiseless:
+                print(f"  {key_p:<14} (resumed, skipped)", flush=True)
+                continue
+            if args.resume and key_p in ds_rec["by_noise"] and noiseless:
+                # The noiseless cell must be recomputed to rebuild ref_spread in memory.
+                print(f"  {key_p:<14} (recomputing noiseless cell for the reference spreads)", flush=True)
+            c_rec = {C: {"fusion": {k: [] for k in ("QVE3", "QWE3", "NWE3")},
+                         "branch": {lab: [] for lab in labels}} for C in c_values}
             per_seed = {k: [] for k in ("QVE3", "QWE3")}
             per_seed.update({f"NWE3@{f}": [] for f in fracs})
             branch = {lab: {"mcc": [], "spread": []} for lab in labels}
@@ -140,10 +161,24 @@ def main():
 
                 preds = [fit_predict(K[l][0], K[l][1], y_tr, sd) for l in comm]
 
-                # QVE3 — plain majority.
+                # Optional SVM regularisation sweep on the SAME Gram matrices.
+                for C in c_values:
+                    pc = {l: fit_predict(K[l][0], K[l][1], y_tr, sd, C=C) for l in labels}
+                    for lab in labels:
+                        c_rec[C]["branch"][lab].append(
+                            matthews_corrcoef(y_te, pc[lab]) if len(np.unique(y_te)) > 1 else 0.0)
+                    pcm = [pc[l] for l in comm]
+                    c_rec[C]["fusion"]["QVE3"].append(matthews_corrcoef(y_te, fuse(pcm, np.ones(len(comm)))))
+                    wg = [1.0 if kernel_spread(K[l][0]) >= args.primary_frac * ref_spread[l].get(sd, kernel_spread(K[l][0])) else 0.0 for l in comm]
+                    if not any(wg):
+                        wg = [1.0 if i == int(np.argmax([kernel_spread(K[l][0]) for l in comm])) else 0.0 for i in range(len(comm))]
+                    c_rec[C]["fusion"]["NWE3"].append(matthews_corrcoef(y_te, fuse(pcm, wg)))
+                    c_rec[C]["fusion"]["QWE3"].append(float("nan"))  # weights need a C-specific refit; not part of E4
+
+                # QVE3 , plain majority.
                 per_seed["QVE3"].append(matthews_corrcoef(y_te, fuse(preds, np.ones(len(comm)))))
 
-                # QWE3 — validation-accuracy weights, from SLICES of the train Gram.
+                # QWE3 , validation-accuracy weights, from SLICES of the train Gram.
                 strat = y_tr if len(np.unique(y_tr)) > 1 else None
                 idx = np.arange(len(y_tr))
                 itr, ival = train_test_split(idx, test_size=0.2, random_state=sd,
@@ -156,7 +191,7 @@ def main():
                     w_acc.append(max(accuracy_score(y_tr[ival], pv), 1e-6))
                 per_seed["QWE3"].append(matthews_corrcoef(y_te, fuse(preds, w_acc)))
 
-                # NWE3 — drop branches whose spread fell below frac * its own p=0 spread.
+                # NWE3 , drop branches whose spread fell below frac * its own p=0 spread.
                 # Binary gate, then EQUAL votes among survivors. Weighting in
                 # proportion to spread was measurably worse: spread decays faster
                 # than accuracy, so a degraded-but-best branch gets under-weighted.
@@ -184,6 +219,13 @@ def main():
                            for lab, b in branch.items()},
                 "kept_rate": {lab: float(np.mean(v)) for lab, v in kept_rate.items()},
             }
+            if c_values:
+                ds_rec["by_noise"][key_p]["by_C"] = {
+                    str(C): {"fusion": {r: {"mcc_mean": float(np.nanmean(v)), "mcc_seeds": [float(x) for x in v]}
+                                        for r, v in c_rec[C]["fusion"].items()},
+                             "branch": {lab: {"mcc_mean": float(np.mean(v)), "mcc_seeds": [float(x) for x in v]}
+                                        for lab, v in c_rec[C]["branch"].items()}}
+                    for C in c_values}
             # Flush after every noise level: an abrupt power loss then costs one
             # cell rather than the whole run.
             out["datasets"][ds] = ds_rec

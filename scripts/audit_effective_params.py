@@ -43,27 +43,9 @@ TOL = 1e-9
 
 
 def effective_mask(circ, rng):
-    """Boolean per parameter, sorted by name: does perturbing it change the state?"""
-    from qiskit.quantum_info import Statevector
-
-    order = list(circ.parameters)
-    base = rng.uniform(0.2, 2.8, len(order))
-
-    def state(vals):
-        return Statevector.from_instruction(
-            circ.assign_parameters(dict(zip(order, vals)))).data
-
-    v0 = state(base)
-    mask = []
-    for p in sorted(order, key=lambda q: q.name):
-        i = order.index(p)
-        worst = 1.0
-        for d in DELTAS:
-            pert = base.copy()
-            pert[i] += d
-            worst = min(worst, abs(np.vdot(v0, state(pert))) ** 2)
-        mask.append(bool(worst < 1 - TOL))
-    return mask
+    """Boolean per parameter, sorted by name. One implementation, shared with the reward."""
+    from taqcc.feature_maps import effective_parameter_mask
+    return effective_parameter_mask(circ, deltas=DELTAS, tol=TOL, seed=0)
 
 
 def main():

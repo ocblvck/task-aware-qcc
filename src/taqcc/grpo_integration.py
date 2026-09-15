@@ -267,6 +267,12 @@ def make_grpo_reward(
             )
         return ctx_cache[key]
 
+    # Every reward evaluation is appended to TAQCC_REWARD_LOG (JSONL) when set, so a
+    # run's full reward history, per candidate, survives independently of the trainer.
+    import os, time, json as _json
+    log_path = os.environ.get("TAQCC_REWARD_LOG")
+    counter = {"n": 0}
+
     def task_aware_grpo_reward(prompts=None, completions=None, **kwargs) -> List[float]:
         comps = completions or []
         solutions = kwargs.get("solution") or [None] * len(comps)
@@ -277,7 +283,22 @@ def make_grpo_reward(
             if ctx is None:
                 rewards.append(reward_cfg.invalid_penalty)
                 continue
-            rewards.append(score_candidate(text, ctx, reward_cfg)["reward"])
+            res = score_candidate(text, ctx, reward_cfg)
+            rewards.append(res["reward"])
+            counter["n"] += 1
+            if log_path:
+                try:
+                    from .feature_maps import circuit_metrics as _cm
+                    circ = parse_candidate(text)
+                    m = _cm(circ) if circ is not None else {}
+                    rec = {"i": counter["n"], "t": time.time(), "source": _hash(orig_qasm)[:8],
+                           "candidate": _hash(text)[:8],
+                           "two_qubit": m.get("two_qubit"), "depth": m.get("depth")}
+                    rec.update({k: v for k, v in res.items()})
+                    with open(log_path, "a") as fh:
+                        fh.write(_json.dumps(rec) + "\n")
+                except Exception:
+                    pass
         return rewards
 
     task_aware_grpo_reward.__name__ = "task_aware_grpo_reward"

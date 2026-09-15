@@ -37,7 +37,7 @@ from qiskit import QuantumCircuit
 
 from .downstream import DownstreamConfig, downstream_accuracy
 from .equivalence import equivalence_score
-from .feature_maps import circuit_metrics, is_valid_feature_map
+from .feature_maps import circuit_metrics, is_effective_feature_map, is_valid_feature_map
 from .qasm_adapter import parse_candidate
 
 
@@ -70,6 +70,19 @@ class TaskAwareRewardConfig:
     #   "mcc":      chance sits at 0 instead of the majority rate, so majority-class collapse
     #               is priced in directly and util_floor_acc is no longer needed.
     util_metric: str = "accuracy"
+    # Reference for the MCC retention ratio.
+    #   "noisy_source": the source map under the same noise (the accuracy setting's
+    #                   convention). Degenerate at the reward-loop noise used in the
+    #                   article, where the ZZ and Pauli sources sit at MCC 0.
+    #   "clean_source": the source map without noise, so the ratio reads "fraction of
+    #                   the source's clean detection quality kept under noise".
+    util_reference: str = "clean_source"
+    # Below this reference MCC the ratio is meaningless; fall back to absolute MCC and
+    # flag it in the breakdown.
+    mcc_reference_floor: float = 0.05
+    # Eq. 9 inside the admissibility check: every declared parameter must move the
+    # encoded state. Off by default so the pre-correction runs stay reproducible.
+    require_effective: bool = False
     # gate semantics for the compression bonus:
     #   "and" (strict)  -> gate = correctness * utility
     #                      shrink only rewarded when BOTH equivalent AND useful.
@@ -99,6 +112,7 @@ class TaskContext:
     downstream: DownstreamConfig
     baseline_accuracy: Optional[float] = None
     baseline_mcc: Optional[float] = None
+    baseline_mcc_clean: Optional[float] = None
 
     def ensure_baseline(self) -> float:
         if self.baseline_accuracy is None:
@@ -109,6 +123,18 @@ class TaskContext:
             self.baseline_accuracy = res["accuracy"]
             self.baseline_mcc = res.get("mcc")
         return self.baseline_accuracy
+
+    def ensure_baseline_clean(self) -> float:
+        """Source map's MCC without noise, the reference for MCC retention."""
+        if self.baseline_mcc_clean is None:
+            from dataclasses import replace
+            clean = replace(self.downstream, noise_p1=0.0, noise_p2=None)
+            res = downstream_accuracy(
+                self.original, self.X_train, self.y_train,
+                self.X_test, self.y_test, clean,
+            )
+            self.baseline_mcc_clean = float(res.get("mcc") or 0.0)
+        return self.baseline_mcc_clean
 
 
 # --------------------------------------------------------------------------- #
@@ -131,7 +157,8 @@ def score_candidate(
     """Return the full reward breakdown for one candidate circuit."""
     circ = parse_candidate(candidate) if isinstance(candidate, str) else candidate
     out = {
-        "valid": 0.0, "equiv": None, "candidate_accuracy": None,
+        "valid": 0.0, "effective": None, "equiv": None, "candidate_accuracy": None,
+        "candidate_mcc": None, "reference_mcc": None, "reference_kind": None,
         "utility": 0.0, "compression_gain": 0.0, "gate": 0.0,
         "reward": cfg.invalid_penalty,
     }
@@ -141,6 +168,14 @@ def score_candidate(
     # the first few, so truncation scored as compression.
     if not is_valid_feature_map(circ, ctx.X_train.shape[1]):
         return out
+    # Eq. 9: the structural check above is syntactic and a policy gamed it by writing
+    # rotations onto qubits left in |0>. When required, a circuit with any inert
+    # parameter is inadmissible and earns the same soft penalty as an invalid one.
+    if cfg.require_effective:
+        eff = is_effective_feature_map(circ, ctx.X_train.shape[1], seed=ctx.downstream.seed)
+        out["effective"] = 1.0 if eff else 0.0
+        if not eff:
+            return out
     out["valid"] = 1.0
 
     # R1, exact equivalence (None if too large to verify).
@@ -167,8 +202,19 @@ def score_candidate(
     if cfg.util_metric == "mcc":
         # MCC is 0 at chance, so no separate absolute floor is needed here.
         cand = max(float(res.get("mcc") or 0.0), 0.0)
-        base = max(float(ctx.baseline_mcc or 0.0), 0.0)
-        retention = cand / max(base, 1e-6)
+        if cfg.util_reference == "clean_source":
+            base = ctx.ensure_baseline_clean()
+        else:
+            base = float(ctx.baseline_mcc or 0.0)
+        if base > cfg.mcc_reference_floor:
+            retention = cand / base
+            out["reference_kind"] = cfg.util_reference
+        else:
+            # A dead or near-dead reference makes the ratio meaningless; score the
+            # candidate on its own MCC and record that the fallback fired.
+            retention = cand
+            out["reference_kind"] = "absolute_fallback"
+        out["reference_mcc"] = float(base)
         utility = float(np.clip(retention, 0.0, cfg.util_cap))
     else:
         retention = acc / max(baseline, 1e-6)

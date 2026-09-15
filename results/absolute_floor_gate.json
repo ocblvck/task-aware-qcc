@@ -1,0 +1,131 @@
+{
+ "note": "Admit member iff off-diagonal spread > k*2^-n (no noise-free reference), compared with the article's relative rule spread >= 0.05*s0. Counts over every member, noise level, dataset and width in the article.",
+ "agreement": {
+  "1": {
+   "match": 61,
+   "total": 63
+  },
+  "2": {
+   "match": 61,
+   "total": 63
+  },
+  "5": {
+   "match": 60,
+   "total": 63
+  },
+  "10": {
+   "match": 53,
+   "total": 63
+  },
+  "20": {
+   "match": 40,
+   "total": 63
+  },
+  "50": {
+   "match": 37,
+   "total": 63
+  }
+ },
+ "disagreements_k10": [
+  [
+   "fusion_v2_IoT_Orig",
+   "0.0",
+   "ZZ2",
+   0.14926,
+   0.00746,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_v2_IoT_Orig",
+   "0.05",
+   "Z1",
+   0.14971,
+   0.01344,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_v2_IoT_Orig",
+   "0.1",
+   "Z1",
+   0.08585,
+   0.01344,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_v2_UNSW_NB1",
+   "0.1",
+   "Z1",
+   0.09563,
+   0.01608,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_v2_UNSW_201",
+   "0.0",
+   "ZZ2",
+   0.05772,
+   0.00289,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_v2_UNSW_201",
+   "0.0",
+   "Pauli1",
+   0.0802,
+   0.00401,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_v2_UNSW_201",
+   "0.05",
+   "Z1",
+   0.12995,
+   0.01156,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_v2_UNSW_201",
+   "0.1",
+   "Z1",
+   0.07515,
+   0.01156,
+   0.15625,
+   true,
+   false
+  ],
+  [
+   "fusion_realistic_8q",
+   "0.0005:0.01",
+   "ZZ2",
+   0.02189,
+   0.0089,
+   0.03906,
+   true,
+   false
+  ],
+  [
+   "fusion_realistic_8q",
+   "0.0005:0.02",
+   "Pauli1",
+   0.02868,
+   0.01053,
+   0.03906,
+   true,
+   false
+  ]
+ ]
+}

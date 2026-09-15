@@ -1,0 +1,148 @@
+{
+ "note": "NWE3 mean MCC over five seeds at each gate threshold tau, UNSW-NB15, every width and noise setting in the article",
+ "rows": [
+  {
+   "width": 6,
+   "noise": "0.0",
+   "nwe3_by_tau": {
+    "0.01": 0.667,
+    "0.02": 0.667,
+    "0.05": 0.667,
+    "0.1": 0.667,
+    "0.2": 0.667
+   },
+   "z_branch": 0.649,
+   "identical_across_tau": true
+  },
+  {
+   "width": 6,
+   "noise": "0.01",
+   "nwe3_by_tau": {
+    "0.01": 0.651,
+    "0.02": 0.651,
+    "0.05": 0.651,
+    "0.1": 0.651,
+    "0.2": 0.651
+   },
+   "z_branch": 0.651,
+   "identical_across_tau": true
+  },
+  {
+   "width": 6,
+   "noise": "0.03",
+   "nwe3_by_tau": {
+    "0.01": 0.632,
+    "0.02": 0.632,
+    "0.05": 0.632,
+    "0.1": 0.632,
+    "0.2": 0.632
+   },
+   "z_branch": 0.632,
+   "identical_across_tau": true
+  },
+  {
+   "width": 6,
+   "noise": "0.05",
+   "nwe3_by_tau": {
+    "0.01": 0.629,
+    "0.02": 0.629,
+    "0.05": 0.629,
+    "0.1": 0.629,
+    "0.2": 0.629
+   },
+   "z_branch": 0.629,
+   "identical_across_tau": true
+  },
+  {
+   "width": 6,
+   "noise": "0.1",
+   "nwe3_by_tau": {
+    "0.01": 0.615,
+    "0.02": 0.615,
+    "0.05": 0.615,
+    "0.1": 0.615,
+    "0.2": 0.615
+   },
+   "z_branch": 0.615,
+   "identical_across_tau": true
+  },
+  {
+   "width": 8,
+   "noise": "0.0:0.0",
+   "nwe3_by_tau": {
+    "0.01": 0.639,
+    "0.02": 0.639,
+    "0.05": 0.639,
+    "0.1": 0.639,
+    "0.2": 0.639
+   },
+   "z_branch": 0.638,
+   "identical_across_tau": true
+  },
+  {
+   "width": 8,
+   "noise": "0.0005:0.01",
+   "nwe3_by_tau": {
+    "0.01": 0.6,
+    "0.02": 0.6,
+    "0.05": 0.6,
+    "0.1": 0.6,
+    "0.2": 0.655
+   },
+   "z_branch": 0.639,
+   "identical_across_tau": false
+  },
+  {
+   "width": 8,
+   "noise": "0.0005:0.02",
+   "nwe3_by_tau": {
+    "0.01": 0.641,
+    "0.02": 0.641,
+    "0.05": 0.641,
+    "0.1": 0.641,
+    "0.2": 0.639
+   },
+   "z_branch": 0.639,
+   "identical_across_tau": false
+  },
+  {
+   "width": 10,
+   "noise": "0.0:0.0",
+   "nwe3_by_tau": {
+    "0.01": 0.678,
+    "0.02": 0.678,
+    "0.05": 0.678,
+    "0.1": 0.678,
+    "0.2": 0.678
+   },
+   "z_branch": 0.651,
+   "identical_across_tau": true
+  },
+  {
+   "width": 10,
+   "noise": "0.0005:0.01",
+   "nwe3_by_tau": {
+    "0.01": 0.656,
+    "0.02": 0.656,
+    "0.05": 0.656,
+    "0.1": 0.656,
+    "0.2": 0.649
+   },
+   "z_branch": 0.649,
+   "identical_across_tau": false
+  },
+  {
+   "width": 10,
+   "noise": "0.0005:0.02",
+   "nwe3_by_tau": {
+    "0.01": 0.484,
+    "0.02": 0.484,
+    "0.05": 0.649,
+    "0.1": 0.649,
+    "0.2": 0.649
+   },
+   "z_branch": 0.649,
+   "identical_across_tau": false
+  }
+ ]
+}

@@ -112,13 +112,21 @@ def main():
             oracle = np.where(any_ok, y_te, 1 - y_te)
             oracle_mcc.append(float(matthews_corrcoef(y_te, oracle)))
 
+        # Means are what the article tables print; the per-seed lists are kept so the
+        # aggregate Q values can be checked against their spread (reviewer request).
         rec = {
+            "seeds": seeds,
             "member_mcc": {n: float(np.mean(v)) for n, v in member_mcc.items()},
+            "member_mcc_seeds": {n: [float(x) for x in v] for n, v in member_mcc.items()},
             "majority_mcc": float(np.mean(fused_mcc)),
+            "majority_mcc_seeds": [float(x) for x in fused_mcc],
             "best_member_mcc": float(np.mean(best_mcc)),
             "oracle_mcc": float(np.mean(oracle_mcc)),
+            "oracle_mcc_seeds": [float(x) for x in oracle_mcc],
             "pairs": {k: {m: float(np.mean(v)) for m, v in d.items()}
                       for k, d in pair_stats.items()},
+            "pairs_seeds": {k: {m: [float(x) for x in v] for m, v in d.items()}
+                            for k, d in pair_stats.items()},
         }
         out["datasets"][ds] = rec
         print(f"  members  " + "  ".join(f"{n} {rec['member_mcc'][n]:.3f}" for n in NAMES))

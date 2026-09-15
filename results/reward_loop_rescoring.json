@@ -1,0 +1,309 @@
+{
+ "protocol": "UNSW_NB15, 6q, train 16 / test 8, pool 4000, p1=0.01, util_metric=accuracy (the training reward loop)",
+ "by_seed": {
+  "43": {
+   "test_class_counts": [
+    3,
+    5
+   ],
+   "train_class_counts": [
+    6,
+    10
+   ],
+   "models": {
+    "rep_lr5_s43": {
+     "Z": {
+      "source_acc": 0.75,
+      "cand_acc": 0.625,
+      "utility": 0.2083,
+      "equiv": 0.2099,
+      "comp_gain": 0.0,
+      "gate": 0.2099,
+      "reward": 0.3671,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.75,
+      "utility": 0.55,
+      "equiv": 0.0257,
+      "comp_gain": 0.9172,
+      "gate": 0.55,
+      "reward": 1.996,
+      "two_qubit": 3,
+      "depth": 8
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.875,
+      "utility": 0.825,
+      "equiv": 0.0068,
+      "comp_gain": 0.8202,
+      "gate": 0.825,
+      "reward": 2.6446,
+      "two_qubit": 4,
+      "depth": 8
+     }
+    },
+    "grpo_fix_lr5": {
+     "Z": {
+      "source_acc": 0.75,
+      "cand_acc": 0.75,
+      "utility": 0.5,
+      "equiv": 1.0,
+      "comp_gain": 0.0,
+      "gate": 1.0,
+      "reward": 0.75,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.0142,
+      "comp_gain": 0.7811,
+      "gate": 0.25,
+      "reward": 0.9151,
+      "two_qubit": 10,
+      "depth": 17
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.0455,
+      "comp_gain": 0.5843,
+      "gate": 0.25,
+      "reward": 0.7769,
+      "two_qubit": 10,
+      "depth": 17
+     }
+    },
+    "grpo_fix_lr75": {
+     "Z": {
+      "source_acc": 0.75,
+      "cand_acc": 0.75,
+      "utility": 0.5,
+      "equiv": 1.0,
+      "comp_gain": 0.0,
+      "gate": 1.0,
+      "reward": 0.75,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.75,
+      "utility": 0.55,
+      "equiv": 0.0219,
+      "comp_gain": 0.9882,
+      "gate": 0.55,
+      "reward": 2.112,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.75,
+      "utility": 0.55,
+      "equiv": 0.0938,
+      "comp_gain": 0.9775,
+      "gate": 0.55,
+      "reward": 2.1161,
+      "two_qubit": 0,
+      "depth": 2
+     }
+    },
+    "sft_warmup": {
+     "Z": {
+      "source_acc": 0.75,
+      "cand_acc": 0.75,
+      "utility": 0.5,
+      "equiv": 1.0,
+      "comp_gain": 0.0,
+      "gate": 1.0,
+      "reward": 0.75,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.0547,
+      "comp_gain": 0.6154,
+      "gate": 0.25,
+      "reward": 0.8029,
+      "two_qubit": 20,
+      "depth": 25
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.0455,
+      "comp_gain": 0.5843,
+      "gate": 0.25,
+      "reward": 0.7769,
+      "two_qubit": 10,
+      "depth": 17
+     }
+    }
+   }
+  },
+  "42": {
+   "test_class_counts": [
+    3,
+    5
+   ],
+   "train_class_counts": [
+    6,
+    10
+   ],
+   "models": {
+    "rep_lr5_s43": {
+     "Z": {
+      "source_acc": 0.875,
+      "cand_acc": 0.875,
+      "utility": 0.75,
+      "equiv": 0.2387,
+      "comp_gain": 0.0,
+      "gate": 0.75,
+      "reward": 0.6466,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.875,
+      "utility": 0.825,
+      "equiv": 0.0196,
+      "comp_gain": 0.9172,
+      "gate": 0.825,
+      "reward": 2.8883,
+      "two_qubit": 3,
+      "depth": 8
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.875,
+      "utility": 0.825,
+      "equiv": 0.0269,
+      "comp_gain": 0.8202,
+      "gate": 0.825,
+      "reward": 2.6506,
+      "two_qubit": 4,
+      "depth": 8
+     }
+    },
+    "grpo_fix_lr5": {
+     "Z": {
+      "source_acc": 0.875,
+      "cand_acc": 0.875,
+      "utility": 0.75,
+      "equiv": 1.0,
+      "comp_gain": 0.0,
+      "gate": 1.0,
+      "reward": 0.875,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.0171,
+      "comp_gain": 0.7811,
+      "gate": 0.25,
+      "reward": 0.9159,
+      "two_qubit": 10,
+      "depth": 17
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.04,
+      "comp_gain": 0.5843,
+      "gate": 0.25,
+      "reward": 0.7752,
+      "two_qubit": 10,
+      "depth": 17
+     }
+    },
+    "grpo_fix_lr75": {
+     "Z": {
+      "source_acc": 0.875,
+      "cand_acc": 0.875,
+      "utility": 0.75,
+      "equiv": 1.0,
+      "comp_gain": 0.0,
+      "gate": 1.0,
+      "reward": 0.875,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.875,
+      "utility": 0.825,
+      "equiv": 0.0156,
+      "comp_gain": 0.9882,
+      "gate": 0.825,
+      "reward": 3.0,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.875,
+      "utility": 0.825,
+      "equiv": 0.0561,
+      "comp_gain": 0.9775,
+      "gate": 0.825,
+      "reward": 3.0,
+      "two_qubit": 0,
+      "depth": 2
+     }
+    },
+    "sft_warmup": {
+     "Z": {
+      "source_acc": 0.875,
+      "cand_acc": 0.875,
+      "utility": 0.75,
+      "equiv": 1.0,
+      "comp_gain": 0.0,
+      "gate": 1.0,
+      "reward": 0.875,
+      "two_qubit": 0,
+      "depth": 2
+     },
+     "ZZ": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.0129,
+      "comp_gain": 0.6154,
+      "gate": 0.25,
+      "reward": 0.7904,
+      "two_qubit": 20,
+      "depth": 25
+     },
+     "Pauli": {
+      "source_acc": 0.625,
+      "cand_acc": 0.625,
+      "utility": 0.25,
+      "equiv": 0.04,
+      "comp_gain": 0.5843,
+      "gate": 0.25,
+      "reward": 0.7752,
+      "two_qubit": 10,
+      "depth": 17
+     }
+    }
+   }
+  }
+ }
+}

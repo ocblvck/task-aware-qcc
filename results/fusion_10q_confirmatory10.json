@@ -1,0 +1,55 @@
+{
+ "note": "Seeds 5 to 14 only: the ten seeds run after the five-seed result, analysed alone as a confirmation set. UNSW-NB15, ten qubits, p1=5e-4.",
+ "by_noise": {
+  "0.0:0.0": {
+   "n": 10,
+   "mean": {
+    "QVE3": 0.6663836282437845,
+    "QWE3": 0.6663836282437845,
+    "NWE3@0.05": 0.6663836282437845
+   },
+   "tests": {
+    "NWE3@0.05_vs_QVE3": {
+     "mean_delta": 0.0,
+     "wins": 0,
+     "ties": 10,
+     "losses": 0,
+     "p_value": null
+    },
+    "NWE3@0.05_vs_QWE3": {
+     "mean_delta": 0.0,
+     "wins": 0,
+     "ties": 10,
+     "losses": 0,
+     "p_value": null
+    }
+   }
+  },
+  "0.0005:0.02": {
+   "n": 10,
+   "mean": {
+    "QVE3": 0.48070923268844,
+    "QWE3": 0.5757129468084353,
+    "NWE3@0.05": 0.6710450195351106
+   },
+   "tests": {
+    "NWE3@0.05_vs_QVE3": {
+     "mean_delta": 0.1903357868466705,
+     "wins": 8,
+     "ties": 2,
+     "losses": 0,
+     "p_value": 0.0078125,
+     "p_holm": 0.015625
+    },
+    "NWE3@0.05_vs_QWE3": {
+     "mean_delta": 0.09533207272667525,
+     "wins": 4,
+     "ties": 6,
+     "losses": 0,
+     "p_value": 0.125,
+     "p_holm": 0.125
+    }
+   }
+  }
+ }
+}

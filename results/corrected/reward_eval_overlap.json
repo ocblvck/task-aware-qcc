@@ -1,0 +1,115 @@
+{
+ "note": "Records used by the reward loop (48 train + 24 test, pool 4000, per training seed) that also appear in the 200/400 evaluation splits (pool 5000, seeds 0 to 4). Exact feature-row matches.",
+ "overlap": {
+  "reward_seed42": {
+   "eval_seed0": {
+    "in_eval_train": 0,
+    "in_eval_test": 1
+   },
+   "eval_seed1": {
+    "in_eval_train": 0,
+    "in_eval_test": 0
+   },
+   "eval_seed2": {
+    "in_eval_train": 0,
+    "in_eval_test": 3
+   },
+   "eval_seed3": {
+    "in_eval_train": 0,
+    "in_eval_test": 3
+   },
+   "eval_seed4": {
+    "in_eval_train": 0,
+    "in_eval_test": 0
+   }
+  },
+  "reward_seed43": {
+   "eval_seed0": {
+    "in_eval_train": 2,
+    "in_eval_test": 1
+   },
+   "eval_seed1": {
+    "in_eval_train": 1,
+    "in_eval_test": 2
+   },
+   "eval_seed2": {
+    "in_eval_train": 2,
+    "in_eval_test": 2
+   },
+   "eval_seed3": {
+    "in_eval_train": 0,
+    "in_eval_test": 0
+   },
+   "eval_seed4": {
+    "in_eval_train": 2,
+    "in_eval_test": 0
+   }
+  },
+  "reward_seed44": {
+   "eval_seed0": {
+    "in_eval_train": 0,
+    "in_eval_test": 2
+   },
+   "eval_seed1": {
+    "in_eval_train": 1,
+    "in_eval_test": 1
+   },
+   "eval_seed2": {
+    "in_eval_train": 0,
+    "in_eval_test": 1
+   },
+   "eval_seed3": {
+    "in_eval_train": 0,
+    "in_eval_test": 1
+   },
+   "eval_seed4": {
+    "in_eval_train": 2,
+    "in_eval_test": 3
+   }
+  },
+  "reward_seed45": {
+   "eval_seed0": {
+    "in_eval_train": 2,
+    "in_eval_test": 2
+   },
+   "eval_seed1": {
+    "in_eval_train": 3,
+    "in_eval_test": 2
+   },
+   "eval_seed2": {
+    "in_eval_train": 0,
+    "in_eval_test": 6
+   },
+   "eval_seed3": {
+    "in_eval_train": 1,
+    "in_eval_test": 2
+   },
+   "eval_seed4": {
+    "in_eval_train": 1,
+    "in_eval_test": 0
+   }
+  },
+  "reward_seed46": {
+   "eval_seed0": {
+    "in_eval_train": 1,
+    "in_eval_test": 1
+   },
+   "eval_seed1": {
+    "in_eval_train": 1,
+    "in_eval_test": 1
+   },
+   "eval_seed2": {
+    "in_eval_train": 1,
+    "in_eval_test": 3
+   },
+   "eval_seed3": {
+    "in_eval_train": 1,
+    "in_eval_test": 1
+   },
+   "eval_seed4": {
+    "in_eval_train": 3,
+    "in_eval_test": 0
+   }
+  }
+ }
+}

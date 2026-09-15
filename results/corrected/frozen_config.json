@@ -1,0 +1,163 @@
+{
+ "frozen_at": "2026-09-15 12:23:15 EDT",
+ "manuscript": "SNCS-D-26-07200, Noise-Aware Quantum Ensembles and Learned Feature-Map Compression for IoT Intrusion Detection",
+ "code": {
+  "task-aware-qcc_commit": "07c2ab7a0ddcb6878b14b39bb4ccac8255594043",
+  "task-aware-qcc_dirty": false,
+  "quantum-cirq-opt_commit": "cdb0420597eb4cbe5978d66a28e069ed43920270",
+  "quantum-cirq-opt_note": "trainer dependency (GRPO trainer, QASM parsing, format and syntax rewards); its working tree carries the uncommitted seed plumbing in grpo_trainer.py used by every run in the article",
+  "env_freeze": [
+   "results/corrected/env_taqcc-grpo_freeze.txt",
+   "results/corrected/env_qiskit_freeze.txt"
+  ],
+  "python": "Python 3.11.13",
+  "cuda": "12.4",
+  "driver": "550.144.03",
+  "gpu": "3x NVIDIA RTX A6000"
+ },
+ "datasets_md5": {
+  "IoT_Original_Distribution.csv": "be8459855a04a5388f9652dcaf4dd0e5",
+  "UNSW_NB15.csv": "0feec1809425b02e29cc5db0934b2ff1",
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv": "988223803b600897b922c536f7731547"
+ },
+ "base_model": {
+  "path": "models/sft_compress_e2_merged",
+  "config_md5": "6ccc48c5d15f68554fd9444a35674d2e",
+  "safetensors_index_md5": "743407710baf5e42c91436bb899cb5de",
+  "note": "the supervised warm-up merged into Qwen2.5-Coder-3B-Instruct, identical to every run in the submitted article"
+ },
+ "training_E1": {
+  "learning_rates": [
+   "5e-6",
+   "7.5e-6",
+   "1e-5"
+  ],
+  "seeds_per_rate": [
+   42,
+   43,
+   44,
+   45,
+   46
+  ],
+  "seeds_note": "fixed before launch; 42 and 43 coincide with the submitted article's two seeds so the same-seed pre/post pair can be shown; all fifteen runs are reported whatever their outcome",
+  "steps": 250,
+  "gate_mode": "or",
+  "num_generations": 8,
+  "temperature": 1.0,
+  "batch_x_accum": "2 x 4",
+  "kl_coefficient": 0,
+  "loss": "DAPO",
+  "lora": {
+   "rank": 64,
+   "alpha": 128,
+   "dropout": 0.05
+  },
+  "reward_functions": {
+   "format": 0.3,
+   "syntax": 0.5,
+   "task": 1.0
+  },
+  "task_reward": {
+   "w_valid": 0.2,
+   "w_equiv": 0.3,
+   "w_util": 0.5,
+   "w_comp": 3.0,
+   "invalid_penalty": -0.3,
+   "two_qubit_weight": 2.0,
+   "util_cap": 1.1,
+   "equiv_samples": 8,
+   "max_exact_qubits": 12
+  },
+  "admissibility": [
+   "n qubits",
+   "n declared parameters",
+   "every parameter used in a gate",
+   "every qubit acted on",
+   "Eq. 9: every parameter moves the encoded state (perturbations 0.7, 1.9, -1.1; tol 1e-9; base draw uniform(0.2, 2.8), rng seed = training seed)"
+  ],
+  "utility": "MCC of the candidate under the reward noise, divided by the MCC of the SOURCE map WITHOUT noise, clipped to [0, 1.1]; if the clean source MCC is at or below 0.05 the candidate's absolute MCC is used and the record is flagged absolute_fallback",
+  "reward_loop_data": {
+   "dataset": "UNSW_NB15.csv",
+   "pool": 4000,
+   "train": 48,
+   "test": 24,
+   "split_seed": "= training seed",
+   "noise": "p1 = 0.01, p2 = 10 p1 (density matrix)",
+   "classifier": "precomputed-kernel SVC, balanced class weights, C = 1"
+  },
+  "prompt_set": "8 source circuits (Z1, ZZ2, Pauli1, Custom1; full and linear) x 8 repeats = 64 prompts, 61 train / 3 held out, split seed 42",
+  "checkpoint_every_steps": 25,
+  "auto_resume": true,
+  "concurrency": "up to three runs, one per GPU, launched 90 s apart"
+ },
+ "deviations_from_submitted_protocol": [
+  {
+   "what": "Eq. 9 evaluated inside the admissibility check before any reward term",
+   "why": "reviewer 1 comment 3; the submitted policies were trained against the structural check only and one exploited it",
+   "approved": "advisor, 15 Sept 2026"
+  },
+  {
+   "what": "retention metric MCC instead of accuracy",
+   "why": "reviewer 1 comment 4; accuracy rewarded a two-feature circuit on imbalanced data",
+   "approved": "advisor, 15 Sept 2026"
+  },
+  {
+   "what": "retention reference is the source map WITHOUT noise",
+   "why": "under the reward-loop noise (p1 = 0.01, p2 = 0.1) the ZZ and Pauli sources score MCC 0.00 on every seed (results/corrected_probe_reference.json), so retention relative to the noisy source divides by zero; the clean reference is well defined (0.39 to 0.83 at 48/24) and reads as the fraction of the source's clean detection quality kept under noise",
+   "approved": "not separately approved; documented here and in the response letter as a necessary consequence of the MCC change"
+  },
+  {
+   "what": "reward-loop subsample 48 train / 24 test instead of 16 / 8",
+   "why": "experiment plan E1, conditional on budget; at 16 / 8 the clean source MCC is erratic (-0.45 to 0.78 across seeds) and the measured cost of the larger subsample is about 3x per evaluation, which the schedule absorbs",
+   "approved": "advisor via the experiment plan"
+  },
+  {
+   "what": "no other setting changed",
+   "why": "learning rates, steps, sampling, LoRA, weights, noise, prompt set, warm-up and evaluation protocol are those of Table 1 and Section 7"
+  }
+ ],
+ "evaluation_protocol": {
+  "splits": "200 train / 400 test from a stratified 5000-record pool, split seeds 0 to 4 (independent DATA splits; training seeds are independent POLICY seeds, and the two are never pooled)",
+  "features": "MI selection of 2n, StandardScaler, PCA to n, MinMax [0, pi], fitted on the training partition",
+  "widths": {
+   "compression": 6,
+   "fusion_realistic": [
+    8,
+    10
+   ]
+  },
+  "noise": {
+   "coupled": "p1 in 0, 0.01, 0.03, 0.05, 0.1 with p2 = 10 p1",
+   "realistic": "p1 = 5e-4, p2 in 0, 0.01, 0.02",
+   "c_sweep": "p1 in 0, 0.002, 0.005, 0.01 coupled"
+  },
+  "rules": [
+   "QVE3",
+   "QWE3",
+   "NWE3 with tau = 0.05 and the sweep 0.01, 0.02, 0.05, 0.1, 0.2"
+  ],
+  "metric": "Matthews correlation, accuracy alongside",
+  "svm": "precomputed kernel, balanced class weights, C = 1; E4 sweeps C in 0.1, 1, 10, 100 on the same Gram matrices"
+ },
+ "selection_policy": {
+  "learning_rate": "no rate is selected on test performance; all three are reported with all five seeds. The primary confirmatory comparison against the hand-designed linear arm is pre-specified as lr 5e-6, the rate the submitted Section 8.3 compared; the other two are secondary",
+  "seeds": "all five reported; none dropped",
+  "failed_runs": "recorded as FAILED in results/corrected/queue_state.txt and reported"
+ },
+ "statistics_plan": {
+  "structure_outcomes": "per run: two-qubit count per member, distinct members, effective parameters (Eq. 9), whether the run ended with valid sampled outputs",
+  "downstream": "per run and dataset: MCC under QVE3, QWE3, NWE3 at each coupled noise level over the five data splits; mean and standard deviation over five policy seeds, with every seed listed",
+  "tests": "paired Wilcoxon per noise level against the hand-designed arm across the five DATA splits with the policy seeds treated as separate arms, Holm across levels; with five splits the per-level floor is 0.0625 and no significance is claimed below it; five policy seeds do not remove that limit and the text will say so",
+  "consistency_check": "an improvement is reported as consistent only if it holds in at least four of five policy seeds"
+ },
+ "known_leakage": {
+  "reward_vs_evaluation_records": "results/corrected/reward_eval_overlap.json: between 0 and 6 of the 72 records each training seed's reward loop used appear in a given 600-record evaluation split (at most 1.5 percent of a test partition). The policy sees only a scalar reward, never the records, but the overlap is reported as a limitation rather than removed, since removing it would change the evaluation splits shared by every other table in the article"
+ },
+ "campaign": {
+  "supervisor": "scripts/run_revision.sh",
+  "state": "results/corrected/queue_state.txt",
+  "outputs": "results/corrected/",
+  "models": "models/corr_<lr>_s<seed>/",
+  "reward_logs": "logs/corr_<lr>_s<seed>.rewards.jsonl"
+ }
+}

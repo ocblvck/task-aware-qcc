@@ -43,6 +43,7 @@ def main():
     from eval_robust_singlemap import cache_model_maps
     from taqcc.feature_maps import make_feature_map, circuit_metrics, is_valid_feature_map
     from qiskit import qasm3
+    from taqcc.io import atomic_write_json
 
     out_path = Path(args.output)
     out = json.loads(out_path.read_text()) if out_path.exists() else {}
@@ -66,7 +67,7 @@ def main():
             print(f"[fail] {label}: {exc}", flush=True)
             out[label] = {"error": str(exc)}
             out_path.parent.mkdir(parents=True, exist_ok=True)
-            out_path.write_text(json.dumps(out, indent=2))
+            atomic_write_json(out_path, out, indent=2)
             continue
 
         per_member, hashes, valid = [], [], []
@@ -90,7 +91,7 @@ def main():
               f"({out[label]['reduction_pct']:.1f}%) distinct "
               f"{out[label]['distinct_members']}/3 valid={all(valid)}", flush=True)
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(json.dumps(out, indent=2))
+        atomic_write_json(out_path, out, indent=2)
 
     print(f"\n[written] {out_path}  ({len(out)} models)")
     print(f"{'model':<22}{'total 2q':>9}{'reduction':>11}{'distinct':>10}{'valid':>7}")

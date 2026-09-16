@@ -34,6 +34,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_ROOT / "src"))
 
 import numpy as np
+from taqcc.io import atomic_write_json
 
 # The conference QVE3/QWE3 committee, named as they appear in the QASM caches.
 COMMITTEE = [("Z", 1, "full"), ("ZZ", 2, "full"), ("Pauli", 1, "full")]
@@ -236,7 +237,7 @@ def main():
                 for a in arms}
             out["datasets"][ds] = ds_rec
             Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-            Path(args.output).write_text(json.dumps(out, indent=2))
+            atomic_write_json(args.output, out, indent=2)
 
             print(f"  {key_p}", flush=True)
             for a in arms:
@@ -248,7 +249,7 @@ def main():
                       " ".join(f"{v:.2f}" for v in ds_rec["by_noise"][key_p][a]["branch_mcc"]),
                       flush=True)
 
-    Path(args.output).write_text(json.dumps(out, indent=2))
+    atomic_write_json(args.output, out, indent=2)
     print(f"\n[done] -> {args.output}", flush=True)
 
 

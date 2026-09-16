@@ -33,6 +33,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_ROOT / "src"))
 
 import numpy as np
+from taqcc.io import atomic_write_json
 
 # Committee used by the fusion rules (the conference QVE3/QWE3 membership).
 COMMITTEE = [("Z", 1, "full"), ("ZZ", 2, "full"), ("Pauli", 1, "full")]
@@ -230,7 +231,7 @@ def main():
             # cell rather than the whole run.
             out["datasets"][ds] = ds_rec
             Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-            Path(args.output).write_text(json.dumps(out, indent=2))
+            atomic_write_json(args.output, out, indent=2)
 
             f0 = ds_rec["by_noise"][key_p]["fusion"]
             print(f"  {key_p:<14} QVE3 {f0['QVE3']['mcc_mean']:.3f}  "
@@ -263,7 +264,7 @@ def main():
         out["datasets"][ds] = ds_rec
 
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-    Path(args.output).write_text(json.dumps(out, indent=2))
+    atomic_write_json(args.output, out, indent=2)
     print(f"\n[done] -> {args.output}")
 
 

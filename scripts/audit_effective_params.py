@@ -35,6 +35,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_ROOT / "src"))
 
 import numpy as np
+from taqcc.io import atomic_write_json
 
 # Rotation angles in these maps carry factors of 2 and products of features, so a delta
 # that is a multiple of pi can return the same state. Three unrelated sizes avoid that.
@@ -88,7 +89,7 @@ def main():
         print(f"{name:<40}{sum(mask):>10}{len(mask):>10}{str(syn):>11}   {pat}{flag}")
 
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-    Path(args.output).write_text(json.dumps(out, indent=2))
+    atomic_write_json(args.output, out, indent=2)
 
     gamed = sorted(k for k, v in out.items() if v["gamed"])
     print(f"\n[written] {args.output}  ({len(out)} circuits)")

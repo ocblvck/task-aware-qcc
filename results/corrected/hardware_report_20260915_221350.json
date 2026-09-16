@@ -1,0 +1,78 @@
+{
+ "time": "2026-09-15 22:13:48",
+ "host": "mathstat2-lambda-quad2",
+ "uptime": "up 11 minutes",
+ "boot": "2026-09-15 22:01:56",
+ "kernel": "6.8.0-138-generic",
+ "gpus": [
+  {
+   "index": "0",
+   "name": "NVIDIA RTX A6000",
+   "mem_total_mb": "49140",
+   "mem_used_mb": "263",
+   "mem_free_mb": "48404",
+   "util_pct": "0",
+   "temp_c": "43",
+   "power_w": "23.72",
+   "power_limit_w": "300.00"
+  },
+  {
+   "index": "1",
+   "name": "NVIDIA RTX A6000",
+   "mem_total_mb": "49140",
+   "mem_used_mb": "11",
+   "mem_free_mb": "48660",
+   "util_pct": "0",
+   "temp_c": "42",
+   "power_w": "24.39",
+   "power_limit_w": "300.00"
+  },
+  {
+   "index": "2",
+   "name": "NVIDIA RTX A6000",
+   "mem_total_mb": "49140",
+   "mem_used_mb": "11",
+   "mem_free_mb": "48660",
+   "util_pct": "0",
+   "temp_c": "36",
+   "power_w": "23.57",
+   "power_limit_w": "300.00"
+  }
+ ],
+ "gpu_processes": "",
+ "driver": "550.144.03",
+ "cpu": {
+  "model": "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "cores_logical": 128,
+  "cores_physical": "64",
+  "load_1_5_15": [
+   0.080078125,
+   0.05517578125,
+   0.05712890625
+  ]
+ },
+ "memory_mb": {
+  "MemTotal": 1031888,
+  "MemAvailable": 1021304,
+  "SwapTotal": 2047,
+  "SwapFree": 2047
+ },
+ "disk_home_gb": {
+  "total": 915,
+  "used": 785,
+  "free": 83
+ },
+ "models_dir_gb": "128G",
+ "top_processes": "PID %CPU %MEM     ELAPSED COMMAND\n   4898  3.0  0.0       10:09 MainThread\n   6468  3.0  0.0       00:01 python\n   6103  1.2  0.0       09:16 claude\n   2536  1.1  0.0       11:38 snapd\n   4834  1.0  0.0       10:10 MainThread\n   6024  0.9  0.0       09:38 claude\n   5581  0.7  0.0       10:04 MainThread",
+ "tmux_sessions": "none",
+ "software": {
+  "python": "Python 3.11.13",
+  "cuda_torch": "12.4 True 3",
+  "qiskit": "1.4.4",
+  "qiskit_aer": "0.15.1",
+  "trl": "0.26.2",
+  "peft": "0.19.1",
+  "transformers": "4.56.1"
+ },
+ "git_commit": "230cc4d"
+}

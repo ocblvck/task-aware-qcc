@@ -65,6 +65,9 @@ def main():
     ap.add_argument("--auto-resume", action="store_true",
                     help="Resume from the newest checkpoint under --output if one "
                          "exists (this box reboots unpredictably)")
+    ap.add_argument("--save-total-limit", type=int, default=5,
+                    help="Checkpoints kept per run. Each is about 1.4 GB; two suffice to "
+                         "resume with one fallback.")
     ap.add_argument("--save-steps", type=int, default=25,
                     help="Checkpoint interval; small values bound the work lost to a "
                          "machine reboot mid-run")
@@ -120,6 +123,7 @@ def main():
         temperature=args.temperature,
         learning_rate=args.lr,
         save_steps=args.save_steps,
+        save_total_limit=args.save_total_limit,
         reward_weights=reward_weights,
         seed=args.seed,
         # anti-mode-collapse defaults (dapo, beta=0) come from the config.
@@ -168,10 +172,20 @@ def main():
 
     resume = None
     if args.auto_resume:
+        # A power cut can land mid-save. Only a checkpoint that carries its trainer
+        # state, its adapter weights and its optimizer state is resumable; a partial
+        # newest checkpoint is left in place and the previous complete one is used.
+        def complete(c):
+            return all((c / f).exists() for f in
+                       ("trainer_state.json", "adapter_model.safetensors", "optimizer.pt"))
         ckpts = sorted(Path(args.output).glob("checkpoint-*"),
                        key=lambda p: int(p.name.split("-")[1]))
-        if ckpts:
-            resume = str(ckpts[-1])
+        good = [c for c in ckpts if complete(c)]
+        for c in ckpts:
+            if c not in good:
+                print(f"[resume] skipping incomplete checkpoint {c}", flush=True)
+        if good:
+            resume = str(good[-1])
             print(f"[resume] continuing from {resume}", flush=True)
 
     trainer.train(dataset=dataset, resume_from_checkpoint=resume)

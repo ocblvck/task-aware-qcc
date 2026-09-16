@@ -55,7 +55,18 @@ for lr, _ in LRS:
             rec["final_task_reward"] = tr[-1]["rewards/task_aware_grpo_reward/mean"] if tr else None
             rec["last10_task_reward_mean"] = float(np.mean([e["rewards/task_aware_grpo_reward/mean"] for e in tr[-3:]])) if tr else None
             rt = [e.get("train_runtime") for e in h if "train_runtime" in e]
-            rec["train_runtime_min"] = round(rt[-1] / 60, 1) if rt else None
+            if rt:
+                rec["train_runtime_min"] = round(rt[-1] / 60, 1)
+            else:
+                # the final runtime entry is logged after the last checkpoint; fall back
+                # to wall time from the run directory's creation to the last checkpoint
+                import os
+                d = ROOT / f"models/{n}"
+                try:
+                    rec["train_runtime_min"] = round((os.stat(d / "checkpoint-250/trainer_state.json").st_mtime - os.stat(d).st_ctime) / 60, 1)
+                    rec["train_runtime_note"] = "wall time, directory creation to final checkpoint"
+                except OSError:
+                    rec["train_runtime_min"] = None
             rec["ended_invalid"] = bool(tr and tr[-1]["rewards/task_aware_grpo_reward/mean"] <= -0.29)
         rl = ROOT / f"logs/{n}.rewards.jsonl"
         if rl.exists():

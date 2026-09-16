@@ -6,6 +6,7 @@ import sys, json, argparse
 from pathlib import Path
 sys.path.insert(0, "/home/chibuike/task-aware-qcc/src")
 from qiskit import qasm3
+from taqcc.io import atomic_write_json
 from taqcc.data import load_split
 from taqcc.downstream import DownstreamConfig
 from taqcc.feature_maps import make_feature_map, circuit_metrics
@@ -49,5 +50,5 @@ for seed in [int(s) for s in args.seeds.split(",")]:
             print(f"seed{seed} {model:<14}{mt:<6} valid={v['valid']} eff={v['effective']} src_acc={v['source_acc']:.3f} cand_acc={v['cand_acc']} cand_mcc={v['cand_mcc']} ref={v['reference_kind']}:{v['reference_mcc']} util={v['utility']:.3f} gamma={v['comp_gain']:.3f} reward={v['reward']:.3f}", flush=True)
     out["by_seed"][str(seed)]=rec
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-    json.dump(out,open(args.output,"w"),indent=1)
+    atomic_write_json(args.output, out, indent=1)
 print(f"[written] {args.output}")

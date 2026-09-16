@@ -33,6 +33,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_ROOT / "src"))
 
 import numpy as np
+from taqcc.io import atomic_write_json
 
 COMMITTEE = [("Z", 1, "full"), ("ZZ", 2, "full"), ("Pauli", 1, "full")]
 NAMES = ["Z", "ZZ", "Pauli"]
@@ -136,7 +137,7 @@ def main():
             print(f"  {k:<12} agree {d['agree']:.3f}  both wrong {d['both_wrong']:.3f}  "
                   f"Yule Q {d['q']:+.3f}")
         Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-        Path(args.output).write_text(json.dumps(out, indent=2))
+        atomic_write_json(args.output, out, indent=2)
 
     print(f"\n[done] -> {args.output}")
 

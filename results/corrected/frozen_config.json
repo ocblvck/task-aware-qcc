@@ -159,5 +159,30 @@
   "outputs": "results/corrected/",
   "models": "models/corr_<lr>_s<seed>/",
   "reward_logs": "logs/corr_<lr>_s<seed>.rewards.jsonl"
- }
+ },
+ "amendments": [
+  {
+   "time": "2026-09-15 22:26:37 EDT",
+   "commit": "c73fe4af79117ef6bd1b453e3378fc6d3f1f2838",
+   "reason": "power interruption 15 Sept ~16:00 with three concurrent GPU jobs",
+   "changes": [
+    "scheduling: MAX_CONCURRENT=1, one GPU-intensive job at a time, 16 threads, pre-launch and post-job resource checks, resource logging, job records",
+    "checkpoint retention 2 per run for the remaining thirteen runs (was 5); science unchanged: same steps, seeds, rates, reward, subsample, save interval",
+    "resume validates checkpoint completeness; result files written atomically",
+    "no change to learning rates, seeds, datasets, splits, metrics, reward, prompt set or evaluation protocol"
+   ],
+   "runs_completed_before_interruption": [
+    "corr_lr5_s42",
+    "corr_lr5_s43"
+   ],
+   "runs_resumed": {
+    "corr_lr5_s44": "from checkpoint-25"
+   },
+   "runs_restarted_from_zero": [
+    "corr_lr5_s45",
+    "corr_lr5_s46"
+   ],
+   "pilot": "6 steps, checkpoint every 3, checkpoint-6 deleted, resumed from checkpoint-3 to step 6; GPU 0, 11.3 GB VRAM, 0 errors"
+  }
+ ]
 }

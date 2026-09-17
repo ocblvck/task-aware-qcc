@@ -111,6 +111,38 @@ class Check:
         return json.loads(p.read_text())
 
 
+# ---------------------------------------------------------------------------------------
+# Revision: the corrected campaign tables are generated from results/corrected/ by
+# make_revision_tables.py, so the check here is that the generated LaTeX still matches
+# the JSON it was built from (guards against a stale tables/ copy in the manuscript).
+def check_corrected(c):
+    import re
+    corr = RESULTS / "corrected"
+    st = c.load("corrected/structure.json"); eff = c.load("corrected/effective_params.json")
+    tex = corr / "tex" / "table2_corrected.tex"
+    if st and eff and tex.exists():
+        # corrected rows start with "& seed" (the multirow label is on its own line);
+        # reference rows start with a name and are not policies
+        rows = re.findall(r"^ & (\d+) & \$(\d+)/(\d+)/(\d+)\$ & \$(\d+)\$ & \$([\d.]+)\\%\$ & \$(\d+)\$ & \$(\d+)/18\$", tex.read_text(), re.M)
+        lrs = ["lr5"] * 5 + ["lr75"] * 5 + ["lr10"] * 5
+        for (seed, z, zz, pa, tot, red, dist, e), lr in zip(rows, lrs):
+            n = f"corr_{lr}_s{seed}"; v = st[n]
+            c.eq(f"T2c {n} per-member", v["per_member_2q"] == [int(z), int(zz), int(pa)], True, 0)
+            c.eq(f"T2c {n} total", v["total_2q"], int(tot), 0)
+            c.eq(f"T2c {n} distinct", v["distinct_members"], int(dist), 0)
+            c.eq(f"T2c {n} effective", sum(eff[f"{n}__{t}"]["effective"] for t in ("Z_1_full", "ZZ_2_full", "Pauli_1_full")), int(e), 0)
+        print(f"Table 2 (corrected)  {len(rows)} policies checked against structure.json and effective_params.json")
+    for tag, dsf in (("IoT", "IoT_Original_Distribution.csv"), ("UNSW", "UNSW_NB15.csv"), ("Bot", "UNSW_2018_IoT_Botnet_Final_10_Best.csv")):
+        b = c.load(f"corrected/compression_matched_corrected_{tag}.json")
+        if not b: continue
+        bn = b["datasets"][dsf]["by_noise"]
+        for nk in bn:
+            for arm in ("uncompressed", "linear"):
+                for r in ("QVE3", "NWE3"):
+                    c.eq(f"T3c {tag} {arm} {nk} {r} n_splits", len(bn[nk][arm]["fusion"][r]["mcc_seeds"]), 5, 0)
+    print("Table 3 (corrected)  split counts checked")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -190,6 +222,9 @@ def main():
         for model, vals in CLASSICAL.items():
             for dskey, w in zip(CLASSICAL_DS, vals):
                 c.eq(f"T9 {model} {dskey[:12]}", cb["datasets"][dskey][model]["mcc"][0], w)
+
+    print("Corrected campaign (revision)")
+    check_corrected(c)
 
     print()
     if c.skipped:

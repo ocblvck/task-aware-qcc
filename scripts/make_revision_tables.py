@@ -76,40 +76,35 @@ Arm & Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Effective \
 \end{table}
 """)
 
-# ---------------- Table 3 (corrected): downstream by lr, mean +- sd over policy seeds, QVE3 and NWE3
+# ---------------- Table 3 (corrected): downstream by lr, one table per fusion rule
 def load(tag,kind="corrected"): return json.load(open(OUT/f"compression_matched_{kind}_{tag}.json"))
 noises=["0.0","0.01","0.03","0.05","0.1"]
 def cell(bn,arm,nk,rule): return float(np.mean(bn[nk][arm]["fusion"][rule]["mcc_seeds"]))
-lines=[]
-for tag,(dsf,dsn) in DS.items():
-    bn=load(tag)["datasets"][dsf]["by_noise"]
-    lines.append(f"\\multirow{{6}}{{*}}{{{dsn}}}")
-    for arm,lab in (("uncompressed","Uncompressed"),("linear","Hand-designed linear")):
-        lines.append(f" & {lab} & "+" & ".join(f"${cell(bn,arm,nk,'QVE3'):.3f}$" for nk in noises)+" & "+" & ".join(f"${cell(bn,arm,nk,'NWE3'):.3f}$" for nk in noises)+" \\\\")
-    for lr,lrtex in LRS:
-        arms=[f"corr_{lr}_s{s}" for s in SEEDS]
-        q=[]; nw=[]
-        for nk in noises:
-            mq=[cell(bn,a,nk,"QVE3") for a in arms]; mn=[cell(bn,a,nk,"NWE3") for a in arms]
-            q.append(f"${np.mean(mq):.3f}\\,({np.std(mq,ddof=1):.2f})$"); nw.append(f"${np.mean(mn):.3f}\\,({np.std(mn,ddof=1):.2f})$")
-        lines.append(f" & GRPO {lrtex} & "+" & ".join(q)+" & "+" & ".join(nw)+" \\\\")
-    lines.append("\\midrule")
-lines=lines[:-1]
-w("table3_corrected.tex", r"""\begin{table}[t]
+for rule,label,suffix,cap in (("QVE3","majority voting","", "under majority voting"),("NWE3","the noise-aware rule","-nwe","under the noise-aware rule")):
+    lines=[]
+    for tag,(dsf,dsn) in DS.items():
+        bn=load(tag)["datasets"][dsf]["by_noise"]
+        lines.append(f"\\multirow{{5}}{{*}}{{{dsn}}}")
+        for arm,lab in (("uncompressed","Uncompressed"),("linear","Hand-designed linear")):
+            lines.append(f" & {lab} & "+" & ".join(f"${cell(bn,arm,nk,rule):.3f}$" for nk in noises)+" \\\\")
+        for lr,lrtex in LRS:
+            arms=[f"corr_{lr}_s{s}" for s in SEEDS]; q=[]
+            for nk in noises:
+                m=[cell(bn,a,nk,rule) for a in arms]; q.append(f"${np.mean(m):.3f}\\,({np.std(m,ddof=1):.2f})$")
+            lines.append(f" & GRPO {lrtex} & "+" & ".join(q)+" \\\\")
+        lines.append("\\midrule")
+    lines=lines[:-1]
+    w(f"table3_corrected{suffix}.tex", r"""\begin{table}[t]
 \centering
-\scriptsize
 \caption{Downstream Matthews correlation of the corrected policies at six qubits under
-the coupled family, matched protocol (200/400, five data splits), under majority voting
-and under the noise-aware rule. Learned rows give the mean over five policy seeds with
-the standard deviation across seeds in parentheses; each seed's value is itself a mean
-over the five data splits. Per-seed values are in the repository.}
-\label{tab:compdownstream}
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{@{}llrrrrrrrrrr@{}}
+the coupled family, matched protocol (200/400, five data splits), """ + cap + r""".
+Learned rows give the mean over five policy seeds with the standard deviation across
+seeds in parentheses; each seed's value is itself a mean over the five data splits.
+Per-seed values are in the repository.}
+\label{tab:compdownstream""" + suffix + r"""}
+\begin{tabular}{@{}llrrrrr@{}}
 \toprule
-& & \multicolumn{5}{c}{QVE3, majority voting, $p_1 =$} & \multicolumn{5}{c}{NWE3, noise-aware, $p_1 =$} \\
-\cmidrule(lr){3-7}\cmidrule(lr){8-12}
-Dataset & Arm & $0$ & $0.01$ & $0.03$ & $0.05$ & $0.1$ & $0$ & $0.01$ & $0.03$ & $0.05$ & $0.1$ \\
+Dataset & Arm & $p_1 = 0$ & $0.01$ & $0.03$ & $0.05$ & $0.1$ \\
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule

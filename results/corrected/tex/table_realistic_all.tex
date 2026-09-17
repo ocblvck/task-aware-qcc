@@ -1,0 +1,32 @@
+\begin{table}[t]
+\centering
+\caption{Fusion rules at hardware-realistic error rates, $p_1 = 5\times10^{-4}$, on all
+three datasets, matched protocol over five splits. The noise-aware value is bold where it
+exceeds majority voting and underlined where it falls below it.}
+\label{tab:fusionrealistic}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+Width, dataset & $p_2$ & QVE3 & QWE3 & NWE3 & $Z$ & $ZZ$ & Pauli \\
+\midrule
+\multirow{3}{*}{8, IoTID20}
+ & $0.0$ & $0.653$ & $0.653$ & $0.653$ & $0.585$ & $0.525$ & $0.653$ \\
+ & $0.01$ & $0.664$ & $0.664$ & $0.664$ & $0.585$ & $0.609$ & $0.667$ \\
+ & $0.02$ & $0.585$ & $0.585$ & $0.585$ & $0.585$ & $0.000$ & $0.617$ \\
+\midrule
+\multirow{3}{*}{8, UNSW-NB15}
+ & $0.0$ & $0.639$ & $0.639$ & $0.639$ & $0.638$ & $0.616$ & $0.652$ \\
+ & $0.01$ & $0.600$ & $0.600$ & $0.600$ & $0.639$ & $0.553$ & $0.590$ \\
+ & $0.02$ & $0.641$ & $0.641$ & $0.641$ & $0.639$ & $0.023$ & $0.545$ \\
+\midrule
+\multirow{3}{*}{8, Bot-IoT}
+ & $0.0$ & $0.793$ & $0.793$ & $0.793$ & $0.871$ & $0.679$ & $0.793$ \\
+ & $0.01$ & $0.793$ & $0.793$ & $0.793$ & $0.871$ & $0.651$ & $0.793$ \\
+ & $0.02$ & $0.871$ & $0.871$ & $\underline{0.747}$ & $0.871$ & $0.000$ & $0.747$ \\
+\midrule
+\multirow{3}{*}{10, UNSW-NB15}
+ & $0.0$ & $0.678$ & $0.678$ & $0.678$ & $0.651$ & $0.640$ & $0.670$ \\
+ & $0.01$ & $0.656$ & $0.656$ & $0.656$ & $0.649$ & $0.166$ & $0.561$ \\
+ & $0.02$ & $0.484$ & $0.571$ & $\mathbf{0.649}$ & $0.649$ & $0.000$ & $0.448$ \\
+\bottomrule
+\end{tabular}
+\end{table}

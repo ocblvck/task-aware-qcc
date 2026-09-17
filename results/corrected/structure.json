@@ -1,0 +1,242 @@
+{
+  "corr_lr5_s42": {
+    "per_member_2q": [
+      0,
+      10,
+      10
+    ],
+    "total_2q": 20,
+    "reduction_pct": 77.77777777777777,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "547e3a9f",
+      "547e3a9f"
+    ]
+  },
+  "corr_lr5_s43": {
+    "per_member_2q": [
+      0,
+      8,
+      8
+    ],
+    "total_2q": 16,
+    "reduction_pct": 82.22222222222223,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "fa68f9c6",
+      "fa68f9c6"
+    ]
+  },
+  "corr_lr5_s44": {
+    "per_member_2q": [
+      0,
+      5,
+      5
+    ],
+    "total_2q": 10,
+    "reduction_pct": 88.88888888888889,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "b3a8c204",
+      "b3a8c204"
+    ]
+  },
+  "corr_lr5_s45": {
+    "per_member_2q": [
+      0,
+      7,
+      7
+    ],
+    "total_2q": 14,
+    "reduction_pct": 84.44444444444444,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "e1e858b1",
+      "e1e858b1"
+    ]
+  },
+  "corr_lr5_s46": {
+    "per_member_2q": [
+      0,
+      9,
+      7
+    ],
+    "total_2q": 16,
+    "reduction_pct": 82.22222222222223,
+    "distinct_members": 3,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "dc2f60ae",
+      "a2652f8c"
+    ]
+  },
+  "corr_lr75_s42": {
+    "per_member_2q": [
+      0,
+      6,
+      6
+    ],
+    "total_2q": 12,
+    "reduction_pct": 86.66666666666667,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "205ee87c",
+      "205ee87c"
+    ]
+  },
+  "corr_lr75_s43": {
+    "per_member_2q": [
+      0,
+      10,
+      10
+    ],
+    "total_2q": 20,
+    "reduction_pct": 77.77777777777777,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "547e3a9f",
+      "547e3a9f"
+    ]
+  },
+  "corr_lr75_s44": {
+    "per_member_2q": [
+      0,
+      12,
+      10
+    ],
+    "total_2q": 22,
+    "reduction_pct": 75.55555555555556,
+    "distinct_members": 3,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "f0c9cd1c",
+      "547e3a9f"
+    ]
+  },
+  "corr_lr75_s45": {
+    "per_member_2q": [
+      0,
+      10,
+      10
+    ],
+    "total_2q": 20,
+    "reduction_pct": 77.77777777777777,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "547e3a9f",
+      "547e3a9f"
+    ]
+  },
+  "corr_lr75_s46": {
+    "per_member_2q": [
+      0,
+      8,
+      8
+    ],
+    "total_2q": 16,
+    "reduction_pct": 82.22222222222223,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "67f30ee5",
+      "67f30ee5"
+    ]
+  },
+  "corr_lr10_s42": {
+    "per_member_2q": [
+      0,
+      60,
+      30
+    ],
+    "total_2q": 90,
+    "reduction_pct": 0.0,
+    "distinct_members": 3,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "556e4b71",
+      "bcd15525"
+    ]
+  },
+  "corr_lr10_s43": {
+    "per_member_2q": [
+      0,
+      60,
+      30
+    ],
+    "total_2q": 90,
+    "reduction_pct": 0.0,
+    "distinct_members": 3,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "556e4b71",
+      "bcd15525"
+    ]
+  },
+  "corr_lr10_s44": {
+    "per_member_2q": [
+      0,
+      8,
+      8
+    ],
+    "total_2q": 16,
+    "reduction_pct": 82.22222222222223,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "df201cb5",
+      "df201cb5"
+    ]
+  },
+  "corr_lr10_s45": {
+    "per_member_2q": [
+      0,
+      0,
+      0
+    ],
+    "total_2q": 0,
+    "reduction_pct": 100.0,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "1d8657a3",
+      "1d8657a3"
+    ]
+  },
+  "corr_lr10_s46": {
+    "per_member_2q": [
+      0,
+      10,
+      10
+    ],
+    "total_2q": 20,
+    "reduction_pct": 77.77777777777777,
+    "distinct_members": 2,
+    "all_valid": true,
+    "member_md5": [
+      "9b56615e",
+      "547e3a9f",
+      "547e3a9f"
+    ]
+  }
+}

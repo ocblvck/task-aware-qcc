@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{The policies of the submitted version, trained against the structural criterion
+alone with accuracy retention on a 16/8 subsample, audited after training with
+\eqref{eq:effective}. The seed-43 policy at the lowest rate is the one that satisfied the
+structural criterion while leaving ten of eighteen parameters inert.}
+\label{tab:compstructure-pre}
+\begin{tabular}{@{}llcccrc@{}}
+\toprule
+Arm & Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Effective \\
+\midrule
+GRPO $5\times10^{-6}$ & 42 & $0/10/10$ & $20$ & $77.8\%$ & $2$ & $18/18$ \\
+GRPO $5\times10^{-6}$ & 43 & $0/3/4$ & $7$ & $92.2\%$ & $3$ & $\mathbf{8/18}$ \\
+GRPO $7.5\times10^{-6}$ & 42 & $0/0/0$ & $0$ & $100.0\%$ & $1$ & $18/18$ \\
+GRPO $7.5\times10^{-6}$ & 43 & $0/60/30$ & $90$ & $0.0\%$ & $3$ & $18/18$ \\
+GRPO $1\times10^{-5}$ & 42 & $0/60/30$ & $90$ & $0.0\%$ & $3$ & $18/18$ \\
+GRPO $1\times10^{-5}$ & 43 & $0/60/30$ & $90$ & $0.0\%$ & $3$ & $18/18$ \\
+\bottomrule
+\end{tabular}
+\end{table}

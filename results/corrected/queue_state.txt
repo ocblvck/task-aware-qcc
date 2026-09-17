@@ -1,0 +1,282 @@
+corr_lr5_s42 LAUNCHED gpu=0 attempt=1 09-15 12:23
+corr_lr5_s43 LAUNCHED gpu=1 attempt=1 09-15 12:24
+cmp_pre_IoT LAUNCHED gpu=2 attempt=1 09-15 12:26
+cmp_pre_IoT DONE 09-15 13:19
+cmp_pre_UNSW LAUNCHED gpu=2 attempt=1 09-15 13:19
+cmp_pre_IoT DONE 09-15 13:23
+cmp_pre_IoT DONE 09-15 13:25
+cmp_pre_IoT DONE 09-15 13:27
+cmp_pre_IoT DONE 09-15 13:29
+cmp_pre_IoT DONE 09-15 13:31
+cmp_pre_IoT DONE 09-15 13:33
+cmp_pre_IoT DONE 09-15 13:35
+cmp_pre_IoT DONE 09-15 13:37
+cmp_pre_IoT DONE 09-15 13:39
+cmp_pre_IoT DONE 09-15 13:41
+cmp_pre_IoT DONE 09-15 13:43
+cmp_pre_IoT DONE 09-15 13:45
+cmp_pre_IoT DONE 09-15 13:47
+cmp_pre_IoT DONE 09-15 13:49
+cmp_pre_IoT DONE 09-15 13:51
+cmp_pre_IoT DONE 09-15 13:53
+cmp_pre_IoT DONE 09-15 13:55
+cmp_pre_IoT DONE 09-15 13:57
+cmp_pre_IoT DONE 09-15 13:59
+cmp_pre_IoT DONE 09-15 14:01
+cmp_pre_IoT DONE 09-15 14:03
+cmp_pre_IoT DONE 09-15 14:05
+cmp_pre_IoT DONE 09-15 14:07
+cmp_pre_IoT DONE 09-15 14:09
+cmp_pre_IoT DONE 09-15 14:11
+cmp_pre_IoT DONE 09-15 14:13
+cmp_pre_UNSW DONE 09-15 14:13
+cmp_pre_Bot LAUNCHED gpu=2 attempt=1 09-15 14:13
+cmp_pre_IoT DONE 09-15 14:17
+cmp_pre_UNSW DONE 09-15 14:17
+cmp_pre_IoT DONE 09-15 14:19
+cmp_pre_UNSW DONE 09-15 14:19
+cmp_pre_IoT DONE 09-15 14:21
+cmp_pre_UNSW DONE 09-15 14:21
+cmp_pre_IoT DONE 09-15 14:23
+cmp_pre_UNSW DONE 09-15 14:23
+cmp_pre_IoT DONE 09-15 14:25
+cmp_pre_UNSW DONE 09-15 14:25
+cmp_pre_IoT DONE 09-15 14:27
+cmp_pre_UNSW DONE 09-15 14:27
+cmp_pre_IoT DONE 09-15 14:29
+cmp_pre_UNSW DONE 09-15 14:29
+cmp_pre_IoT DONE 09-15 14:31
+cmp_pre_UNSW DONE 09-15 14:31
+cmp_pre_IoT DONE 09-15 14:33
+cmp_pre_UNSW DONE 09-15 14:33
+cmp_pre_IoT DONE 09-15 14:35
+cmp_pre_UNSW DONE 09-15 14:35
+cmp_pre_IoT DONE 09-15 14:37
+cmp_pre_UNSW DONE 09-15 14:37
+cmp_pre_IoT DONE 09-15 14:39
+cmp_pre_UNSW DONE 09-15 14:39
+cmp_pre_IoT DONE 09-15 14:41
+cmp_pre_UNSW DONE 09-15 14:41
+cmp_pre_IoT DONE 09-15 14:43
+cmp_pre_UNSW DONE 09-15 14:43
+cmp_pre_IoT DONE 09-15 14:45
+cmp_pre_UNSW DONE 09-15 14:45
+cmp_pre_IoT DONE 09-15 14:47
+cmp_pre_UNSW DONE 09-15 14:47
+cmp_pre_IoT DONE 09-15 14:49
+cmp_pre_UNSW DONE 09-15 14:49
+cmp_pre_IoT DONE 09-15 14:51
+cmp_pre_UNSW DONE 09-15 14:51
+cmp_pre_IoT DONE 09-15 14:53
+cmp_pre_UNSW DONE 09-15 14:53
+cmp_pre_IoT DONE 09-15 14:55
+cmp_pre_UNSW DONE 09-15 14:55
+cmp_pre_IoT DONE 09-15 14:57
+cmp_pre_UNSW DONE 09-15 14:57
+cmp_pre_IoT DONE 09-15 14:59
+cmp_pre_UNSW DONE 09-15 14:59
+cmp_pre_IoT DONE 09-15 15:01
+cmp_pre_UNSW DONE 09-15 15:01
+cmp_pre_IoT DONE 09-15 15:03
+cmp_pre_UNSW DONE 09-15 15:03
+cmp_pre_IoT DONE 09-15 15:05
+cmp_pre_UNSW DONE 09-15 15:05
+corr_lr5_s43 DONE 09-15 15:07
+cmp_pre_IoT DONE 09-15 15:07
+cmp_pre_UNSW DONE 09-15 15:07
+csweep_IoT LAUNCHED gpu=1 attempt=1 09-15 15:07
+csweep_UNSW LAUNCHED gpu=2 attempt=1 09-15 15:08
+corr_lr5_s43 DONE 09-15 15:12
+cmp_pre_IoT DONE 09-15 15:12
+cmp_pre_UNSW DONE 09-15 15:12
+cmp_pre_Bot DONE 09-15 15:12
+corr_lr5_s43 DONE 09-15 15:14
+cmp_pre_IoT DONE 09-15 15:14
+cmp_pre_UNSW DONE 09-15 15:14
+cmp_pre_Bot DONE 09-15 15:14
+corr_lr5_s43 DONE 09-15 15:16
+cmp_pre_IoT DONE 09-15 15:16
+cmp_pre_UNSW DONE 09-15 15:16
+cmp_pre_Bot DONE 09-15 15:16
+corr_lr5_s42 DONE 09-15 15:18
+corr_lr5_s43 DONE 09-15 15:18
+cmp_pre_IoT DONE 09-15 15:18
+cmp_pre_UNSW DONE 09-15 15:18
+cmp_pre_Bot DONE 09-15 15:18
+csweep_IoT DONE 09-15 15:18
+csweep_UNSW DONE 09-15 15:18
+csweep_Bot LAUNCHED gpu=0 attempt=1 09-15 15:18
+real8q_IoT LAUNCHED gpu=1 attempt=1 09-15 15:19
+real8q_Bot LAUNCHED gpu=2 attempt=1 09-15 15:21
+corr_lr5_s42 DONE 09-15 15:24
+corr_lr5_s43 DONE 09-15 15:24
+cmp_pre_IoT DONE 09-15 15:24
+cmp_pre_UNSW DONE 09-15 15:24
+cmp_pre_Bot DONE 09-15 15:24
+csweep_IoT DONE 09-15 15:24
+csweep_UNSW DONE 09-15 15:24
+corr_lr5_s42 DONE 09-15 15:26
+corr_lr5_s43 DONE 09-15 15:26
+cmp_pre_IoT DONE 09-15 15:26
+cmp_pre_UNSW DONE 09-15 15:26
+cmp_pre_Bot DONE 09-15 15:26
+csweep_IoT DONE 09-15 15:26
+csweep_UNSW DONE 09-15 15:26
+corr_lr5_s42 DONE 09-15 15:28
+corr_lr5_s43 DONE 09-15 15:28
+cmp_pre_IoT DONE 09-15 15:28
+cmp_pre_UNSW DONE 09-15 15:28
+cmp_pre_Bot DONE 09-15 15:28
+csweep_IoT DONE 09-15 15:28
+csweep_UNSW DONE 09-15 15:28
+corr_lr5_s42 DONE 09-15 15:30
+corr_lr5_s43 DONE 09-15 15:30
+cmp_pre_IoT DONE 09-15 15:30
+cmp_pre_UNSW DONE 09-15 15:30
+cmp_pre_Bot DONE 09-15 15:30
+csweep_IoT DONE 09-15 15:30
+csweep_UNSW DONE 09-15 15:30
+csweep_Bot DONE 09-15 15:30
+corr_lr5_s44 LAUNCHED gpu=0 attempt=1 09-15 15:30
+corr_lr5_s42 DONE 09-15 15:34
+corr_lr5_s43 DONE 09-15 15:34
+cmp_pre_IoT DONE 09-15 15:34
+cmp_pre_UNSW DONE 09-15 15:34
+cmp_pre_Bot DONE 09-15 15:34
+csweep_IoT DONE 09-15 15:34
+csweep_UNSW DONE 09-15 15:34
+csweep_Bot DONE 09-15 15:34
+corr_lr5_s42 DONE 09-15 15:36
+corr_lr5_s43 DONE 09-15 15:36
+cmp_pre_IoT DONE 09-15 15:36
+cmp_pre_UNSW DONE 09-15 15:36
+cmp_pre_Bot DONE 09-15 15:36
+csweep_IoT DONE 09-15 15:36
+csweep_UNSW DONE 09-15 15:36
+csweep_Bot DONE 09-15 15:36
+corr_lr5_s42 DONE 09-15 15:38
+corr_lr5_s43 DONE 09-15 15:38
+cmp_pre_IoT DONE 09-15 15:38
+cmp_pre_UNSW DONE 09-15 15:38
+cmp_pre_Bot DONE 09-15 15:38
+csweep_IoT DONE 09-15 15:38
+csweep_UNSW DONE 09-15 15:38
+csweep_Bot DONE 09-15 15:38
+corr_lr5_s42 DONE 09-15 15:40
+corr_lr5_s43 DONE 09-15 15:40
+cmp_pre_IoT DONE 09-15 15:40
+cmp_pre_UNSW DONE 09-15 15:40
+cmp_pre_Bot DONE 09-15 15:40
+csweep_IoT DONE 09-15 15:40
+csweep_UNSW DONE 09-15 15:40
+csweep_Bot DONE 09-15 15:40
+corr_lr5_s42 DONE 09-15 15:42
+corr_lr5_s43 DONE 09-15 15:42
+cmp_pre_IoT DONE 09-15 15:42
+cmp_pre_UNSW DONE 09-15 15:42
+cmp_pre_Bot DONE 09-15 15:42
+csweep_IoT DONE 09-15 15:42
+csweep_UNSW DONE 09-15 15:42
+csweep_Bot DONE 09-15 15:42
+corr_lr5_s42 DONE 09-15 15:44
+corr_lr5_s43 DONE 09-15 15:44
+cmp_pre_IoT DONE 09-15 15:44
+cmp_pre_UNSW DONE 09-15 15:44
+cmp_pre_Bot DONE 09-15 15:44
+csweep_IoT DONE 09-15 15:44
+csweep_UNSW DONE 09-15 15:44
+csweep_Bot DONE 09-15 15:44
+corr_lr5_s42 DONE 09-15 15:46
+corr_lr5_s43 DONE 09-15 15:46
+cmp_pre_IoT DONE 09-15 15:46
+cmp_pre_UNSW DONE 09-15 15:46
+cmp_pre_Bot DONE 09-15 15:46
+csweep_IoT DONE 09-15 15:46
+csweep_UNSW DONE 09-15 15:46
+csweep_Bot DONE 09-15 15:46
+corr_lr5_s42 DONE 09-15 15:48
+corr_lr5_s43 DONE 09-15 15:48
+cmp_pre_IoT DONE 09-15 15:48
+cmp_pre_UNSW DONE 09-15 15:48
+cmp_pre_Bot DONE 09-15 15:48
+csweep_IoT DONE 09-15 15:48
+csweep_UNSW DONE 09-15 15:48
+csweep_Bot DONE 09-15 15:48
+corr_lr5_s42 DONE 09-15 15:50
+corr_lr5_s43 DONE 09-15 15:50
+cmp_pre_IoT DONE 09-15 15:50
+cmp_pre_UNSW DONE 09-15 15:50
+cmp_pre_Bot DONE 09-15 15:50
+csweep_IoT DONE 09-15 15:50
+csweep_UNSW DONE 09-15 15:50
+csweep_Bot DONE 09-15 15:50
+corr_lr5_s42 DONE 09-15 15:52
+corr_lr5_s43 DONE 09-15 15:52
+cmp_pre_IoT DONE 09-15 15:52
+cmp_pre_UNSW DONE 09-15 15:52
+cmp_pre_Bot DONE 09-15 15:52
+csweep_IoT DONE 09-15 15:52
+csweep_UNSW DONE 09-15 15:52
+csweep_Bot DONE 09-15 15:52
+real8q_IoT DONE 09-15 15:52
+corr_lr5_s45 LAUNCHED gpu=1 attempt=1 09-15 15:52
+corr_lr5_s42 DONE 09-15 15:55
+corr_lr5_s43 DONE 09-15 15:55
+cmp_pre_IoT DONE 09-15 15:55
+cmp_pre_UNSW DONE 09-15 15:55
+cmp_pre_Bot DONE 09-15 15:55
+csweep_IoT DONE 09-15 15:55
+csweep_UNSW DONE 09-15 15:55
+csweep_Bot DONE 09-15 15:55
+real8q_IoT DONE 09-15 15:55
+real8q_Bot DONE 09-15 15:55
+corr_lr5_s46 LAUNCHED gpu=2 attempt=1 09-15 15:55
+corr_lr5_s42 DONE 09-15 15:59
+corr_lr5_s43 DONE 09-15 15:59
+cmp_pre_IoT DONE 09-15 15:59
+cmp_pre_UNSW DONE 09-15 15:59
+cmp_pre_Bot DONE 09-15 15:59
+csweep_IoT DONE 09-15 15:59
+csweep_UNSW DONE 09-15 15:59
+csweep_Bot DONE 09-15 15:59
+real8q_IoT DONE 09-15 15:59
+real8q_Bot DONE 09-15 15:59
+corr_lr5_s44 LAUNCHED gpu=0 attempt=2 09-15 22:26
+corr_lr5_s44 DONE 09-16 00:37
+corr_lr5_s45 LAUNCHED gpu=0 attempt=2 09-16 00:38
+corr_lr5_s45 DONE 09-16 03:47
+corr_lr5_s46 LAUNCHED gpu=0 attempt=2 09-16 03:48
+corr_lr5_s46 DONE 09-16 06:25
+corr_lr75_s42 LAUNCHED gpu=0 attempt=1 09-16 06:26
+corr_lr75_s42 DONE 09-16 08:51
+corr_lr75_s43 LAUNCHED gpu=0 attempt=1 09-16 08:52
+corr_lr75_s43 DONE 09-16 11:28
+corr_lr75_s44 LAUNCHED gpu=0 attempt=1 09-16 11:29
+corr_lr75_s44 DONE 09-16 14:20
+corr_lr75_s45 LAUNCHED gpu=0 attempt=1 09-16 14:21
+corr_lr75_s45 DONE 09-16 17:20
+corr_lr75_s46 LAUNCHED gpu=0 attempt=1 09-16 17:21
+corr_lr75_s46 DONE 09-16 19:39
+corr_lr10_s42 LAUNCHED gpu=0 attempt=1 09-16 19:40
+corr_lr10_s42 DONE 09-16 20:50
+corr_lr10_s43 LAUNCHED gpu=0 attempt=1 09-16 20:51
+corr_lr10_s43 DONE 09-16 23:45
+corr_lr10_s44 LAUNCHED gpu=0 attempt=1 09-16 23:46
+corr_lr10_s44 DONE 09-17 02:38
+corr_lr10_s45 LAUNCHED gpu=0 attempt=1 09-17 02:39
+corr_lr10_s45 DONE 09-17 05:39
+corr_lr10_s46 LAUNCHED gpu=0 attempt=1 09-17 05:40
+corr_lr10_s46 DONE 09-17 08:24
+emit_corr LAUNCHED gpu=0 attempt=1 09-17 08:25
+emit_corr DONE 09-17 08:41
+audit_corr LAUNCHED gpu=0 attempt=1 09-17 08:42
+cmp_corr_IoT LAUNCHED gpu=0 attempt=1 09-17 08:43
+audit_corr DONE 09-17 08:47
+cmp_corr_IoT DONE 09-17 10:00
+cmp_corr_UNSW LAUNCHED gpu=0 attempt=1 09-17 10:01
+cmp_corr_UNSW DONE 09-17 11:17
+cmp_corr_Bot LAUNCHED gpu=0 attempt=1 09-17 11:18
+cmp_corr_Bot DONE 09-17 12:36
+rescore_corr LAUNCHED gpu=0 attempt=1 09-17 12:37
+rescore_corr DONE 09-17 12:50
+real10q_IoT LAUNCHED gpu=0 attempt=1 09-17 12:51

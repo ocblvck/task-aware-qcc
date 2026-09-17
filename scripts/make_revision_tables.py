@@ -90,12 +90,14 @@ for rule,label,suffix,cap in (("QVE3","majority voting","", "under majority voti
         for lr,lrtex in LRS:
             arms=[f"corr_{lr}_s{s}" for s in SEEDS]; q=[]
             for nk in noises:
-                m=[cell(bn,a,nk,rule) for a in arms]; q.append(f"${np.mean(m):.3f}\\,({np.std(m,ddof=1):.2f})$")
+                m=[cell(bn,a,nk,rule) for a in arms]; q.append(f"${np.mean(m):.3f}$ ({np.std(m,ddof=1):.2f})")
             lines.append(f" & GRPO {lrtex} & "+" & ".join(q)+" \\\\")
         lines.append("\\midrule")
     lines=lines[:-1]
     w(f"table3_corrected{suffix}.tex", r"""\begin{table}[t]
 \centering
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
 \caption{Downstream Matthews correlation of the corrected policies at six qubits under
 the coupled family, matched protocol (200/400, five data splits), """ + cap + r""".
 Learned rows give the mean over five policy seeds with the standard deviation across

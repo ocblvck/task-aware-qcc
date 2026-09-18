@@ -141,6 +141,32 @@ def check_corrected(c):
                 for r in ("QVE3", "NWE3"):
                     c.eq(f"T3c {tag} {arm} {nk} {r} n_splits", len(bn[nk][arm]["fusion"][r]["mcc_seeds"]), 5, 0)
     print("Table 3 (corrected)  split counts checked")
+    # realistic family and tau sweep at 8 and 10 qubits: every printed cell against its JSON
+    files = {(8, "UNSW-NB15"): "fusion_realistic_8q.json", (10, "UNSW-NB15"): "fusion_realistic_10q.json",
+             (8, "IoTID20"): "corrected/fusion_realistic_8q_IoT.json", (10, "IoTID20"): "corrected/fusion_realistic_10q_IoT.json",
+             (8, "Bot-IoT"): "corrected/fusion_realistic_8q_Bot.json", (10, "Bot-IoT"): "corrected/fusion_realistic_10q_Bot.json"}
+    num = re.compile(r"(\d\.\d{3})")
+    for texname, keys in (("table_realistic_all.tex", ["QVE3", "QWE3", "NWE3@0.05", "b:Z1", "b:ZZ2", "b:Pauli1"]),
+                          ("table_tau_widths.tex", ["NWE3@0.01", "NWE3@0.02", "NWE3@0.05", "NWE3@0.1", "NWE3@0.2", "QVE3", "b:Z1"])):
+        tex = corr / "tex" / texname
+        if not tex.exists():
+            c.skipped.append(texname); continue
+        cur, n = None, 0
+        for line in tex.read_text().splitlines():
+            m = re.match(r"\\multirow\{3\}\{\*\}\{(\d+), ([^}]+)\}", line)
+            if m:
+                d = c.load(files[(int(m.group(1)), m.group(2))])
+                cur = (m.group(1), m.group(2), list(d["datasets"].values())[0]["by_noise"]) if d else None
+                continue
+            if cur is None or not line.startswith(" & $"): continue
+            p2 = re.match(r" & \$([\d.]+)\$", line).group(1)
+            nk = next(k for k in cur[2] if float(k.split(":")[-1]) == float(p2))
+            vals = num.findall(line.split("&", 2)[2])
+            for key, v in zip(keys, vals):
+                cell = cur[2][nk]
+                got = cell["branch"][key[2:]]["mcc"] if key.startswith("b:") else cell["fusion"][key]["mcc_mean"]
+                c.eq(f"{texname} {cur[0]}q {cur[1]} p2={p2} {key}", got, float(v)); n += 1
+        print(f"{texname}  {n} cells checked")
 
 
 def main():

@@ -13,13 +13,49 @@ computed. Nothing needs to be rerun to inspect the numbers.
 python scripts/verify_paper_numbers.py
 ```
 
-Reads only `results/*.json`, no GPU, about a second. It compares 195 values typed from
-the printed tables against the JSON that produced them and reports any disagreement.
+Reads only `results/*.json`, no GPU, about a second. It compares 549 values from the printed tables (submitted version and revision) against
+the JSON that produced them and reports any disagreement.
 Expected output:
 
 ```
-[OK] all 195 published values reproduce from results/
+[OK] all 549 published values reproduce from results/
 ```
+
+## Revision campaign (September 2026)
+
+The reviewers asked that the effective-parameter test be enforced during training, that
+the reward use Matthews correlation, and that each learning rate be run with more seeds.
+Everything produced in response is under `results/corrected/`, and the submitted results
+in `results/` are untouched so the two can be compared.
+
+| Revision item | Produced by | Result file |
+|---|---|---|
+| Frozen protocol, seeds 42 to 46 fixed before training | `scripts/freeze_revision_config.py` | `corrected/frozen_config.json` |
+| Fifteen corrected policies, structure and Eq. 9 audit | `scripts/emit_replicate_circuits.py`, `scripts/audit_effective_params.py` | `corrected/structure.json`, `corrected/effective_params.json`, `corrected/circuits/` |
+| Downstream evaluation of the corrected policies | `scripts/eval_compression_matched.py` | `corrected/compression_matched_corrected_{IoT,UNSW,Bot}.json` |
+| Submitted seed-43 circuits at the full protocol | same script | `corrected/compression_matched_precorrection_*.json` |
+| Regularization sweep, C in 0.1, 1, 10, 100 | `scripts/eval_fusion_full.py --c-values` | `corrected/c_sweep_*.json` |
+| Eight and ten qubits on IoTID20 and Bot-IoT | `scripts/eval_fusion_full.py` | `corrected/fusion_realistic_{8q,10q}_{IoT,Bot}.json` |
+| Reward-loop rescoring | `scripts/rescore_reward_loop.py` | `corrected/rescoring_*.json`, `reward_loop_rescoring.json` |
+| Full-feature classical baselines | `scripts/eval_classical_fullfeat.py` | `classical_baseline_fullfeat_200.json` |
+| LaTeX tables of the revised manuscript | `scripts/make_revision_tables.py` | `corrected/tex/*.tex` |
+| Job history, one record per launch and completion | `scripts/run_revision.sh` | `corrected/job_records.jsonl`, `corrected/queue_state.txt` |
+
+Corrected training command (one policy):
+
+```bash
+python scripts/train_taskaware_grpo.py \
+  --base-model models/sft_compress_e2_merged --num-qubits 6 \
+  --max-steps 250 --gate-mode or --lr 5e-6 --seed 42 \
+  --util-metric mcc --util-reference clean_source --require-effective \
+  --save-steps 25 --save-total-limit 2 --auto-resume \
+  --output models/corr_lr5_s42
+```
+
+Results that did not favour the method are in the same files as those that did: two of
+five runs at the highest learning rate collapsed to invalid sampling, eleven of fifteen
+committees merge two members, and the noise-aware rule loses to majority voting in three
+of thirty-nine configurations, all on Bot-IoT.
 
 ## Where each table and figure comes from
 
@@ -62,8 +98,8 @@ reward = w_valid * valid
   built from the candidate map, scored on an IoT-NID or UNSW split under a depolarizing
   density-matrix channel ([`kernels.py`](src/taqcc/kernels.py), Hilbert-Schmidt overlap
   `K = Tr(rho_a rho_b)`). `utility = clip(cand/orig, 0, cap)` with an absolute floor.
-  `--util-metric mcc` switches the retention term to Matthews correlation; the runs
-  reported in the article all use the accuracy formulation.
+  `--util-metric mcc` switches the retention term to Matthews correlation; the submitted
+  runs use the accuracy formulation and the revision runs use Matthews correlation.
 - **Compression** is `1 - cost(cand)/cost(orig)` with `cost = depth + 2*n_2q`, counted
   on the decomposed circuit in the basis `u, cx, rz, sx, x`.
 - **Gate semantics** (`TaskAwareRewardConfig.gate_mode`): `"and"` gives
@@ -86,8 +122,9 @@ reports this as a finding.
    onto qubits it had not put into superposition, where they act as the identity.
 3. **Effective parameters** (`scripts/audit_effective_params.py`): perturb each
    parameter and measure self-fidelity. A parameter counts only if it changes the state
-   the kernel sees. This is applied as a post-hoc audit in the article, not inside the
-   training loop, and 3 of 21 emitted circuits fail it.
+   the kernel sees. In the submitted version this was a post-hoc audit, and 3 of 21 emitted
+   circuits fail it. In the revision it is enforced inside the training loop
+   (`--require-effective`), and all 45 circuits of the fifteen corrected policies pass.
 
 ```bash
 python scripts/audit_effective_params.py     # prints the per-circuit table

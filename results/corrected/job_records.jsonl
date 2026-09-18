@@ -37,3 +37,8 @@
 {"job":"rescore_corr","status":"launched","gpu":0,"attempt":1,"time":"2026-09-17 12:37:18","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":"","stdout":"logs/rescore_corr.log","stderr":"logs/rescore_corr.err"}
 {"job":"rescore_corr","status":"done","gpu":null,"attempt":1,"time":"2026-09-17 12:50:50","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":""}
 {"job":"real10q_IoT","status":"launched","gpu":0,"attempt":1,"time":"2026-09-17 12:51:50","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":"","stdout":"logs/real10q_IoT.log","stderr":"logs/real10q_IoT.err"}
+{"job":"real10q_IoT","status":"done","gpu":null,"attempt":1,"time":"2026-09-17 22:50:23","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":""}
+{"job":"real10q_Bot","status":"launched","gpu":0,"attempt":1,"time":"2026-09-17 22:51:23","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":"","stdout":"logs/real10q_Bot.log","stderr":"logs/real10q_Bot.err"}
+{"job":"real10q_Bot","status":"done","gpu":null,"attempt":1,"time":"2026-09-18 08:49:31","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":""}
+{"job":"campaign_complete","status":"launched","gpu":0,"attempt":1,"time":"2026-09-18 08:50:31","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":"","stdout":"logs/campaign_complete.log","stderr":"logs/campaign_complete.err"}
+{"job":"campaign_complete","status":"done","gpu":null,"attempt":1,"time":"2026-09-18 08:54:01","commit":"0159691","host":"mathstat2-lambda-quad2","checkpoint":""}

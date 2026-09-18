@@ -187,3 +187,38 @@ Width, dataset & $p_2$ & QVE3 & QWE3 & NWE3 & $Z$ & $ZZ$ & Pauli \\
 \end{tabular}
 \end{table}
 """)
+
+# ---------------- Table: gate threshold sweep at 8 and 10 qubits, all datasets
+TAUS=["0.01","0.02","0.05","0.1","0.2"]; tl=[]
+for wq in (8,10):
+    for tag,(dsf,dsn) in DS.items():
+        f = ROOT/f"results/fusion_realistic_{wq}q.json" if tag=="UNSW" else OUT/f"fusion_realistic_{wq}q_{tag}.json"
+        if not f.exists(): continue
+        bn=json.load(open(f))["datasets"][dsf]["by_noise"]
+        if len(bn)<3: continue
+        tl.append(f"\\multirow{{3}}{{*}}{{{wq}, {dsn}}}")
+        for nk,d in bn.items():
+            fu=d["fusion"]; ref=fu["NWE3@0.05"]["mcc_mean"]; cells=[]
+            for t in TAUS:
+                v=fu[f"NWE3@{t}"]["mcc_mean"]
+                cells.append(f"$\\mathbf{{{v:.3f}}}$" if abs(v-ref)>5e-4 else f"${v:.3f}$")
+            tl.append(f" & ${nk.split(':')[-1]}$ & " + " & ".join(cells) + f" & ${fu['QVE3']['mcc_mean']:.3f}$ & ${d['branch']['Z1']['mcc']:.3f}$ \\\\")
+        tl.append("\\midrule")
+tl=tl[:-1]
+w("table_tau_widths.tex", r"""\begin{table}[t]
+\centering
+\caption{Sensitivity of the noise-aware rule to $\tau$ at eight and ten qubits on all
+three datasets, hardware-realistic family, Matthews correlation over five splits. Cells
+that differ from the $\tau = 0.05$ column are in bold. Majority voting and the shallow
+member alone are given for reference.}
+\label{tab:tauwidth}
+\footnotesize
+\begin{tabular}{@{}lrrrrrrrr@{}}
+\toprule
+Width, dataset & $p_2$ & $\tau = 0.01$ & $0.02$ & $0.05$ & $0.1$ & $0.2$ & QVE3 & $Z$ alone \\
+\midrule
+""" + "\n".join(tl) + r"""
+\bottomrule
+\end{tabular}
+\end{table}
+""")

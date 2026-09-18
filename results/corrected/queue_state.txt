@@ -280,3 +280,8 @@ cmp_corr_Bot DONE 09-17 12:36
 rescore_corr LAUNCHED gpu=0 attempt=1 09-17 12:37
 rescore_corr DONE 09-17 12:50
 real10q_IoT LAUNCHED gpu=0 attempt=1 09-17 12:51
+real10q_IoT DONE 09-17 22:50
+real10q_Bot LAUNCHED gpu=0 attempt=1 09-17 22:51
+real10q_Bot DONE 09-18 08:49
+campaign_complete LAUNCHED gpu=0 attempt=1 09-18 08:50
+campaign_complete DONE 09-18 08:54

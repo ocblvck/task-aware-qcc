@@ -40,8 +40,8 @@ Table~\ref{tab:compstructure-pre}.}
 \toprule
 Arm & Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Effective \\
 \midrule
-Uncompressed & --- & $0/60/30$ & $90$ & $0\%$ & $3$ & $18/18$ \\
-Hand-designed linear & --- & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ \\
+Uncompressed & n/a & $0/60/30$ & $90$ & $0\%$ & $3$ & $18/18$ \\
+Hand-designed linear & n/a & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ \\
 Supervised warm-up & 42 & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ \\
 \midrule
 """ + "\n".join(body) + r"""

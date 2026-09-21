@@ -1,0 +1,646 @@
+{
+ "corr_lr10_s42": {
+  "run": "corr_lr10_s42",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=42"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 1e-05,
+   "seed": 42,
+   "data_seed": 42,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.182,
+  "admitted_fraction_last_400": 0.0,
+  "effective_pass_rate_among_structurally_valid": 0.9707,
+  "last_valid_evaluation_index": 408,
+  "approx_last_valid_step": 51,
+  "rejected_by_effective_test": 11,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": [
+   "Z_1_full",
+   "ZZ_2_full",
+   "Pauli_1_full"
+  ]
+ },
+ "corr_lr10_s43": {
+  "run": "corr_lr10_s43",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=43"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 1e-05,
+   "seed": 43,
+   "data_seed": 43,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.579,
+  "admitted_fraction_last_400": 0.0,
+  "effective_pass_rate_among_structurally_valid": 0.9957,
+  "last_valid_evaluation_index": 1456,
+  "approx_last_valid_step": 182,
+  "rejected_by_effective_test": 5,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": [
+   "Z_1_full",
+   "ZZ_2_full",
+   "Pauli_1_full"
+  ]
+ },
+ "corr_lr10_s44": {
+  "run": "corr_lr10_s44",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=44"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 1e-05,
+   "seed": 44,
+   "data_seed": 44,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.9065,
+  "admitted_fraction_last_400": 0.945,
+  "effective_pass_rate_among_structurally_valid": 0.9962,
+  "last_valid_evaluation_index": 1992,
+  "approx_last_valid_step": 249,
+  "rejected_by_effective_test": 7,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr10_s45": {
+  "run": "corr_lr10_s45",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=45"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 1e-05,
+   "seed": 45,
+   "data_seed": 45,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.9285,
+  "admitted_fraction_last_400": 0.9925,
+  "effective_pass_rate_among_structurally_valid": 1.0,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 0,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr10_s46": {
+  "run": "corr_lr10_s46",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=46"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 1e-05,
+   "seed": 46,
+   "data_seed": 46,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.962,
+  "admitted_fraction_last_400": 1.0,
+  "effective_pass_rate_among_structurally_valid": 0.9974,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 5,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr5_s42": {
+  "run": "corr_lr5_s42",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=42"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 5e-06,
+   "seed": 42,
+   "data_seed": 42,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.9785,
+  "admitted_fraction_last_400": 0.995,
+  "effective_pass_rate_among_structurally_valid": 1.0,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 0,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr5_s43": {
+  "run": "corr_lr5_s43",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=43"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 5e-06,
+   "seed": 43,
+   "data_seed": 43,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.903,
+  "admitted_fraction_last_400": 0.8975,
+  "effective_pass_rate_among_structurally_valid": 1.0,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 0,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr5_s44": {
+  "run": "corr_lr5_s44",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=44"
+  ],
+  "launches_in_log": 2,
+  "resumed_from": [
+   "models/corr_lr5_s44/checkpoint-25"
+  ],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 5e-06,
+   "seed": 44,
+   "data_seed": 44,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2024,
+  "admitted_fraction": 0.9699,
+  "admitted_fraction_last_400": 0.9575,
+  "effective_pass_rate_among_structurally_valid": 0.999,
+  "last_valid_evaluation_index": 1800,
+  "approx_last_valid_step": 225,
+  "rejected_by_effective_test": 2,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr5_s45": {
+  "run": "corr_lr5_s45",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=45"
+  ],
+  "launches_in_log": 2,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 5e-06,
+   "seed": 45,
+   "data_seed": 45,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2056,
+  "admitted_fraction": 0.9548,
+  "admitted_fraction_last_400": 0.9975,
+  "effective_pass_rate_among_structurally_valid": 1.0,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 0,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr5_s46": {
+  "run": "corr_lr5_s46",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=46"
+  ],
+  "launches_in_log": 2,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 5e-06,
+   "seed": 46,
+   "data_seed": 46,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2032,
+  "admitted_fraction": 0.7436,
+  "admitted_fraction_last_400": 0.98,
+  "effective_pass_rate_among_structurally_valid": 0.9569,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 68,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr75_s42": {
+  "run": "corr_lr75_s42",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=42"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 7.5e-06,
+   "seed": 42,
+   "data_seed": 42,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.5325,
+  "admitted_fraction_last_400": 0.58,
+  "effective_pass_rate_among_structurally_valid": 0.987,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 14,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": [
+   "Z_1_full"
+  ]
+ },
+ "corr_lr75_s43": {
+  "run": "corr_lr75_s43",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=43"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 7.5e-06,
+   "seed": 43,
+   "data_seed": 43,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.983,
+  "admitted_fraction_last_400": 0.995,
+  "effective_pass_rate_among_structurally_valid": 0.999,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 2,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr75_s44": {
+  "run": "corr_lr75_s44",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=44"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 7.5e-06,
+   "seed": 44,
+   "data_seed": 44,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.9825,
+  "admitted_fraction_last_400": 0.9975,
+  "effective_pass_rate_among_structurally_valid": 1.0,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 0,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr75_s45": {
+  "run": "corr_lr75_s45",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=45"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 7.5e-06,
+   "seed": 45,
+   "data_seed": 45,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.976,
+  "admitted_fraction_last_400": 0.9975,
+  "effective_pass_rate_among_structurally_valid": 0.9995,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 1,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": []
+ },
+ "corr_lr75_s46": {
+  "run": "corr_lr75_s46",
+  "reward_config_lines": [
+   "[reward] gate_mode=or util_metric=mcc util_reference=clean_source require_effective=True w_comp=3.0 w_equiv=0.3 w_util=0.5 train_size=48 test_size=24 pool=4000 noise_p1=0.01 seed=46"
+  ],
+  "launches_in_log": 1,
+  "resumed_from": [],
+  "exit_codes": [
+   "0"
+  ],
+  "global_step": 250,
+  "max_steps": 250,
+  "training_args": {
+   "learning_rate": 7.5e-06,
+   "seed": 46,
+   "data_seed": 46,
+   "max_steps": 250,
+   "num_generations": 8,
+   "temperature": 1.0,
+   "beta": 0.0,
+   "loss_type": "dapo",
+   "lr_scheduler_type": "SchedulerType.CONSTANT_WITH_WARMUP",
+   "warmup_ratio": 0.03,
+   "per_device_train_batch_size": 2,
+   "gradient_accumulation_steps": 4
+  },
+  "reward_evaluations_logged": 2000,
+  "admitted_fraction": 0.6625,
+  "admitted_fraction_last_400": 0.5575,
+  "effective_pass_rate_among_structurally_valid": 1.0,
+  "last_valid_evaluation_index": 2000,
+  "approx_last_valid_step": 250,
+  "rejected_by_effective_test": 0,
+  "reference_mcc_values": [
+   0.4966,
+   0.5674,
+   0.7303,
+   0.8284
+  ],
+  "absolute_fallback_count": 0,
+  "members_substituted_by_source_at_emission": [
+   "Z_1_full"
+  ]
+ }
+}

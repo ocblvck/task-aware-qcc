@@ -1,0 +1,25 @@
+diff --git a/src/qcc/grpo_trainer.py b/src/qcc/grpo_trainer.py
+index 6729ddb..6f3f51a 100644
+--- a/src/qcc/grpo_trainer.py
++++ b/src/qcc/grpo_trainer.py
+@@ -133,6 +133,11 @@ class GRPOTrainingConfig:
+         metadata={"help": "Temperature for positive advantages (more permissive)"}
+     )
+     
++    # Replication seed. Propagated to TrainingArguments so that repeated runs of one
++    # configuration differ only in initialization and sampling order, which is what makes
++    # run-to-run variance measurable.
++    seed: int = field(default=42, metadata={"help": "Training seed (TrainingArguments.seed)"})
++
+     # Clipping settings (DAPO recommends epsilon_high=0.28)
+     epsilon_low: float = field(default=0.2, metadata={"help": "GRPO clip epsilon low bound"})
+     epsilon_high: float = field(default=0.28, metadata={"help": "GRPO clip epsilon high bound (DAPO)"})
+@@ -501,6 +506,8 @@ class ComplexityAwareGRPOTrainer:
+         # negative reward → trains model to produce short/degenerate outputs → collapse.
+         # Build GRPOConfig kwargs - only include SAPO params when using SAPO loss
+         grpo_kwargs = dict(
++            seed=self.config.seed,
++            data_seed=self.config.seed,
+             output_dir=self.config.output_dir,
+             num_train_epochs=self.config.num_train_epochs,
+             max_steps=self.config.max_steps,

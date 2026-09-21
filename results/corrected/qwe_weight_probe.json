@@ -1,0 +1,59 @@
+{
+ "UNSW_NB15.csv": {
+  "train_class1_rate": 0.64,
+  "test_class1_rate": 0.64,
+  "Z": {
+   "val_acc": 0.85,
+   "val_pred_class1_rate": 0.65,
+   "test_pred_class1_rate": 0.6775
+  },
+  "ZZ": {
+   "val_acc": 0.35,
+   "val_pred_class1_rate": 0.0,
+   "test_pred_class1_rate": 1.0
+  },
+  "Pauli": {
+   "val_acc": 0.35,
+   "val_pred_class1_rate": 0.0,
+   "test_pred_class1_rate": 1.0
+  }
+ },
+ "IoT_Original_Distribution.csv": {
+  "train_class1_rate": 0.095,
+  "test_class1_rate": 0.095,
+  "Z": {
+   "val_acc": 0.85,
+   "val_pred_class1_rate": 0.15,
+   "test_pred_class1_rate": 0.1975
+  },
+  "ZZ": {
+   "val_acc": 0.9,
+   "val_pred_class1_rate": 0.0,
+   "test_pred_class1_rate": 1.0
+  },
+  "Pauli": {
+   "val_acc": 0.9,
+   "val_pred_class1_rate": 0.0,
+   "test_pred_class1_rate": 1.0
+  }
+ },
+ "UNSW_2018_IoT_Botnet_Final_10_Best.csv": {
+  "train_class1_rate": 0.905,
+  "test_class1_rate": 0.905,
+  "Z": {
+   "val_acc": 1.0,
+   "val_pred_class1_rate": 0.9,
+   "test_pred_class1_rate": 0.9025
+  },
+  "ZZ": {
+   "val_acc": 0.9,
+   "val_pred_class1_rate": 1.0,
+   "test_pred_class1_rate": 0.0
+  },
+  "Pauli": {
+   "val_acc": 0.9,
+   "val_pred_class1_rate": 1.0,
+   "test_pred_class1_rate": 0.0
+  }
+ }
+}

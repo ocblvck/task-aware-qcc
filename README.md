@@ -13,8 +13,8 @@ computed. Nothing needs to be rerun to inspect the numbers.
 python scripts/verify_paper_numbers.py
 ```
 
-Reads only `results/*.json`, no GPU, about a second. It compares 549 values from the printed tables (submitted version and revision) against
-the JSON that produced them and reports any disagreement.
+Reads only `results/*.json`, no GPU, about a second. It compares 549 table cells (submitted version and revision) against the JSON that
+produced them and reports any disagreement. It does not check numbers quoted in the text.
 Expected output:
 
 ```
@@ -51,6 +51,10 @@ python scripts/train_taskaware_grpo.py \
   --save-steps 25 --save-total-limit 2 --auto-resume \
   --output models/corr_lr5_s42
 ```
+
+`results/corrected/ERRATA.md` lists where the frozen configuration and our campaign notes
+describe the runs incorrectly (the reward subsample seed is fixed at 42 for every policy;
+eight emitted circuits are source substitutions), and what the verifier does not cover.
 
 Results that did not favour the method are in the same files as those that did: two of
 five runs at the highest learning rate collapsed to invalid sampling, eleven of fifteen

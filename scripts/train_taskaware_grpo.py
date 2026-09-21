@@ -82,6 +82,9 @@ def main():
                     choices=["clean_source", "noisy_source"],
                     help="Reference for MCC retention. The source maps sit at MCC 0 under the "
                          "reward noise, so 'noisy_source' is degenerate there.")
+    ap.add_argument("--reward-seed", type=int, default=42,
+                    help="Seed of the reward-loop subsample. Every run up to the revision campaign "
+                         "used 42 regardless of --seed; the supplement sets it to the training seed.")
     ap.add_argument("--reward-log", default=None,
                     help="JSONL path; every reward evaluation is appended with its breakdown")
     ap.add_argument("--seed", type=int, default=42,
@@ -153,6 +156,7 @@ def main():
         test_size=args.test_size,
         pool_size=args.pool_size,
         noise_p1=args.noise_p1,
+        seed=args.reward_seed,
         reward_cfg=reward_cfg,
         gpu=not args.no_gpu_sim,
     )

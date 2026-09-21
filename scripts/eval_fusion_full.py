@@ -78,6 +78,9 @@ def main():
     ap.add_argument("--c-values", default=None,
                     help="Comma list of SVM C values; when given, fusion and branch results "
                          "are stored per C under 'by_C' as well as at the default C=1")
+    ap.add_argument("--device-noise", default=None,
+                    help="Name of a calibration snapshot (e.g. fake_casablanca). Replaces the noise "
+                         "grid by a noiseless cell and one cell under the device-derived model.")
     ap.add_argument("--resume", action="store_true",
                     help="Skip (dataset, noise) cells already present in --output. Ten-qubit "
                          "cells take hours each and this box loses power.")
@@ -92,7 +95,7 @@ def main():
     from taqcc.data import load_split
     from taqcc.downstream import kernel_spread
     from taqcc.feature_maps import make_feature_map
-    from taqcc.kernels import gram_pair
+    from taqcc.kernels import gram_pair, device_gram_pair
 
     nq = args.num_qubits
     all_maps = COMMITTEE if args.no_ablation else COMMITTEE + ABLATION
@@ -104,6 +107,8 @@ def main():
         noises = [tuple(float(v) for v in pr.split(":")) for pr in args.noise_pairs.split(",")]
     else:
         noises = [(float(x), None) for x in args.noise_grid.split(",")]
+    if args.device_noise:
+        noises = [(0.0, None), ("device", args.device_noise)]
     fracs = [float(x) for x in args.spread_fracs.split(",")]
 
     def fit_predict(K_tr, K_te, y_tr, seed, C=1.0):
@@ -130,6 +135,7 @@ def main():
         for p1, p2 in noises:
             key_p = f"{p1}:{p2}" if p2 is not None else f"{p1}"
             noiseless = (p1 == 0.0 and (p2 in (0.0, None)))
+            device = (p1 == "device")
             if args.resume and key_p in ds_rec["by_noise"] and not noiseless:
                 print(f"  {key_p:<14} (resumed, skipped)", flush=True)
                 continue
@@ -150,8 +156,11 @@ def main():
                 # One Gram per branch, reused by every fusion rule below.
                 K = {}
                 for lab in labels:
-                    K[lab] = gram_pair(circuits[lab], X_tr, X_te, p1=p1, p2=p2,
-                                       gpu=not args.no_gpu)
+                    if device:
+                        K[lab] = device_gram_pair(circuits[lab], X_tr, X_te, p2, gpu=not args.no_gpu)
+                    else:
+                        K[lab] = gram_pair(circuits[lab], X_tr, X_te, p1=p1, p2=p2,
+                                           gpu=not args.no_gpu)
                     s = kernel_spread(K[lab][0])
                     branch[lab]["spread"].append(s)
                     if noiseless:

@@ -117,6 +117,70 @@ def noisy_rect(fm, X_test, X_train, p1, p2=None, gpu=True) -> np.ndarray:
     return np.array([[_hs_overlap(a, b) for b in rb] for a in ra])
 
 
+# --------------------------------------------------------------------------- #
+# Device-derived noise: a calibration snapshot in place of the depolarizing model.
+# --------------------------------------------------------------------------- #
+@lru_cache(maxsize=8)
+def _device_backend(name: str):
+    from qiskit_ibm_runtime.fake_provider import FakeProviderForBackendV2
+    return FakeProviderForBackendV2().backend(name)
+
+
+@lru_cache(maxsize=8)
+def _device_sim(name: str, gpu: bool, ideal: bool = False):
+    backend = _device_backend(name)
+    if ideal:  # same transpilation, no noise: used only to validate the path
+        return AerSimulator(method="density_matrix")
+    if gpu:
+        try:
+            return AerSimulator.from_backend(backend, method="density_matrix", device="GPU")
+        except Exception:
+            pass
+    return AerSimulator.from_backend(backend, method="density_matrix")
+
+
+_DEVICE_TQC = {}
+
+
+def _device_template(fm: QuantumCircuit, name: str) -> QuantumCircuit:
+    """Transpile once with symbolic parameters so every record shares one final layout."""
+    key = (id(fm), name)
+    if key not in _DEVICE_TQC:
+        backend = _device_backend(name)
+        tqc = transpile(fm, backend=backend, optimization_level=1, seed_transpiler=0,
+                        initial_layout=list(range(fm.num_qubits)))
+        tqc.save_density_matrix()
+        _DEVICE_TQC[key] = tqc
+    return _DEVICE_TQC[key]
+
+
+def _device_density_matrices(fm, X, name, gpu, ideal=False):
+    sim = _device_sim(name, gpu, ideal)
+    tpl = _device_template(fm, name)
+    params = sorted(fm.parameters, key=lambda p: p.name)
+    order = list(fm.parameters)
+    rhos = []
+    for x in X:
+        bound = tpl.assign_parameters(dict(zip(order, x)))
+        res = sim.run(bound).result()
+        rhos.append(np.asarray(res.data(0)["density_matrix"]))
+    return rhos
+
+
+def device_gram_pair(fm, X_train, X_test, name: str, gpu=True, ideal=False):
+    """(K_train, K_test_rect) under the noise model of calibration snapshot ``name``."""
+    ra = _device_density_matrices(fm, X_train, name, gpu, ideal)
+    rb = _device_density_matrices(fm, X_test, name, gpu, ideal)
+    n = len(ra)
+    K = np.empty((n, n))
+    for i in range(n):
+        K[i, i] = _hs_overlap(ra[i], ra[i])
+        for j in range(i + 1, n):
+            K[i, j] = K[j, i] = _hs_overlap(ra[i], ra[j])
+    R = np.array([[_hs_overlap(b, a) for a in ra] for b in rb])
+    return K, R
+
+
 def gram_pair(fm, X_train, X_test, p1=0.0, p2=None, gpu=True):
     """Return (K_train, K_test_rect) for ``fm`` at depolarizing strength ``p1``.
 

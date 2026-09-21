@@ -1,0 +1,98 @@
+{
+ "frozen_at": "2026-09-21T13:03:59",
+ "protocol_document": "results/supplement/PROTOCOL.md",
+ "S1": {
+  "script": "scripts/eval_fusion_full.py",
+  "num_qubits": 6,
+  "train_size": 200,
+  "test_size": 400,
+  "data_split_seeds": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ],
+  "noise_grid_p1": [
+   0.0,
+   0.002,
+   0.005,
+   0.01,
+   0.03,
+   0.05,
+   0.1
+  ],
+  "p2": "10*p1",
+  "C": 1.0,
+  "tau_primary": 0.05,
+  "tau_sweep": [
+   0.01,
+   0.02,
+   0.05,
+   0.1,
+   0.2
+  ],
+  "ablation_branches": false,
+  "datasets": [
+   "IoT_Original_Distribution.csv",
+   "UNSW_NB15.csv",
+   "UNSW_2018_IoT_Botnet_Final_10_Best.csv"
+  ],
+  "analysis": "splits 5-14 reported separately from 0-4; exact two-sided Wilcoxon, ties dropped; Holm across the six non-zero levels within dataset and comparison; no pooling"
+ },
+ "S2": {
+  "script": "scripts/eval_fusion_full.py --device-noise",
+  "snapshots": [
+   "fake_casablanca",
+   "fake_jakarta",
+   "fake_lagos",
+   "fake_nairobi",
+   "fake_oslo",
+   "fake_perth"
+  ],
+  "source": "qiskit-ibm-runtime 0.42.0 fake_provider",
+  "transpile": {
+   "optimization_level": 1,
+   "seed_transpiler": 0,
+   "initial_layout": "0..5",
+   "once_with_symbolic_parameters": true
+  },
+  "num_qubits": 6,
+  "data_split_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "kernel": "Hilbert-Schmidt overlap of saved density matrices; no readout error, no shot noise",
+  "pilot": "ideal device path equals exact Gram to 4e-15 on UNSW-NB15 split 0 (12x8 records); about 1 minute per 600 records per member"
+ },
+ "S3": {
+  "script": "scripts/train_taskaware_grpo.py",
+  "lr": 5e-06,
+  "training_seeds": [
+   43,
+   44,
+   45,
+   46
+  ],
+  "reward_seed": "equal to training seed",
+  "reused": "corr_lr5_s42 (reward seed 42 = training seed 42)",
+  "max_steps": 250,
+  "other_args": "identical to results/corrected/frozen_config.json",
+  "evaluation": "emit, Eq. 9 audit, matched 200/400 protocol, data splits 0-4, grid 0,0.01,0.03,0.05,0.1"
+ },
+ "not_run": {
+  "S3-full": "optional",
+  "S4 hardware": "not feasible",
+  "S5 floor gate downstream": "not justified",
+  "S6 C sweep above 0.03": "not justified",
+  "S7 ten-qubit fifteen splits on two datasets": "optional"
+ }
+}

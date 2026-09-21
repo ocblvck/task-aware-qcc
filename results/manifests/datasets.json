@@ -1,0 +1,35 @@
+{
+ "IoT_Original_Distribution.csv": {
+  "sha256": "85c1de873d38d669adb50ab8155aff2c389da155f3f5ee61dd4cdcdc20f41bd5",
+  "bytes": 126736479,
+  "rows": 293696,
+  "columns": 85,
+  "label_column": "Label",
+  "label_counts": {
+   "Anomaly": 266166,
+   "Normal": 27530
+  }
+ },
+ "UNSW_NB15.csv": {
+  "sha256": "98679f73d06851d76da6b982e95f06a1f41bcb3223684e7b9fd5cf992b0eb5e8",
+  "bytes": 49217462,
+  "rows": 257673,
+  "columns": 45,
+  "label_column": "label",
+  "label_counts": {
+   "1": 164673,
+   "0": 93000
+  }
+ },
+ "UNSW_2018_IoT_Botnet_Final_10_Best.csv": {
+  "sha256": "cf412171c67832fd783811541dc7dc09ed4625a8f3b8a544f644e572bc50bd7b",
+  "bytes": 516770761,
+  "rows": 3668522,
+  "columns": 20,
+  "label_column": "attack",
+  "label_counts": {
+   "1": 3668045,
+   "0": 477
+  }
+ }
+}

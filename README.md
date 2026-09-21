@@ -172,7 +172,7 @@ Two conda environments, because the quantum stack and the training stack conflic
 | Environment | Used for | Specification |
 |---|---|---|
 | `qiskit` | every `eval_*`, `analyze_*`, `make_*`, `verify_*` script | `environment/requirements-qiskit-env.txt` (Python 3.11, qiskit 1.4.4, qiskit-aer 0.15.1 GPU build, qiskit-machine-learning, scikit-learn 1.7.2, SciPy 1.15.3, cupy 13.6, qiskit-ibm-runtime 0.42.0) |
-| `taqcc-grpo` | training, emission, rescoring (needs `qiskit_qasm3_import`) | `environment/requirements-taqcc-grpo-env.txt` (adds torch 2.6.0+cu124, trl 0.26.2, peft, bitsandbytes, liger-kernel) |
+| `taqcc-grpo` | training, emission, the effective-parameter audit, rescoring and `analyze_revision_scope.py` (anything that loads OpenQASM 3 needs `qiskit_qasm3_import`) | `environment/requirements-taqcc-grpo-env.txt` (adds torch 2.6.0+cu124, trl 0.26.2, peft, bitsandbytes, liger-kernel) |
 
 Training also needs the GRPO trainer of `https://github.com/ocblvck/quantum-cirq-opt` at
 commit `cdb0420` with the seven-line patch `environment/quantum-cirq-opt_seed.patch`

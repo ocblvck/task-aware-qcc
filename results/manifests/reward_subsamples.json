@@ -1,0 +1,126 @@
+{
+ "protocol": "load_split(UNSW_NB15.csv, 6, train, test, pool_size=4000, seed)",
+ "note": "every policy up to and including the revision campaign used seed 42; the supplement uses the training seed",
+ "subsamples": {
+  "reward|48/24|seed42": {
+   "X_train": "07e04a1df2677d5c",
+   "X_test": "13757116ed5e87fc",
+   "train_class_counts": [
+    17,
+    31
+   ],
+   "test_class_counts": [
+    9,
+    15
+   ]
+  },
+  "reward|16/8|seed42": {
+   "X_train": "d5c5147375a28891",
+   "X_test": "1dfea43de9a4f0cc",
+   "train_class_counts": [
+    6,
+    10
+   ],
+   "test_class_counts": [
+    3,
+    5
+   ]
+  },
+  "reward|48/24|seed43": {
+   "X_train": "33b0dd6c94ce98af",
+   "X_test": "e164f7a55dc99e99",
+   "train_class_counts": [
+    17,
+    31
+   ],
+   "test_class_counts": [
+    9,
+    15
+   ]
+  },
+  "reward|16/8|seed43": {
+   "X_train": "6db73807cbbdab48",
+   "X_test": "95e7c05bc52e744c",
+   "train_class_counts": [
+    6,
+    10
+   ],
+   "test_class_counts": [
+    3,
+    5
+   ]
+  },
+  "reward|48/24|seed44": {
+   "X_train": "8447b644652e39b9",
+   "X_test": "b985f31710f6ee4c",
+   "train_class_counts": [
+    17,
+    31
+   ],
+   "test_class_counts": [
+    9,
+    15
+   ]
+  },
+  "reward|16/8|seed44": {
+   "X_train": "2b073283861c9213",
+   "X_test": "a7c32c5b2177bb85",
+   "train_class_counts": [
+    6,
+    10
+   ],
+   "test_class_counts": [
+    3,
+    5
+   ]
+  },
+  "reward|48/24|seed45": {
+   "X_train": "1332bd256286a9c7",
+   "X_test": "c0473a250c82a51a",
+   "train_class_counts": [
+    17,
+    31
+   ],
+   "test_class_counts": [
+    9,
+    15
+   ]
+  },
+  "reward|16/8|seed45": {
+   "X_train": "6e3cd4c89f592d4f",
+   "X_test": "4d5cf2b79f55d808",
+   "train_class_counts": [
+    6,
+    10
+   ],
+   "test_class_counts": [
+    3,
+    5
+   ]
+  },
+  "reward|48/24|seed46": {
+   "X_train": "5488aa9e00029cfb",
+   "X_test": "df1189afb1851ca1",
+   "train_class_counts": [
+    17,
+    31
+   ],
+   "test_class_counts": [
+    9,
+    15
+   ]
+  },
+  "reward|16/8|seed46": {
+   "X_train": "28de713601477a3a",
+   "X_test": "5c6e5e4176f5fa70",
+   "train_class_counts": [
+    6,
+    10
+   ],
+   "test_class_counts": [
+    3,
+    5
+   ]
+  }
+ }
+}

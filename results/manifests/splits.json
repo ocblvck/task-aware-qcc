@@ -1,0 +1,1195 @@
+{
+ "protocol": "load_split(path, width, 200, 400, pool_size=5000, seed)",
+ "splits": {
+  "IoT_Original_Distribution.csv|6q|seed0": {
+   "X_train": "d16265bb5ae5d321",
+   "X_test": "b8d704abdea06880",
+   "y_train": "6030331e37253a6c",
+   "y_test": "a97184a45a9c5195",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed1": {
+   "X_train": "ecf73b2a0fc614cd",
+   "X_test": "ae3f67afdba516e6",
+   "y_train": "8f99119e823eeb22",
+   "y_test": "1b6119894830a2c0",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed2": {
+   "X_train": "467daceab5324497",
+   "X_test": "9487ce05d5ce43fb",
+   "y_train": "eaf603ee82f4f64a",
+   "y_test": "d58544ccf0f2ef07",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed3": {
+   "X_train": "c18ead90b7e39579",
+   "X_test": "93196b4abc02ed1d",
+   "y_train": "3e5a8e76c26014a4",
+   "y_test": "9e94ee7101b230f1",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed4": {
+   "X_train": "fada6763704bf12b",
+   "X_test": "c4a47205e4e5d5b6",
+   "y_train": "9da3212a228e5892",
+   "y_test": "74e727ad12d9e3a4",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed5": {
+   "X_train": "f81d90f9830537f0",
+   "X_test": "7155e16b174f3ab2",
+   "y_train": "e7315583ac458f0c",
+   "y_test": "69ef236d63fb7eaf",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed6": {
+   "X_train": "4a671b0610a02f7d",
+   "X_test": "1c6182554b2e574f",
+   "y_train": "65a49b3fbfc5f2aa",
+   "y_test": "26c9491a171465f2",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed7": {
+   "X_train": "f81887d32478d7bb",
+   "X_test": "6835789f090521ce",
+   "y_train": "eadbaae59caf2678",
+   "y_test": "735efafd8e0cd305",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed8": {
+   "X_train": "501708ff93e1ad2a",
+   "X_test": "fc9f9892ffd87921",
+   "y_train": "6999cf01cb047807",
+   "y_test": "66fc5b0f02af10cc",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed9": {
+   "X_train": "773ef3f362f44b88",
+   "X_test": "f4602ade94d6d2a8",
+   "y_train": "00213d2685191bb1",
+   "y_test": "c8dbddb1b3aa4d84",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed10": {
+   "X_train": "7e079d6ed2c83366",
+   "X_test": "bdab38fd9c1181d4",
+   "y_train": "d8d28b998e529f52",
+   "y_test": "442c97c82ddfa909",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed11": {
+   "X_train": "608662d1898f0844",
+   "X_test": "c4bda3a2b113b761",
+   "y_train": "0ee919bd77b7f417",
+   "y_test": "67412cb70a13fe34",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed12": {
+   "X_train": "3cf01a0ecd4b404d",
+   "X_test": "e9732db378f64b23",
+   "y_train": "d639daf38a963379",
+   "y_test": "9e8ebf3ee7dd00c6",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed13": {
+   "X_train": "7f784371369bf75f",
+   "X_test": "771a590fd5ade341",
+   "y_train": "c047f5f85dc8f56c",
+   "y_test": "1db5ffcd955ac49c",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|6q|seed14": {
+   "X_train": "aa06293f8896dafc",
+   "X_test": "0e8b91f11e88d2ca",
+   "y_train": "b757b9d0b309b0cd",
+   "y_test": "97877a78fb9eb0e3",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|8q|seed0": {
+   "X_train": "9809830c5aca0413",
+   "X_test": "552a461e9e8a0978",
+   "y_train": "6030331e37253a6c",
+   "y_test": "a97184a45a9c5195",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|8q|seed1": {
+   "X_train": "f5f063a242b1192d",
+   "X_test": "0bea693c84b2d272",
+   "y_train": "8f99119e823eeb22",
+   "y_test": "1b6119894830a2c0",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|8q|seed2": {
+   "X_train": "5453d5aa36ee4307",
+   "X_test": "94c22767c3956386",
+   "y_train": "eaf603ee82f4f64a",
+   "y_test": "d58544ccf0f2ef07",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|8q|seed3": {
+   "X_train": "711fd3094a4a0bd9",
+   "X_test": "fc707c17a0e4da2d",
+   "y_train": "3e5a8e76c26014a4",
+   "y_test": "9e94ee7101b230f1",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|8q|seed4": {
+   "X_train": "22077a90c80c4067",
+   "X_test": "61b0744d1e988dc8",
+   "y_train": "9da3212a228e5892",
+   "y_test": "74e727ad12d9e3a4",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|10q|seed0": {
+   "X_train": "302f0758301f9ebc",
+   "X_test": "8d246c62246807fc",
+   "y_train": "6030331e37253a6c",
+   "y_test": "a97184a45a9c5195",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|10q|seed1": {
+   "X_train": "355a75e98890bc90",
+   "X_test": "34ce1d64c3aded58",
+   "y_train": "8f99119e823eeb22",
+   "y_test": "1b6119894830a2c0",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    363,
+    37
+   ]
+  },
+  "IoT_Original_Distribution.csv|10q|seed2": {
+   "X_train": "18ba6da745570814",
+   "X_test": "31333c96fa8ef37c",
+   "y_train": "eaf603ee82f4f64a",
+   "y_test": "d58544ccf0f2ef07",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|10q|seed3": {
+   "X_train": "d921baa3a00de71d",
+   "X_test": "1bb40f77fdf59ff1",
+   "y_train": "3e5a8e76c26014a4",
+   "y_test": "9e94ee7101b230f1",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "IoT_Original_Distribution.csv|10q|seed4": {
+   "X_train": "5f97eadf87cfcbe7",
+   "X_test": "fb103c3bdfd37779",
+   "y_train": "9da3212a228e5892",
+   "y_test": "74e727ad12d9e3a4",
+   "train_class_counts": [
+    181,
+    19
+   ],
+   "test_class_counts": [
+    362,
+    38
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed0": {
+   "X_train": "d310dfee261e8abd",
+   "X_test": "3054d4b33bd50cf4",
+   "y_train": "df9eb74eb7345774",
+   "y_test": "daf79074edc7553a",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed1": {
+   "X_train": "237134416b3982d0",
+   "X_test": "fa256d1d7aaa3972",
+   "y_train": "a00549e1a0966804",
+   "y_test": "ba21a798b6d37b75",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed2": {
+   "X_train": "9ea389927ec10bcb",
+   "X_test": "1ee76ecbd7a9ed94",
+   "y_train": "cd0dd4f93ade0921",
+   "y_test": "3f346fa0fc7685bb",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed3": {
+   "X_train": "03fd04831dff0ced",
+   "X_test": "52d31b65d9657f0b",
+   "y_train": "6bf953eb3a250eea",
+   "y_test": "6275460bd78b0405",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed4": {
+   "X_train": "b813fc796fa4ddb9",
+   "X_test": "c258b4cd1c07e481",
+   "y_train": "7e41669ddb797c1f",
+   "y_test": "13a0a3805250de81",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed5": {
+   "X_train": "af68330fec0ca6c9",
+   "X_test": "0b2b85a9ca951be4",
+   "y_train": "9a2819010d2461e6",
+   "y_test": "61efbb8059706aba",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed6": {
+   "X_train": "db517110d3f06a8e",
+   "X_test": "50ec2ccab9937b5e",
+   "y_train": "210314f2c2039aff",
+   "y_test": "51473f1b88b85e55",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed7": {
+   "X_train": "fbb8a2ab3b5fe534",
+   "X_test": "92c0aa45de05e85a",
+   "y_train": "343fe8781ebb6ec1",
+   "y_test": "7e0889e155417311",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed8": {
+   "X_train": "7000432d96267d12",
+   "X_test": "98ce0f057145bf45",
+   "y_train": "006a0f75748d1c5f",
+   "y_test": "466752f06eb5fa89",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed9": {
+   "X_train": "81c797851bb1565f",
+   "X_test": "c2bd1a6930da9de5",
+   "y_train": "836105564fb35a97",
+   "y_test": "53068660ba72d1a9",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed10": {
+   "X_train": "d75a6106d29a1968",
+   "X_test": "0be8231cdea7da6c",
+   "y_train": "d0797f1f2c862e4d",
+   "y_test": "0000f069833e73c9",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed11": {
+   "X_train": "c240e98fd2f193b8",
+   "X_test": "8c01e3a56d90cd64",
+   "y_train": "7169ba800de341af",
+   "y_test": "87f438b49f0ebebc",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed12": {
+   "X_train": "a392c3e9ca99abe9",
+   "X_test": "20aa2550fa819f5d",
+   "y_train": "bddec63448938457",
+   "y_test": "175d968182e7fac6",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed13": {
+   "X_train": "aa1e1f5f202830be",
+   "X_test": "a678a38c646207cd",
+   "y_train": "ddab68b55e2ae4a3",
+   "y_test": "e3ea69b5f5bbf45c",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|6q|seed14": {
+   "X_train": "5c89ccce6b8fa15d",
+   "X_test": "29a4903e796e9209",
+   "y_train": "a39b341ffee303f7",
+   "y_test": "0b2c8dd0bc8c8a38",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|8q|seed0": {
+   "X_train": "e815d841d8550c11",
+   "X_test": "aa6957fec360e5d2",
+   "y_train": "df9eb74eb7345774",
+   "y_test": "daf79074edc7553a",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|8q|seed1": {
+   "X_train": "784f5f5772b3d99b",
+   "X_test": "40e5be7e3e29e004",
+   "y_train": "a00549e1a0966804",
+   "y_test": "ba21a798b6d37b75",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|8q|seed2": {
+   "X_train": "ee96836b2fb41375",
+   "X_test": "d4b1bfeb9fe39a60",
+   "y_train": "cd0dd4f93ade0921",
+   "y_test": "3f346fa0fc7685bb",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|8q|seed3": {
+   "X_train": "e4c9cb43e72030c2",
+   "X_test": "999e9d2af05af3a2",
+   "y_train": "6bf953eb3a250eea",
+   "y_test": "6275460bd78b0405",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|8q|seed4": {
+   "X_train": "c104113426ddd5ad",
+   "X_test": "121b5805f6423e9a",
+   "y_train": "7e41669ddb797c1f",
+   "y_test": "13a0a3805250de81",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed0": {
+   "X_train": "81ccf6e996b2be2d",
+   "X_test": "700eb50e2f7e39b5",
+   "y_train": "df9eb74eb7345774",
+   "y_test": "daf79074edc7553a",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed1": {
+   "X_train": "83ec02eb033f11d7",
+   "X_test": "b883acd81117fb2a",
+   "y_train": "a00549e1a0966804",
+   "y_test": "ba21a798b6d37b75",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed2": {
+   "X_train": "4eed04cfbbb9e9ea",
+   "X_test": "e1619506d54c7eaa",
+   "y_train": "cd0dd4f93ade0921",
+   "y_test": "3f346fa0fc7685bb",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed3": {
+   "X_train": "382ebb617428f736",
+   "X_test": "42f244a482558503",
+   "y_train": "6bf953eb3a250eea",
+   "y_test": "6275460bd78b0405",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed4": {
+   "X_train": "406c7de6ced59c07",
+   "X_test": "07ba372c91dcce9f",
+   "y_train": "7e41669ddb797c1f",
+   "y_test": "13a0a3805250de81",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed0": {
+   "X_train": "61a535549aca40c8",
+   "X_test": "4e96cad57d69d6a0",
+   "y_train": "20934811435de58c",
+   "y_test": "6265a7942b0a911d",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed1": {
+   "X_train": "539379be44eee7b1",
+   "X_test": "bb687a74cefc4bc9",
+   "y_train": "44ec97845ddc0029",
+   "y_test": "36830c8dc47846c7",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed2": {
+   "X_train": "61e4d5896aa9b975",
+   "X_test": "99c47abac9ea6671",
+   "y_train": "3a6c0ea9801d2485",
+   "y_test": "9769edaefa69fc6e",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed3": {
+   "X_train": "39cd77a4cd78b828",
+   "X_test": "93a66e966df93799",
+   "y_train": "b54955aaec2c8039",
+   "y_test": "4f36c9b5e6d2f281",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed4": {
+   "X_train": "a99583ea687b0f48",
+   "X_test": "bb5d6716608b645e",
+   "y_train": "a979890727d1c93b",
+   "y_test": "c6c8214f6237c118",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed5": {
+   "X_train": "052f8e21674aff3b",
+   "X_test": "2b72bbab422a72a0",
+   "y_train": "26665260c0bb90f4",
+   "y_test": "081698a7f396332e",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed6": {
+   "X_train": "4c68e34315fc68cf",
+   "X_test": "99fa8b009ed7ee6e",
+   "y_train": "1657f4a762a77194",
+   "y_test": "6efa9f4d00af3169",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed7": {
+   "X_train": "7bc79064ab797ef5",
+   "X_test": "b2388443d1f09a7d",
+   "y_train": "47166498cae3870c",
+   "y_test": "ff97f1bc1a9ba8e8",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed8": {
+   "X_train": "a52f5ffbef8631ab",
+   "X_test": "5de011484a29ac50",
+   "y_train": "57bed3f4b602160a",
+   "y_test": "80696399d1b46d3f",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed9": {
+   "X_train": "dced7f1fe05813d7",
+   "X_test": "75b7d30f70559df5",
+   "y_train": "8bf73552a44f1278",
+   "y_test": "3ac95a9670d2c08f",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed10": {
+   "X_train": "75ce9af72269f7fd",
+   "X_test": "fa6475b2d809868f",
+   "y_train": "7210feacc1a66ec9",
+   "y_test": "23857ba2a8c3ec42",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed11": {
+   "X_train": "683759295b0d2622",
+   "X_test": "0c8f7d02ba91b715",
+   "y_train": "a9b38e58589f5eb4",
+   "y_test": "6e85adf2202ad938",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed12": {
+   "X_train": "92adb19d30d3233f",
+   "X_test": "09b020540528c760",
+   "y_train": "cc9291d326029825",
+   "y_test": "21a9c6a7b1ea721c",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed13": {
+   "X_train": "30b10b5c82c5fe80",
+   "X_test": "425c0dfdc4ef2a6c",
+   "y_train": "ee11f451b042fb67",
+   "y_test": "f6f1ed11d82a3677",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|6q|seed14": {
+   "X_train": "114906bc27458707",
+   "X_test": "5c7c1404e5bcec4a",
+   "y_train": "d661e40ef86d039b",
+   "y_test": "0d6dd4e7e2017d5e",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|8q|seed0": {
+   "X_train": "dfec5f9e4b6bc2c0",
+   "X_test": "f7fe98b96f3b6e13",
+   "y_train": "20934811435de58c",
+   "y_test": "6265a7942b0a911d",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|8q|seed1": {
+   "X_train": "8c222593a8b745a3",
+   "X_test": "33af3bd23ea582b0",
+   "y_train": "44ec97845ddc0029",
+   "y_test": "36830c8dc47846c7",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|8q|seed2": {
+   "X_train": "f7f56b7a8aebc18f",
+   "X_test": "f317f4b4f789e052",
+   "y_train": "3a6c0ea9801d2485",
+   "y_test": "9769edaefa69fc6e",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|8q|seed3": {
+   "X_train": "1f6f77d2ae60dace",
+   "X_test": "a4f9a585b09fb1d1",
+   "y_train": "b54955aaec2c8039",
+   "y_test": "4f36c9b5e6d2f281",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|8q|seed4": {
+   "X_train": "bf6d1c738c48e275",
+   "X_test": "47458d9540bc079d",
+   "y_train": "a979890727d1c93b",
+   "y_test": "c6c8214f6237c118",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|10q|seed0": {
+   "X_train": "2e7963c16ae82311",
+   "X_test": "cee9b6489af37629",
+   "y_train": "20934811435de58c",
+   "y_test": "6265a7942b0a911d",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|10q|seed1": {
+   "X_train": "56c0253c1f32c96d",
+   "X_test": "851d22bc65c3502d",
+   "y_train": "44ec97845ddc0029",
+   "y_test": "36830c8dc47846c7",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|10q|seed2": {
+   "X_train": "6e864d660042310c",
+   "X_test": "fde100d5251b25f6",
+   "y_train": "3a6c0ea9801d2485",
+   "y_test": "9769edaefa69fc6e",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|10q|seed3": {
+   "X_train": "1a56361a46e452a1",
+   "X_test": "82f132d94bf502cf",
+   "y_train": "b54955aaec2c8039",
+   "y_test": "4f36c9b5e6d2f281",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_2018_IoT_Botnet_Final_10_Best.csv|10q|seed4": {
+   "X_train": "a72d1175de8c2e59",
+   "X_test": "0d54c6fba03d8365",
+   "y_train": "a979890727d1c93b",
+   "y_test": "c6c8214f6237c118",
+   "train_class_counts": [
+    19,
+    181
+   ],
+   "test_class_counts": [
+    38,
+    362
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed5": {
+   "X_train": "bb4b9624ca05b408",
+   "X_test": "f613aee03f74f57e",
+   "y_train": "9a2819010d2461e6",
+   "y_test": "61efbb8059706aba",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed6": {
+   "X_train": "ba92cdb5ea3415f6",
+   "X_test": "b1525f9f6c39ca97",
+   "y_train": "210314f2c2039aff",
+   "y_test": "51473f1b88b85e55",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed7": {
+   "X_train": "48e6394a10020109",
+   "X_test": "ffb30c1aecfe8440",
+   "y_train": "343fe8781ebb6ec1",
+   "y_test": "7e0889e155417311",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed8": {
+   "X_train": "3066cbaa7e5e0808",
+   "X_test": "e895cdfc286dcf10",
+   "y_train": "006a0f75748d1c5f",
+   "y_test": "466752f06eb5fa89",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed9": {
+   "X_train": "23879d5b34116e90",
+   "X_test": "3c5f1a5a45dcd3e9",
+   "y_train": "836105564fb35a97",
+   "y_test": "53068660ba72d1a9",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed10": {
+   "X_train": "65ae45aed19cedd2",
+   "X_test": "9b7a0783de6400f7",
+   "y_train": "d0797f1f2c862e4d",
+   "y_test": "0000f069833e73c9",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed11": {
+   "X_train": "62bded1fae1edd1e",
+   "X_test": "da5044389f07e064",
+   "y_train": "7169ba800de341af",
+   "y_test": "87f438b49f0ebebc",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed12": {
+   "X_train": "80296901ce8422dc",
+   "X_test": "bd736236daba4d63",
+   "y_train": "bddec63448938457",
+   "y_test": "175d968182e7fac6",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed13": {
+   "X_train": "110160152f891435",
+   "X_test": "00f2dbde42f110b8",
+   "y_train": "ddab68b55e2ae4a3",
+   "y_test": "e3ea69b5f5bbf45c",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  },
+  "UNSW_NB15.csv|10q|seed14": {
+   "X_train": "73d8fc85817e8367",
+   "X_test": "450b50c4184be422",
+   "y_train": "a39b341ffee303f7",
+   "y_test": "0b2c8dd0bc8c8a38",
+   "train_class_counts": [
+    72,
+    128
+   ],
+   "test_class_counts": [
+    144,
+    256
+   ]
+  }
+ }
+}

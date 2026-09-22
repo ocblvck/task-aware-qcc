@@ -166,7 +166,7 @@ def tex_s3(R):
     st = R.get("structure", {}); dn = R.get("downstream", {})
     corr = json.load(open(ROOT / "results/corrected/structure.json"))
     L = []
-    rows = [("corr_lr5_s42", "42 (shared design)", corr["corr_lr5_s42"])] + [(k, k.split("_s")[-1], v) for k, v in sorted(st.items())]
+    rows = [("corr_lr5_s42", "42", corr["corr_lr5_s42"])] + [(k, k.split("_s")[-1], v) for k, v in sorted(st.items())]
     for name, seed, v in rows:
         pm = "/".join(str(x) for x in v["per_member_2q"]); same = "yes" if v["member_md5"][1] == "547e3a9f" and v["member_md5"][2] == "547e3a9f" else "no"
         eff = v.get("effective", 18)

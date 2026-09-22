@@ -7,9 +7,9 @@ re-reads those JSONs and asserts the hard-coded values still match, so a figure 
 silently drift away from the text.
 
   Fig1  pipeline, built separately from Fig1.tex (TikZ)
-  Fig2  Table 2: total two-qubit gates against surviving diversity
-  Fig3  Tables 4 and 6: MCC against error rate, coupled and realistic
-  Fig4  Table 8: error diversity and the oracle ceiling
+  Fig2  Tables 3 and 7: MCC against error rate, coupled and realistic
+  Fig3  Table 11: error diversity and the oracle ceiling
+  Fig4  Table 13: total two-qubit gates against surviving diversity
 
 Run:
   python3 scripts/make_figures.py            # write the PDFs
@@ -385,9 +385,9 @@ def main():
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
     style()
-    for fn, name in ((fig_compression, "Fig2.pdf"),
-                     (fig_noise, "Fig3.pdf"),
-                     (fig_agreement, "Fig4.pdf")):
+    for fn, name in ((fig_noise, "Fig2.pdf"),
+                     (fig_agreement, "Fig3.pdf"),
+                     (fig_compression, "Fig4.pdf")):
         path = fn(outdir / name)
         print(f"[written] {path}  ({path.stat().st_size / 1024:.0f} kB)")
     print("\nFig1.pdf is built from Fig1.tex:")

@@ -1,8 +1,7 @@
 # Noise-aware quantum ensembles and learned feature-map compression (`taqcc`)
 
 Code, emitted circuits and result files for the SN Computer Science article
-**"Noise-Aware Quantum Ensembles and Learned Feature-Map Compression for IoT Intrusion
-Detection"**, an extended version of our IEEE DCAS 2026 paper
+**"Noise-Aware Fusion of Quantum Kernel Ensembles for IoT Intrusion Detection"**, an extended version of our IEEE DCAS 2026 paper
 (DOI 10.1109/dcas69364.2026.11544356).
 
 Everything is classical simulation. No result in this repository comes from a quantum
@@ -30,7 +29,8 @@ Contributions, in the order the evidence supports them.
 3. **A learned compressor with a largely negative evaluation.** A code language model
    trained by reinforcement learning rewrites OpenQASM 3.0 feature maps. It removes 76 to
    89 percent of the entangling gates at the two lower learning rates, mostly by merging
-   two of three members, and gains nothing under the noise-aware rule. Two admissibility
+   two of three members; seven of nineteen policies emit the hand-designed warm-up circuit
+   itself, and under the noise-aware rule compression gains nothing. Two admissibility
    criteria were gamed by earlier policies; the article documents both.
 
 ## 2. Verify the article without running anything
@@ -217,19 +217,19 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 |---|---|---|
 | Table 1, conference comparison | prose | none |
 | Table 2, training configuration | prose | `results/corrected/frozen_config.json`, `training_provenance.json` |
-| Table 3, Fig. 2, committee structure | `emit_replicate_circuits.py`, `audit_effective_params.py` (see 9) | `corrected/structure.json`, `corrected/effective_params.json`, `corrected/circuits/` |
-| Table 4, Table A3, reward-seeded committees | `train_taskaware_grpo.py ... --reward-seed <seed>` then emit, audit, `eval_compression_matched.py` | `supplement/structure_rs.json`, `effective_params_rs.json`, `compression_matched_rs_*.json` |
-| Tables 5, 6, downstream compression | `eval_compression_matched.py` (see 9) | `corrected/compression_matched_corrected_{IoT,UNSW,Bot}.json` |
-| Table 7, Fig. 3 a to c, six-qubit fusion | `eval_fusion_full.py --datasets <csv> --num-qubits 6 --seeds 0,1,2,3,4 --output results/fusion_v2_<tag>.json` | `fusion_v2_IoT_Orig.json`, `fusion_v2_UNSW_NB1.json`, `fusion_v2_UNSW_201.json` |
-| Table 8, C sweep | same script with `--noise-grid 0.0,0.002,0.005,0.01 --no-ablation --c-values 0.1,1,10,100` | `corrected/c_sweep_{IoT,UNSW,Bot}.json` |
-| Table 9, tau at eight and ten qubits; Table 11, Fig. 3 d, realistic family | same script with `--num-qubits 8` or `10 --noise-pairs 0.0:0.0,0.0005:0.01,0.0005:0.02 --no-ablation --resume` | `fusion_realistic_{8q,10q}.json` (UNSW-NB15), `corrected/fusion_realistic_{8q,10q}_{IoT,Bot}.json` |
-| Table 10, tau at six qubits | same runs as Table 7 (`NWE3@<tau>` keys) | as Table 7 |
-| Table 12, device-derived noise models | `eval_fusion_full.py ... --device-noise <snapshot> --no-ablation` for each of six snapshots | `supplement/fusion_6q_<snapshot>_{IoT,UNSW,Bot}.json`, metadata in `supplement/device_snapshots.json` |
-| Table 13, six-qubit confirmation splits 5 to 14 | `eval_fusion_full.py ... --seeds 5,...,14 --noise-grid 0.0,0.002,0.005,0.01,0.03,0.05,0.1 --no-ablation` | `supplement/fusion_6q_splits5to14_{IoT,UNSW,Bot}.json` |
-| Table 14, fifteen splits at ten qubits | three runs merged | `fusion_10q_merged15.json` (its `source_files` key), `fusion_10q_confirmatory10.json` |
-| Table 15, Fig. 4, Table A1, member agreement | `analyze_member_agreement.py` | `member_agreement.json` |
-| Table 16, classical baselines | `eval_classical_baseline.py`, `eval_classical_fullfeat.py` | `classical_baseline_200.json`, `classical_baseline_fullfeat_200.json` |
-| Table A2, submitted policies | as Table 3 on `results/replicate_circuits/` | `replicates_structure.json`, `effective_params.json` |
+| Table 13, Fig. 4, committee structure | `emit_replicate_circuits.py`, `audit_effective_params.py` (see 9) | `corrected/structure.json`, `corrected/effective_params.json`, `corrected/circuits/` |
+| Table 14, Table A3, reward-seeded committees | `train_taskaware_grpo.py ... --reward-seed <seed>` then emit, audit, `eval_compression_matched.py` | `supplement/structure_rs.json`, `effective_params_rs.json`, `compression_matched_rs_*.json` |
+| Tables 15, 16, downstream compression | `eval_compression_matched.py` (see 9) | `corrected/compression_matched_corrected_{IoT,UNSW,Bot}.json` |
+| Table 3, Fig. 2 a to c, six-qubit fusion | `eval_fusion_full.py --datasets <csv> --num-qubits 6 --seeds 0,1,2,3,4 --output results/fusion_v2_<tag>.json` | `fusion_v2_IoT_Orig.json`, `fusion_v2_UNSW_NB1.json`, `fusion_v2_UNSW_201.json` |
+| Table 4, C sweep | same script with `--noise-grid 0.0,0.002,0.005,0.01 --no-ablation --c-values 0.1,1,10,100` | `corrected/c_sweep_{IoT,UNSW,Bot}.json` |
+| Table 5, tau at eight and ten qubits; Table 7, Fig. 2 d, realistic family | same script with `--num-qubits 8` or `10 --noise-pairs 0.0:0.0,0.0005:0.01,0.0005:0.02 --no-ablation --resume` | `fusion_realistic_{8q,10q}.json` (UNSW-NB15), `corrected/fusion_realistic_{8q,10q}_{IoT,Bot}.json` |
+| Table 6, tau at six qubits | same runs as Table 3 (`NWE3@<tau>` keys) | as Table 3 |
+| Table 8, device-derived noise models | `eval_fusion_full.py ... --device-noise <snapshot> --no-ablation` for each of six snapshots | `supplement/fusion_6q_<snapshot>_{IoT,UNSW,Bot}.json`, metadata in `supplement/device_snapshots.json` |
+| Table 9, six-qubit confirmation splits 5 to 14 | `eval_fusion_full.py ... --seeds 5,...,14 --noise-grid 0.0,0.002,0.005,0.01,0.03,0.05,0.1 --no-ablation` | `supplement/fusion_6q_splits5to14_{IoT,UNSW,Bot}.json` |
+| Table 10, fifteen splits at ten qubits | three runs merged | `fusion_10q_merged15.json` (its `source_files` key), `fusion_10q_confirmatory10.json` |
+| Table 11, Fig. 3, Table A1, member agreement | `analyze_member_agreement.py` | `member_agreement.json` |
+| Table 12, classical baselines | `eval_classical_baseline.py`, `eval_classical_fullfeat.py` | `classical_baseline_200.json`, `classical_baseline_fullfeat_200.json` |
+| Table A2, submitted policies | as Table 13 on `results/replicate_circuits/` | `replicates_structure.json`, `effective_params.json` |
 | Floor-referenced gate, cost-weight sensitivity | `analyze_revision_scope.py` | `corrected/absolute_floor_gate_all.json`, `corrected/cost_weight_sensitivity_corrected.json` |
 | Reward-loop rescoring | `rescore_reward_loop.py` | `reward_loop_rescoring.json`, `corrected/rescoring_*.json` (only the `"42"` block is the subsample the policies saw) |
 | Accuracy-weighting probe | `probe_qwe_weights.py` | `corrected/qwe_weight_probe.json` |

@@ -168,6 +168,41 @@ def check_corrected(c):
                 c.eq(f"{texname} {cur[0]}q {cur[1]} p2={p2} {key}", got, float(v)); n += 1
         print(f"{texname}  {n} cells checked")
 
+    # supplement tables (results/supplement/tex) against the summary that analyze_supplement.py wrote
+    sup = RESULTS / "supplement"; summ = c.load("supplement/summary_supplement.json")
+    if summ:
+        S1 = summ["S1"]; tex = sup / "tex" / "table_s1_splits5to14.tex"; n = 0; cur = None
+        for line in tex.read_text().splitlines():
+            m = re.match(r"\\multirow\{\d+\}\{\*\}\{([^}]+)\}", line)
+            if m: cur = m.group(1); continue
+            if cur is None or not line.startswith(" & $"): continue
+            f = line.split("&"); p1 = re.search(r"\$([\d.]+)\$", f[1]).group(1)
+            nk = next(k for k in S1[cur] if float(k) == float(p1)); cell = S1[cur][nk]
+            for j, rule in ((2, "QVE3"), (3, "QWE3"), (4, "NWE3@0.05")):
+                mu, sd = re.findall(r"[\d.]+", f[j])[:2]
+                c.eq(f"S1 {cur} p1={p1} {rule} mean", cell[rule]["mean"], float(mu)); c.eq(f"S1 {cur} p1={p1} {rule} sd", cell[rule]["sd"], float(sd)); n += 2
+            w, t, l = re.findall(r"\d+", f[5])[:3]; v = cell["NWE3_vs_QVE3"]
+            c.eq(f"S1 {cur} p1={p1} wtl", (v["wins"], v["ties"], v["losses"]) == (int(w), int(t), int(l)), True, 0); n += 1
+        print(f"table_s1_splits5to14.tex  {n} cells checked")
+        S2 = summ["S2"]; tex = sup / "tex" / "table_s2_device.tex"; n = 0; cur = None
+        for line in tex.read_text().splitlines():
+            m = re.search(r"texttt\{(fake\\_\w+)\}", line)
+            if m: cur = m.group(1).replace("\\_", "_"); continue
+            if cur is None or not line.startswith(" & "): continue
+            f = line.split("&"); ds = f[1].strip(); cell = S2[cur][ds]
+            vals = [float(x) for x in re.findall(r"\d\.\d{3}", line)]
+            want = [cell["QVE3"]["mean"], cell["QWE3"]["mean"], cell["NWE3@0.05"]["mean"], cell["branch_mean"]["Z1"], cell["branch_mean"]["ZZ2"], cell["branch_mean"]["Pauli1"]]
+            for k, (g, w_) in enumerate(zip(want, vals)): c.eq(f"S2 {cur} {ds} col{k}", g, w_); n += 1
+        print(f"table_s2_device.tex  {n} cells checked")
+        S3 = c.load("supplement/structure_rs.json"); tex = sup / "tex" / "table_s3_structure.tex"; n = 0
+        for line in tex.read_text().splitlines():
+            m = re.match(r"^(\d+) & \$(\d+)/(\d+)/(\d+)\$ & \$(\d+)\$ & \$([\d.]+)\\%\$ & \$(\d+)\$", line)
+            if not m or m.group(1) == "42": continue
+            v = S3[f"rs_lr5_s{m.group(1)}"]
+            c.eq(f"S3 s{m.group(1)} members", v["per_member_2q"] == [int(m.group(2)), int(m.group(3)), int(m.group(4))], True, 0)
+            c.eq(f"S3 s{m.group(1)} total", v["total_2q"], int(m.group(5)), 0); c.eq(f"S3 s{m.group(1)} reduction", v["reduction_pct"], float(m.group(6)), 0.06); n += 3
+        print(f"table_s3_structure.tex  {n} cells checked")
+
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__,

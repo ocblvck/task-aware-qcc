@@ -41,7 +41,8 @@ python scripts/make_revision_tables.py          # regenerates results/corrected/
 python scripts/make_figures.py --check          # cross-checks figure values against results/
 ```
 
-`verify_paper_numbers.py` compares 549 table cells against the JSON that produced them.
+`verify_paper_numbers.py` compares 816 table cells (submitted, corrected and supplement
+tables) against the JSON that produced them.
 It does **not** check numbers quoted in running text, the values of the two downstream
 compression tables (it checks their split counts), or the C sweep table. Those tables are
 generated directly from JSON by `make_revision_tables.py`, which is the check for them.
@@ -174,10 +175,25 @@ Two conda environments, because the quantum stack and the training stack conflic
 | `qiskit` | every `eval_*`, `analyze_*`, `make_*`, `verify_*` script | `environment/requirements-qiskit-env.txt` (Python 3.11, qiskit 1.4.4, qiskit-aer 0.15.1 GPU build, qiskit-machine-learning, scikit-learn 1.7.2, SciPy 1.15.3, cupy 13.6, qiskit-ibm-runtime 0.42.0) |
 | `taqcc-grpo` | training, emission, the effective-parameter audit, rescoring and `analyze_revision_scope.py` (anything that loads OpenQASM 3 needs `qiskit_qasm3_import`) | `environment/requirements-taqcc-grpo-env.txt` (adds torch 2.6.0+cu124, trl 0.26.2, peft, bitsandbytes, liger-kernel) |
 
-Training also needs the GRPO trainer of `https://github.com/ocblvck/quantum-cirq-opt` at
-commit `cdb0420` with the seven-line patch `environment/quantum-cirq-opt_seed.patch`
-applied (it passes the training seed to `TrainingArguments`). Put its `src/` on
-`PYTHONPATH`. Evaluation and verification do not need it.
+Both environments can run the effective-parameter audit; loading OpenQASM 3 needs
+`qiskit-qasm3-import`, which is now pinned in both lists.
+
+**Relationship to `quantum-cirq-opt`.** Training (and only training) imports the GRPO
+trainer, the QASM parsing helpers and the format and syntax shaping rewards from our
+earlier repository `https://github.com/ocblvck/quantum-cirq-opt` (commit `cdb0420`). That
+repository is a general circuit-compression trainer; this one adds the task-aware reward,
+the effective-parameter test, the kernel and fusion evaluation, and every result of the
+article. The trainer as published did not pass a seed to `TrainingArguments`; the
+seven-line patch `environment/quantum-cirq-opt_seed.patch` (adds a `seed` field to
+`GRPOTrainingConfig` and passes `seed` and `data_seed` to the trainer) was applied in our
+working copy for every run reported here and is reproduced in this repository so that a
+third party can apply it with `git apply`. Put the patched `src/` on `PYTHONPATH`.
+Evaluation, analysis and verification do not need it.
+
+Data location. Every script reads the data directory from `--data-dir`, whose default is
+the environment variable `TAQCC_DATA_DIR` (falling back to `./data`). The queue scripts
+`scripts/run_*.sh` still carry this workstation's absolute paths and are kept as a record
+of exactly what was run; a third party would edit `DATA` and `PY` at their top.
 
 Hardware used: one workstation with three NVIDIA RTX A6000 (48 GB), AMD Threadripper PRO
 3995WX, 1 TB RAM, Ubuntu with kernel 6.8. One GPU job at a time, 16 CPU threads. A CPU
@@ -214,7 +230,11 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 | Tables A3, A4, submitted compression arms | `eval_compression_matched.py` | `compression_matched_cmpUNSW.json`, `compression_matched_cmpBot.json` |
 | Floor-referenced gate, cost-weight sensitivity | `analyze_revision_scope.py` | `corrected/absolute_floor_gate_all.json`, `corrected/cost_weight_sensitivity_corrected.json` |
 | Reward-loop rescoring | `rescore_reward_loop.py` | `reward_loop_rescoring.json`, `corrected/rescoring_*.json` (only the `"42"` block is the subsample the policies saw) |
-| Supplement | `scripts/run_supplement.sh` | `results/supplement/` |
+| Table 14, six-qubit confirmation splits 5 to 14 | `eval_fusion_full.py ... --seeds 5,...,14 --noise-grid 0.0,0.002,0.005,0.01,0.03,0.05,0.1 --no-ablation` | `supplement/fusion_6q_splits5to14_{IoT,UNSW,Bot}.json` |
+| Table 13, device-derived noise models | `eval_fusion_full.py ... --device-noise <snapshot> --no-ablation` for each of six snapshots | `supplement/fusion_6q_<snapshot>_{IoT,UNSW,Bot}.json`, metadata in `supplement/device_snapshots.json` |
+| Table 4 and appendix table, reward-seeded committees | `train_taskaware_grpo.py ... --reward-seed <seed>` then emit, audit, `eval_compression_matched.py` | `supplement/structure_rs.json`, `effective_params_rs.json`, `compression_matched_rs_*.json` |
+| Supplement tables as LaTeX and statistics | `scripts/analyze_supplement.py` | `supplement/summary_supplement.json`, `supplement/tex/*.tex` |
+| Whole supplement, unattended | `scripts/run_supplement.sh` | `results/supplement/` (protocol frozen in `PROTOCOL.md` and `frozen_supplement.json` before launch) |
 | Fig. 1 | TikZ schematic in the manuscript source | none |
 
 ## 9. Run the main experiments
@@ -288,5 +308,6 @@ results/            see section 3
   cells that matter most. Result files do not embed a git commit; `job_records.jsonl`
   records the commit of each queued job from 15 September 2026 onward. No scientific
   source file changed between commit `07c2ab7` and the end of the revision campaign.
-- **Archive.** A permanent archive of a tagged release is planned (Zenodo). No DOI exists
-  yet, and none is claimed until it does.
+- **Archive.** The state reported in the revised article is tagged `v1.1-revision`. A
+  permanent archive of that tag is planned (Zenodo). No DOI exists yet, and none is
+  claimed until it does.

@@ -99,6 +99,7 @@ def s3():
                 rs = {a: float(np.mean(bn[nk][a]["fusion"][rule]["mcc_seeds"])) for a in bn[nk] if a.startswith("rs_")}
                 co = {a: float(np.mean(cb[nk][a]["fusion"][rule]["mcc_seeds"])) for a in cb[nk] if a.startswith("corr_lr5_")}
                 r[nk][rule] = {"reward_seed_equals_training_seed": rs, "reward_seed_42": co,
+                               "seed42_shared_member": float(np.mean(cb[nk]["corr_lr5_s42"]["fusion"][rule]["mcc_seeds"])),
                                "uncompressed": float(np.mean(cb[nk]["uncompressed"]["fusion"][rule]["mcc_seeds"])), "linear": float(np.mean(cb[nk]["linear"]["fusion"][rule]["mcc_seeds"]))}
         res.setdefault("downstream", {})[name] = r
     return res
@@ -161,11 +162,69 @@ Snapshot & Dataset & QVE3 & QWE3 & NWE3 & $Z$ & $ZZ$ & Pauli & W/T/L \\
 \end{table}
 """)
 
+def tex_s3(R):
+    st = R.get("structure", {}); dn = R.get("downstream", {})
+    corr = json.load(open(ROOT / "results/corrected/structure.json"))
+    L = []
+    rows = [("corr_lr5_s42", "42 (shared design)", corr["corr_lr5_s42"])] + [(k, k.split("_s")[-1], v) for k, v in sorted(st.items())]
+    for name, seed, v in rows:
+        pm = "/".join(str(x) for x in v["per_member_2q"]); same = "yes" if v["member_md5"][1] == "547e3a9f" and v["member_md5"][2] == "547e3a9f" else "no"
+        eff = v.get("effective", 18)
+        L.append(f"{seed} & ${pm}$ & ${v['total_2q']}$ & ${v['reduction_pct']:.1f}\\%$ & ${v['distinct_members']}$ & {same} & ${eff}/18$ \\\\")
+    (TEX / "table_s3_structure.tex").write_text(r"""\begin{table}[t]
+\centering
+\caption{Committees emitted at the confirmatory learning rate when the reward subsample
+is drawn with the training seed instead of the fixed seed 42. Seed 42 is the run of
+Table~\ref{tab:compstructure} whose reward seed already equals its training seed.
+``Warm-up circuit'' marks committees whose two entangling members are byte-identical to
+the linear-entanglement Pauli circuit that the supervised warm-up teaches.}
+\label{tab:s3structure}
+\begin{tabular}{@{}lrrrrlr@{}}
+\toprule
+Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Warm-up circuit & Effective \\
+\midrule
+""" + "\n".join(L) + r"""
+\bottomrule
+\end{tabular}
+\end{table}
+""")
+    L = []
+    for name, r in dn.items():
+        nks = sorted(r, key=float); L.append(f"\\multirow{{{len(nks)}}}{{*}}{{{name}}}")
+        for nk in nks:
+            cells = []
+            for rule in ("QVE3", "NWE3"):
+                x = r[nk][rule]; rs = list(x["reward_seed_equals_training_seed"].values()); co = list(x["reward_seed_42"].values())
+                cells += [f"${np.mean(rs):.3f}$", f"${np.mean(co):.3f}$", f"${x['linear']:.3f}$"]
+            L.append(f" & ${float(nk):g}$ & " + " & ".join(cells) + " \\\\")
+        L.append("\\midrule")
+    (TEX / "table_s3_downstream.tex").write_text(r"""\begin{table}[t]
+\centering
+\caption{Downstream Matthews correlation of the reward-seeded committees (mean over
+policy seeds 43 to 46 and over five data splits) next to the shared-subsample committees
+of Tables~\ref{tab:compdownstream} and~\ref{tab:compdownstream-nwe} (seeds 42 to 46)
+and the hand-designed substitution, coupled family, six qubits.}
+\label{tab:s3downstream}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+& & \multicolumn{3}{c}{QVE3, majority voting} & \multicolumn{3}{c}{NWE3, noise-aware} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Dataset & $p_1$ & seeded & shared & linear & seeded & shared & linear \\
+\midrule
+""" + "\n".join(L[:-1]) + r"""
+\bottomrule
+\end{tabular}
+\end{table}
+""")
+
 if __name__ == "__main__":
     out = {"S1": s1(), "S2": s2(), "S3": s3()}
     atomic_write_json(SUP / "summary_supplement.json", out, indent=1)
     if out["S1"]: tex_s1(out["S1"])
     if out["S2"]: tex_s2(out["S2"])
+    if out["S3"]: tex_s3(out["S3"])
     for name, r in out["S1"].items():
         print("S1", name)
         for nk in sorted(r, key=float):

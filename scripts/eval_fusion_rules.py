@@ -22,6 +22,7 @@ Run:
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import sys
 from pathlib import Path
@@ -39,7 +40,7 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", default="IoT_Original_Distribution.csv,UNSW_NB15.csv,"
                                           "UNSW_2018_IoT_Botnet_Final_10_Best.csv")
-    ap.add_argument("--data-dir", default="/home/chibuike/quantum-ml-iot-nid")
+    ap.add_argument("--data-dir", default=os.environ.get("TAQCC_DATA_DIR", "data"))
     ap.add_argument("--num-qubits", type=int, default=6)
     ap.add_argument("--train-size", type=int, default=48)
     ap.add_argument("--test-size", type=int, default=160)

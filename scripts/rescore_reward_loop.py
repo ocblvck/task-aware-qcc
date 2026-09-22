@@ -2,6 +2,7 @@
 against: UNSW-NB15, 6 qubits, 16 train / 8 test from a 4000-record pool, p1=0.01,
 accuracy retention. Answers Reviewer 2: did the inert-parameter circuits earn their reward
 through genuinely retained accuracy on this tiny subsample?"""
+import os
 import sys, json, argparse
 from pathlib import Path
 sys.path.insert(0, "/home/chibuike/task-aware-qcc/src")
@@ -27,7 +28,7 @@ COMMITTEE=[("Z",1,"full"),("ZZ",2,"full"),("Pauli",1,"full")]
 cfg=TaskAwareRewardConfig(util_metric=args.util_metric, util_reference=args.util_reference, require_effective=args.require_effective)
 out={"protocol":f"UNSW_NB15, 6q, train {args.train_size} / test {args.test_size}, pool 4000, p1=0.01, util_metric={args.util_metric}, reference={args.util_reference}, require_effective={args.require_effective}","by_seed":{}}
 for seed in [int(s) for s in args.seeds.split(",")]:
-    X_tr,X_te,y_tr,y_te=load_split("/home/chibuike/quantum-ml-iot-nid/UNSW_NB15.csv",6,args.train_size,args.test_size,pool_size=4000,seed=seed)
+    X_tr,X_te,y_tr,y_te=load_split(os.path.join(os.environ.get("TAQCC_DATA_DIR", "data"), "UNSW_NB15.csv"),6,args.train_size,args.test_size,pool_size=4000,seed=seed)
     dcfg=DownstreamConfig(num_qubits=6, noise_p1=0.01, seed=seed, gpu=True)
     rec={"test_class_counts":[int((y_te==c).sum()) for c in (0,1)],"train_class_counts":[int((y_tr==c).sum()) for c in (0,1)],"models":{}}
     for model in [m for m in args.models.split(",") if m]:

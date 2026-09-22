@@ -19,6 +19,7 @@ Run (one qubit count per process, parallelised by the caller):
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import sys
 from pathlib import Path
@@ -35,7 +36,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dataset", default="UNSW_NB15.csv")
-    ap.add_argument("--data-dir", default="/home/chibuike/quantum-ml-iot-nid")
+    ap.add_argument("--data-dir", default=os.environ.get("TAQCC_DATA_DIR", "data"))
     ap.add_argument("--num-qubits", type=int, required=True)
     ap.add_argument("--train-size", type=int, default=48)
     ap.add_argument("--test-size", type=int, default=64)

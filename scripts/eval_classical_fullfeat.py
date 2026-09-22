@@ -12,7 +12,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.metrics import matthews_corrcoef, accuracy_score
 from taqcc.data import DataProcessor, _detect_delimiter, load_split
-DD="/home/chibuike/quantum-ml-iot-nid"
+import os
+DD=os.environ.get("TAQCC_DATA_DIR", "data")
 DS={"IoTID20":"IoT_Original_Distribution.csv","UNSW-NB15":"UNSW_NB15.csv","Bot-IoT":"UNSW_2018_IoT_Botnet_Final_10_Best.csv"}
 def models(seed): return {
   "RandomForest": RandomForestClassifier(n_estimators=100, random_state=seed, class_weight="balanced"),

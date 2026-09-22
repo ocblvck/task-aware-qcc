@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{Committees emitted at the confirmatory learning rate when the reward subsample
+is drawn with the training seed instead of the fixed seed 42. Seed 42 is the run of
+Table~\ref{tab:compstructure} whose reward seed already equals its training seed.
+``Warm-up circuit'' marks committees whose two entangling members are byte-identical to
+the linear-entanglement Pauli circuit that the supervised warm-up teaches.}
+\label{tab:s3structure}
+\begin{tabular}{@{}lrrrrlr@{}}
+\toprule
+Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Warm-up circuit & Effective \\
+\midrule
+42 (shared design) & $0/10/10$ & $20$ & $77.8\%$ & $2$ & yes & $18/18$ \\
+43 & $0/10/10$ & $20$ & $77.8\%$ & $2$ & yes & $18/18$ \\
+44 & $0/10/10$ & $20$ & $77.8\%$ & $2$ & yes & $18/18$ \\
+45 & $0/10/10$ & $20$ & $77.8\%$ & $2$ & yes & $18/18$ \\
+46 & $0/6/6$ & $12$ & $86.7\%$ & $2$ & no & $18/18$ \\
+\bottomrule
+\end{tabular}
+\end{table}

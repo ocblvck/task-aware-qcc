@@ -1,0 +1,182 @@
+{
+  "rs_lr5_s43__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s43__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s43__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s44__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s44__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s44__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s45__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s45__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s45__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s46__Pauli_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s46__ZZ_2_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  },
+  "rs_lr5_s46__Z_1_full": {
+    "num_qubits": 6,
+    "declared": 6,
+    "effective": 6,
+    "per_param": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_syntactic_check": true,
+    "gamed": false
+  }
+}

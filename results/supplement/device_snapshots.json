@@ -1,0 +1,586 @@
+{
+ "software": {
+  "qiskit": "1.4.4",
+  "qiskit_aer": "0.15.1",
+  "qiskit_ibm_runtime": "0.42.0"
+ },
+ "construction": "AerSimulator.from_backend(backend, method='density_matrix'); each feature map transpiled once with symbolic parameters (optimization_level=1, seed_transpiler=0, initial_layout qubits 0..5) to the snapshot basis and coupling map, then parameters bound per record; kernel = Tr(rho_a rho_b) from saved density matrices (no measurement, no readout error, no shot noise). Selection rule: every seven-qubit snapshot in the provider, fixed before any result was seen.",
+ "snapshots": {
+  "fake_casablanca": {
+   "backend_name": "fake_casablanca",
+   "processor": "1.1.14",
+   "num_qubits": 7,
+   "coupling_map": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "basis_gates": [
+    "cx",
+    "delay",
+    "id",
+    "measure",
+    "reset",
+    "rz",
+    "sx",
+    "x"
+   ],
+   "calibration_dates_in_snapshot": [
+    "2021-03-01 00:28:30-05:00",
+    "2021-03-15 14:43:21-04:00"
+   ],
+   "cx_error_min_median_max": [
+    0.007487093077592266,
+    0.013089923228494199,
+    0.018322434738265364
+   ],
+   "readout_error_median": 0.01739999999999997,
+   "t1_us_median": 88.06343398653307,
+   "t2_us_median": 77.27228483651834,
+   "transpiled": {
+    "Z": {
+     "cx": 0,
+     "depth": 4,
+     "logical_two_qubit": 0
+    },
+    "ZZ": {
+     "cx": 134,
+     "depth": 127,
+     "logical_two_qubit": 60
+    },
+    "Pauli": {
+     "cx": 64,
+     "depth": 68,
+     "logical_two_qubit": 30
+    }
+   }
+  },
+  "fake_jakarta": {
+   "backend_name": "fake_jakarta",
+   "processor": "1.4.8",
+   "num_qubits": 7,
+   "coupling_map": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "basis_gates": [
+    "cx",
+    "delay",
+    "for_loop",
+    "id",
+    "if_else",
+    "measure",
+    "reset",
+    "rz",
+    "switch_case",
+    "sx",
+    "x"
+   ],
+   "calibration_dates_in_snapshot": [
+    "2024-05-27 01:06:55-03:00",
+    "2024-05-27 15:32:24-03:00"
+   ],
+   "cx_error_min_median_max": [
+    0.006091969601690478,
+    0.00909301425184092,
+    0.013420197085121627
+   ],
+   "readout_error_median": 0.02529999999999999,
+   "t1_us_median": 117.51442449730037,
+   "t2_us_median": 34.22985291901501,
+   "transpiled": {
+    "Z": {
+     "cx": 0,
+     "depth": 4,
+     "logical_two_qubit": 0
+    },
+    "ZZ": {
+     "cx": 134,
+     "depth": 127,
+     "logical_two_qubit": 60
+    },
+    "Pauli": {
+     "cx": 64,
+     "depth": 68,
+     "logical_two_qubit": 30
+    }
+   }
+  },
+  "fake_lagos": {
+   "backend_name": "fake_lagos",
+   "processor": "1.6.6",
+   "num_qubits": 7,
+   "coupling_map": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "basis_gates": [
+    "cx",
+    "delay",
+    "for_loop",
+    "id",
+    "if_else",
+    "measure",
+    "reset",
+    "rz",
+    "switch_case",
+    "sx",
+    "x"
+   ],
+   "calibration_dates_in_snapshot": [
+    "2024-05-27 01:09:12-03:00",
+    "2024-05-27 15:51:15-03:00"
+   ],
+   "cx_error_min_median_max": [
+    0.008261701229522717,
+    0.010729106982965475,
+    0.02897748999596947
+   ],
+   "readout_error_median": 0.16900000000000004,
+   "t1_us_median": 105.43661157788414,
+   "t2_us_median": 72.3991910306952,
+   "transpiled": {
+    "Z": {
+     "cx": 0,
+     "depth": 4,
+     "logical_two_qubit": 0
+    },
+    "ZZ": {
+     "cx": 134,
+     "depth": 127,
+     "logical_two_qubit": 60
+    },
+    "Pauli": {
+     "cx": 64,
+     "depth": 68,
+     "logical_two_qubit": 30
+    }
+   }
+  },
+  "fake_nairobi": {
+   "backend_name": "fake_nairobi",
+   "processor": "1.3.5",
+   "num_qubits": 7,
+   "coupling_map": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "basis_gates": [
+    "cx",
+    "delay",
+    "for_loop",
+    "id",
+    "if_else",
+    "measure",
+    "reset",
+    "rz",
+    "switch_case",
+    "sx",
+    "x"
+   ],
+   "calibration_dates_in_snapshot": [
+    "2024-05-27 01:09:32-03:00",
+    "2024-05-27 15:45:40-03:00"
+   ],
+   "cx_error_min_median_max": [
+    0.006790988836364892,
+    0.008594115909420164,
+    0.012572268228634498
+   ],
+   "readout_error_median": 0.022299999999999986,
+   "t1_us_median": 87.26538034205313,
+   "t2_us_median": 106.13173001967968,
+   "transpiled": {
+    "Z": {
+     "cx": 0,
+     "depth": 4,
+     "logical_two_qubit": 0
+    },
+    "ZZ": {
+     "cx": 134,
+     "depth": 127,
+     "logical_two_qubit": 60
+    },
+    "Pauli": {
+     "cx": 64,
+     "depth": 68,
+     "logical_two_qubit": 30
+    }
+   }
+  },
+  "fake_oslo": {
+   "backend_name": "fake_oslo",
+   "processor": "1.0.5",
+   "num_qubits": 7,
+   "coupling_map": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "basis_gates": [
+    "cx",
+    "delay",
+    "id",
+    "measure",
+    "reset",
+    "rz",
+    "sx",
+    "x"
+   ],
+   "calibration_dates_in_snapshot": [
+    "2022-07-14 22:01:55+02:00",
+    "2022-07-17 22:01:55+02:00"
+   ],
+   "cx_error_min_median_max": [
+    0.006658667905034887,
+    0.008958756306646692,
+    0.009496172164203343
+   ],
+   "readout_error_median": 0.01429999999999998,
+   "t1_us_median": 142.17817897014814,
+   "t2_us_median": 46.69878652698784,
+   "transpiled": {
+    "Z": {
+     "cx": 0,
+     "depth": 4,
+     "logical_two_qubit": 0
+    },
+    "ZZ": {
+     "cx": 134,
+     "depth": 127,
+     "logical_two_qubit": 60
+    },
+    "Pauli": {
+     "cx": 64,
+     "depth": 68,
+     "logical_two_qubit": 30
+    }
+   }
+  },
+  "fake_perth": {
+   "backend_name": "fake_perth",
+   "processor": "1.2.11",
+   "num_qubits": 7,
+   "coupling_map": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "basis_gates": [
+    "cx",
+    "delay",
+    "for_loop",
+    "id",
+    "if_else",
+    "measure",
+    "reset",
+    "rz",
+    "switch_case",
+    "sx",
+    "x"
+   ],
+   "calibration_dates_in_snapshot": [
+    "2024-05-26 01:12:53-03:00",
+    "2024-05-27 15:17:50-03:00"
+   ],
+   "cx_error_min_median_max": [
+    0.0048165171356507885,
+    0.008596726182629216,
+    0.016971063289400706
+   ],
+   "readout_error_median": 0.028999999999999915,
+   "t1_us_median": 123.0191042902877,
+   "t2_us_median": 95.06662329992108,
+   "transpiled": {
+    "Z": {
+     "cx": 0,
+     "depth": 4,
+     "logical_two_qubit": 0
+    },
+    "ZZ": {
+     "cx": 134,
+     "depth": 127,
+     "logical_two_qubit": 60
+    },
+    "Pauli": {
+     "cx": 64,
+     "depth": 68,
+     "logical_two_qubit": 30
+    }
+   }
+  }
+ }
+}

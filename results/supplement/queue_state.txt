@@ -1,0 +1,62 @@
+s1_6q_ext_IoT LAUNCHED gpu=0 attempt=1 09-21 13:04
+s1_6q_ext_IoT DONE 09-21 13:41
+s1_6q_ext_UNSW LAUNCHED gpu=0 attempt=1 09-21 13:42
+s1_6q_ext_UNSW DONE 09-21 14:18
+s1_6q_ext_Bot LAUNCHED gpu=0 attempt=1 09-21 14:19
+s1_6q_ext_Bot DONE 09-21 15:00
+s2_fake_casablanca_IoT LAUNCHED gpu=0 attempt=1 09-21 15:01
+s2_fake_casablanca_IoT DONE 09-21 15:17
+s2_fake_casablanca_UNSW LAUNCHED gpu=0 attempt=1 09-21 15:18
+s2_fake_casablanca_UNSW DONE 09-21 15:34
+s2_fake_casablanca_Bot LAUNCHED gpu=0 attempt=1 09-21 15:35
+s2_fake_casablanca_Bot DONE 09-21 15:50
+s2_fake_jakarta_IoT LAUNCHED gpu=0 attempt=1 09-21 15:51
+s2_fake_jakarta_IoT DONE 09-21 16:03
+s2_fake_jakarta_UNSW LAUNCHED gpu=0 attempt=1 09-21 16:04
+s2_fake_jakarta_UNSW DONE 09-21 16:16
+s2_fake_jakarta_Bot LAUNCHED gpu=0 attempt=1 09-21 16:17
+s2_fake_jakarta_Bot DONE 09-21 16:30
+s2_fake_lagos_IoT LAUNCHED gpu=0 attempt=1 09-21 16:31
+s2_fake_lagos_IoT DONE 09-21 16:45
+s2_fake_lagos_UNSW LAUNCHED gpu=0 attempt=1 09-21 16:46
+s2_fake_lagos_UNSW DONE 09-21 16:59
+s2_fake_lagos_Bot LAUNCHED gpu=0 attempt=1 09-21 17:00
+s2_fake_lagos_Bot DONE 09-21 17:14
+s2_fake_nairobi_IoT LAUNCHED gpu=0 attempt=1 09-21 17:15
+s2_fake_nairobi_IoT DONE 09-21 17:23
+s2_fake_nairobi_UNSW LAUNCHED gpu=0 attempt=1 09-21 17:24
+s2_fake_nairobi_UNSW DONE 09-21 17:31
+s2_fake_nairobi_Bot LAUNCHED gpu=0 attempt=1 09-21 17:32
+s2_fake_nairobi_Bot DONE 09-21 17:42
+s2_fake_oslo_IoT LAUNCHED gpu=0 attempt=1 09-21 17:43
+s2_fake_oslo_IoT DONE 09-21 18:00
+s2_fake_oslo_UNSW LAUNCHED gpu=0 attempt=1 09-21 18:01
+s2_fake_oslo_UNSW DONE 09-21 18:19
+s2_fake_oslo_Bot LAUNCHED gpu=0 attempt=1 09-21 18:20
+s2_fake_oslo_Bot DONE 09-21 18:39
+s2_fake_perth_IoT LAUNCHED gpu=0 attempt=1 09-21 18:40
+s2_fake_perth_IoT DONE 09-21 18:50
+s2_fake_perth_UNSW LAUNCHED gpu=0 attempt=1 09-21 18:51
+s2_fake_perth_UNSW DONE 09-21 19:00
+s2_fake_perth_Bot LAUNCHED gpu=0 attempt=1 09-21 19:01
+s2_fake_perth_Bot DONE 09-21 19:11
+rs_lr5_s43 LAUNCHED gpu=0 attempt=1 09-21 19:12
+rs_lr5_s43 DONE 09-21 22:08
+rs_lr5_s44 LAUNCHED gpu=0 attempt=1 09-21 22:09
+rs_lr5_s44 DONE 09-22 01:03
+rs_lr5_s45 LAUNCHED gpu=0 attempt=1 09-22 01:04
+rs_lr5_s45 DONE 09-22 03:46
+rs_lr5_s46 LAUNCHED gpu=0 attempt=1 09-22 03:47
+rs_lr5_s46 DONE 09-22 06:03
+emit_rs LAUNCHED gpu=0 attempt=1 09-22 06:04
+emit_rs DONE 09-22 06:09
+audit_rs LAUNCHED gpu=0 attempt=1 09-22 06:10
+cmp_rs_IoT LAUNCHED gpu=0 attempt=1 09-22 06:12
+audit_rs DONE 09-22 06:15
+cmp_rs_IoT DONE 09-22 07:00
+cmp_rs_UNSW LAUNCHED gpu=0 attempt=1 09-22 07:01
+cmp_rs_UNSW DONE 09-22 07:49
+cmp_rs_Bot LAUNCHED gpu=0 attempt=1 09-22 07:50
+cmp_rs_Bot DONE 09-22 08:39
+supplement_complete LAUNCHED gpu=0 attempt=1 09-22 08:40
+supplement_complete DONE 09-22 08:44

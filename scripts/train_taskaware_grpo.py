@@ -7,7 +7,7 @@ bitsandbytes) AND the quantum stack (qiskit + qiskit-aer + sklearn).
 
 Smoke test (few steps, tiny data; verifies the whole loop end to end):
   python scripts/train_taskaware_grpo.py --smoke \
-      --dataset UNSW_NB15.csv --data-dir /home/chibuike/quantum-ml-iot-nid
+      --dataset UNSW_NB15.csv --data-dir $TAQCC_DATA_DIR
 
 Real run (single node, 3x A6000 via accelerate):
   accelerate launch --num_processes 3 scripts/train_taskaware_grpo.py \
@@ -19,6 +19,7 @@ Real run (single node, 3x A6000 via accelerate):
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -33,7 +34,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dataset", default="UNSW_NB15.csv")
-    ap.add_argument("--data-dir", default="/home/chibuike/quantum-ml-iot-nid")
+    ap.add_argument("--data-dir", default=os.environ.get("TAQCC_DATA_DIR", "data"))
     ap.add_argument("--base-model", default="Qwen/Qwen2.5-Coder-3B-Instruct")
     ap.add_argument("--sft-adapter", default=None,
                     help="Path to SFT LoRA adapter to merge before RL (recommended)")

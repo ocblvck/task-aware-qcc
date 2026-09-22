@@ -15,6 +15,7 @@ Run:
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import sys
 from pathlib import Path
@@ -46,7 +47,7 @@ def main():
     ap.add_argument("--base", required=True)
     ap.add_argument("--model", action="append", default=[], help="label:adapter (empty=base)")
     ap.add_argument("--dataset", default="UNSW_NB15.csv")
-    ap.add_argument("--data-dir", default="/home/chibuike/quantum-ml-iot-nid")
+    ap.add_argument("--data-dir", default=os.environ.get("TAQCC_DATA_DIR", "data"))
     ap.add_argument("--num-qubits", type=int, default=6)
     ap.add_argument("--train-size", type=int, default=32)
     ap.add_argument("--test-size", type=int, default=32)

@@ -1,0 +1,38 @@
+\begin{table}[t]
+\centering
+\caption{Downstream Matthews correlation of the reward-seeded committees (mean over
+policy seeds 43 to 46 and over five data splits) next to the shared-subsample committees
+of Tables~\ref{tab:compdownstream} and~\ref{tab:compdownstream-nwe} (seeds 42 to 46)
+and the hand-designed substitution, coupled family, six qubits.}
+\label{tab:s3downstream}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+& & \multicolumn{3}{c}{QVE3, majority voting} & \multicolumn{3}{c}{NWE3, noise-aware} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Dataset & $p_1$ & seeded & shared & linear & seeded & shared & linear \\
+\midrule
+\multirow{5}{*}{IoTID20}
+ & $0$ & $0.567$ & $0.561$ & $0.580$ & $0.567$ & $0.561$ & $0.580$ \\
+ & $0.01$ & $0.540$ & $0.531$ & $0.527$ & $0.540$ & $0.531$ & $0.537$ \\
+ & $0.03$ & $0.103$ & $0.280$ & $0.000$ & $0.516$ & $0.530$ & $0.550$ \\
+ & $0.05$ & $0.075$ & $0.000$ & $0.000$ & $0.524$ & $0.535$ & $0.535$ \\
+ & $0.1$ & $0.059$ & $0.000$ & $0.000$ & $0.514$ & $0.514$ & $0.514$ \\
+\midrule
+\multirow{5}{*}{UNSW-NB15}
+ & $0$ & $0.667$ & $0.666$ & $0.673$ & $0.667$ & $0.666$ & $0.673$ \\
+ & $0.01$ & $0.614$ & $0.606$ & $0.600$ & $0.614$ & $0.606$ & $0.660$ \\
+ & $0.03$ & $0.193$ & $0.479$ & $0.089$ & $0.601$ & $0.631$ & $0.632$ \\
+ & $0.05$ & $0.117$ & $0.000$ & $0.000$ & $0.629$ & $0.629$ & $0.629$ \\
+ & $0.1$ & $0.050$ & $0.000$ & $0.000$ & $0.615$ & $0.615$ & $0.615$ \\
+\midrule
+\multirow{5}{*}{Bot-IoT}
+ & $0$ & $0.837$ & $0.830$ & $0.862$ & $0.837$ & $0.830$ & $0.862$ \\
+ & $0.01$ & $0.797$ & $0.805$ & $0.806$ & $0.797$ & $0.805$ & $0.806$ \\
+ & $0.03$ & $0.167$ & $0.441$ & $0.018$ & $0.782$ & $0.760$ & $0.838$ \\
+ & $0.05$ & $0.107$ & $0.002$ & $0.000$ & $0.750$ & $0.833$ & $0.833$ \\
+ & $0.1$ & $0.084$ & $0.000$ & $0.000$ & $0.820$ & $0.820$ & $0.820$ \\
+\bottomrule
+\end{tabular}
+\end{table}

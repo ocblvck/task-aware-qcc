@@ -13,6 +13,10 @@ def effsum(prefix, src): return sum(src.get(f"{prefix}__{t}",{}).get("effective"
 def w(name, s): (TEX/name).write_text(s); print("[tex]", TEX/name)
 
 # ---------------- Table 2 (corrected): structure per policy
+WARMUP_MD5 = "547e3a9f"   # md5 prefix of the warm-up's linear-entanglement Pauli circuit
+prov = json.load(open(OUT/"training_provenance.json")) if (OUT/"training_provenance.json").exists() else {}
+_ab = {"Z_1_full": "Z", "ZZ_2_full": "ZZ", "Pauli_1_full": "Pauli"}
+SUBST = {k: ("all" if len(v["members_substituted_by_source_at_emission"]) == 3 else ", ".join(_ab[m] for m in v["members_substituted_by_source_at_emission"])) for k, v in prov.items() if v.get("members_substituted_by_source_at_emission")}
 rows=[]
 for lr,lrtex in LRS:
     for s in SEEDS:
@@ -24,7 +28,9 @@ for lr,lrtex in LRS:
     body.append(f"\\multirow{{5}}{{*}}{{GRPO {lrtex}}}")
     for s in SEEDS:
         n=f"corr_{lr}_s{s}"; v=st[n]; e=effsum(n,eff)
-        body.append(f" & {s} & ${'/'.join(map(str,v['per_member_2q']))}$ & ${v['total_2q']}$ & ${v['reduction_pct']:.1f}\\%$ & ${v['distinct_members']}$ & ${e}/18$ \\\\")
+        wu = "yes" if v["member_md5"][1] == WARMUP_MD5 and v["member_md5"][2] == WARMUP_MD5 else "no"
+        sub = SUBST.get(n, "none")
+        body.append(f" & {s} & ${'/'.join(map(str,v['per_member_2q']))}$ & ${v['total_2q']}$ & ${v['reduction_pct']:.1f}\\%$ & ${v['distinct_members']}$ & ${e}/18$ & {wu} & {sub} \\\\")
     body.append("\\midrule")
 body=body[:-1]
 t2 = r"""\begin{table}[t]
@@ -33,16 +39,21 @@ t2 = r"""\begin{table}[t]
 objective, every learning rate at five training seeds. Two-qubit gate counts per member
 in the order $Z$, $ZZ$, Pauli; distinct counts how many of the three members are still
 different circuits; effective counts parameters passing the perturbation test of
-\eqref{eq:effective}, which every policy was trained against. Reference arms are those of
-Table~\ref{tab:compstructure-pre}.}
+\eqref{eq:effective}, which every policy was trained against. ``Warm-up'' marks committees
+whose two entangling members are byte-identical to the linear-entanglement Pauli circuit
+the supervised warm-up teaches; ``Substituted'' names members whose greedy decoding was
+invalid and for which the emission script substituted the source circuit. Reference arms
+are those of Table~\ref{tab:compstructure-pre}.}
 \label{tab:compstructure}
-\begin{tabular}{@{}llcccrc@{}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llcccrcll@{}}
 \toprule
-Arm & Seed & Per-member $g_2$ & Total $g_2$ & Reduction & Distinct & Effective \\
+Arm & Seed & $g_2$ per member & Total & Reduction & Distinct & Effective & Warm-up & Substituted \\
 \midrule
-Uncompressed & n/a & $0/60/30$ & $90$ & $0\%$ & $3$ & $18/18$ \\
-Hand-designed linear & n/a & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ \\
-Supervised warm-up & 42 & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ \\
+Uncompressed & n/a & $0/60/30$ & $90$ & $0\%$ & $3$ & $18/18$ & no & none \\
+Hand-designed linear & n/a & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ & no & none \\
+Supervised warm-up & 42 & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ & yes & none \\
 \midrule
 """ + "\n".join(body) + r"""
 \bottomrule

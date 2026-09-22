@@ -9,6 +9,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 4091.489,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -55,6 +56,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 10391.1172,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -101,6 +103,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 10279.4248,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -143,6 +146,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 10731.7817,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -185,6 +189,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 9733.6091,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -227,6 +232,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 10461.4598,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -269,6 +275,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 9614.5166,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -313,6 +320,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 7782.1858,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -355,6 +363,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 11327.3134,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -397,6 +406,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 9356.8417,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -439,6 +449,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 8654.5056,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -483,6 +494,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 9336.6084,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -525,6 +537,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 10154.9088,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -567,6 +580,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 10617.6263,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -609,6 +623,7 @@
   "exit_codes": [
    "0"
   ],
+  "train_runtime_seconds": 8256.0692,
   "global_step": 250,
   "max_steps": 250,
   "training_args": {

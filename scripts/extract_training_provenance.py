@@ -30,6 +30,8 @@ def main():
             lines = re.findall(r"^\[reward\] .*$", t, re.M); rec["reward_config_lines"] = sorted(set(lines)); rec["launches_in_log"] = len(lines)
             rec["resumed_from"] = re.findall(r"^\[resume\] continuing from (\S+)", t, re.M)
             rec["exit_codes"] = re.findall(r"^EXIT=(\d+)", t, re.M)
+            rt = re.findall(r"'train_runtime': ([\d.]+)", t)
+            rec["train_runtime_seconds"] = float(rt[-1]) if rt else None
         ts = Path(d) / "checkpoint-250" / "trainer_state.json"
         if ts.exists():
             s = json.loads(ts.read_text()); rec["global_step"] = s.get("global_step"); rec["max_steps"] = s.get("max_steps")

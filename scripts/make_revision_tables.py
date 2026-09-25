@@ -36,13 +36,14 @@ body=body[:-1]
 t2 = r"""\begin{table}[t]
 \centering
 \caption{Committee structure after compression at six qubits under the corrected
-objective, every learning rate at five training seeds. Two-qubit gate counts per member
-in the order $Z$, $ZZ$, Pauli; distinct counts how many of the three members are still
-different circuits; effective counts parameters passing the perturbation test of
-\eqref{eq:effective}, which every policy was trained against. ``Warm-up'' marks committees
-whose two entangling members are byte-identical to the linear-entanglement Pauli circuit
-the supervised warm-up teaches; ``Substituted'' names members whose greedy decoding was
-invalid and for which the emission script substituted the source circuit.}
+objective, every learning rate at five training seeds. Two-qubit gate counts are given
+per member in the order $Z$, $ZZ$, Pauli. ``Distinct'' counts how many of the three
+members are still different circuits. ``Effective'' counts the parameters passing the
+perturbation test of \eqref{eq:effective}, which every policy was trained against.
+``Warm-up'' marks committees whose two entangling members are byte-identical to the
+linear-entanglement Pauli circuit the supervised warm-up teaches. ``Substituted'' names
+members whose greedy decoding was invalid and for which the emission script substituted
+the source circuit.}
 \label{tab:compstructure}
 \footnotesize
 \setlength{\tabcolsep}{2pt}
@@ -72,8 +73,8 @@ for lr,lrtex in LRS:
 w("table2_pre.tex", r"""\begin{table}[t]
 \centering
 \caption{The policies of the submitted version, trained against the structural criterion
-alone with accuracy retention on a 16/8 subsample, audited after training with
-\eqref{eq:effective}. The seed-43 policy at the lowest rate is the one that satisfied the
+alone with an accuracy-retention reward on a 16/8 subsample (sixteen training and eight
+test records), and audited after training with \eqref{eq:effective}. The seed-43 policy at the lowest rate is the one that satisfied the
 structural criterion while leaving ten of eighteen parameters inert.}
 \label{tab:compstructure-pre}
 \begin{tabular}{@{}llcccrc@{}}
@@ -154,7 +155,7 @@ w("table_csweep.tex", r"""\begin{table}[t]
 \caption{Sensitivity to the support-vector regularization constant, six qubits, coupled
 family, on the same Gram matrices. Matthews correlation, mean over five splits. The
 article's tables use $C = 1$, fixed in advance. Off-diagonal spreads at $p_1 = 0.01$ are
-about $3\times10^{-5}$ for $ZZ$ and $10^{-3}$ for Pauli.}
+$10^{-5}$ to $3\times10^{-5}$ for $ZZ$ and $6\times10^{-4}$ to $2\times10^{-3}$ for Pauli.}
 \label{tab:csweep}
 \begin{tabular}{@{}lllrrrr@{}}
 \toprule

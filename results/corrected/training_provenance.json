@@ -10,6 +10,7 @@
    "0"
   ],
   "train_runtime_seconds": 4091.489,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -57,6 +58,7 @@
    "0"
   ],
   "train_runtime_seconds": 10391.1172,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -104,6 +106,7 @@
    "0"
   ],
   "train_runtime_seconds": 10279.4248,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -147,6 +150,7 @@
    "0"
   ],
   "train_runtime_seconds": 10731.7817,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -190,6 +194,7 @@
    "0"
   ],
   "train_runtime_seconds": 9733.6091,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -233,6 +238,11 @@
    "0"
   ],
   "train_runtime_seconds": 10461.4598,
+  "train_runtime_covers": "whole run",
+  "progress_bar_elapsed_seconds_at_step": {
+   "150": 6441,
+   "250": 10461
+  },
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -276,6 +286,11 @@
    "0"
   ],
   "train_runtime_seconds": 9614.5166,
+  "train_runtime_covers": "whole run",
+  "progress_bar_elapsed_seconds_at_step": {
+   "150": 6107,
+   "250": 9614
+  },
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -321,6 +336,7 @@
    "0"
   ],
   "train_runtime_seconds": 7782.1858,
+  "train_runtime_covers": "resumed final segment only",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -364,6 +380,7 @@
    "0"
   ],
   "train_runtime_seconds": 11327.3134,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -407,6 +424,7 @@
    "0"
   ],
   "train_runtime_seconds": 9356.8417,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -450,6 +468,7 @@
    "0"
   ],
   "train_runtime_seconds": 8654.5056,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -495,6 +514,7 @@
    "0"
   ],
   "train_runtime_seconds": 9336.6084,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -538,6 +558,7 @@
    "0"
   ],
   "train_runtime_seconds": 10154.9088,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -581,6 +602,7 @@
    "0"
   ],
   "train_runtime_seconds": 10617.6263,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -624,6 +646,7 @@
    "0"
   ],
   "train_runtime_seconds": 8256.0692,
+  "train_runtime_covers": "whole run",
   "global_step": 250,
   "max_steps": 250,
   "training_args": {

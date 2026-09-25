@@ -10,6 +10,10 @@
   ],
   "exit_codes": [],
   "train_runtime_seconds": 13314.9774,
+  "train_runtime_covers": "resumed final segment only",
+  "progress_bar_elapsed_seconds_at_step": {
+   "250": 13315
+  },
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -39,6 +43,11 @@
   ],
   "exit_codes": [],
   "train_runtime_seconds": 4719.09,
+  "train_runtime_covers": "resumed final segment only",
+  "progress_bar_elapsed_seconds_at_step": {
+   "150": 6987,
+   "250": 4719
+  },
   "global_step": 250,
   "max_steps": 250,
   "training_args": {
@@ -68,6 +77,11 @@
   ],
   "exit_codes": [],
   "train_runtime_seconds": 2631.7385,
+  "train_runtime_covers": "resumed final segment only",
+  "progress_bar_elapsed_seconds_at_step": {
+   "150": 6578,
+   "162": 6988
+  },
   "global_step": 250,
   "max_steps": 250,
   "training_args": {

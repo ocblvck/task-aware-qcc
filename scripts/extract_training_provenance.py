@@ -32,6 +32,15 @@ def main():
             rec["exit_codes"] = re.findall(r"^EXIT=(\d+)", t, re.M)
             rt = re.findall(r"'train_runtime': ([\d.]+)", t)
             rec["train_runtime_seconds"] = float(rt[-1]) if rt else None
+            # the trainer reports train_runtime for the launch that finished; after a resume
+            # that is the final segment only, so record every progress-bar timestamp too
+            segs = re.findall(r"(\d+)/250 \[(\d+):(\d\d):(\d\d)<", t)
+            rec["train_runtime_covers"] = "resumed final segment only" if rec.get("resumed_from") else "whole run"
+            if segs:
+                last = {}
+                for step, h, m, sec in segs:
+                    last[int(step)] = int(h) * 3600 + int(m) * 60 + int(sec)
+                rec["progress_bar_elapsed_seconds_at_step"] = {str(k): v for k, v in sorted(last.items()) if k in (150, 250) or k == max(last)}
         ts = Path(d) / "checkpoint-250" / "trainer_state.json"
         if ts.exists():
             s = json.loads(ts.read_text()); rec["global_step"] = s.get("global_step"); rec["max_steps"] = s.get("max_steps")

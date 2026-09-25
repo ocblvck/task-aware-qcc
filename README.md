@@ -41,7 +41,7 @@ python scripts/make_revision_tables.py          # regenerates results/corrected/
 python scripts/make_figures.py --check          # cross-checks figure values against results/
 ```
 
-`verify_paper_numbers.py` compares 816 table cells (submitted, corrected and supplement
+`verify_paper_numbers.py` compares 832 table cells (submitted, corrected and supplement
 tables) against the JSON that produced them.
 It does **not** check numbers quoted in running text, the values of the two downstream
 compression tables (it checks their split counts), or the C sweep table. Those tables are
@@ -200,7 +200,7 @@ Hardware used: one workstation with three NVIDIA RTX A6000 (48 GB), AMD Threadri
 fallback exists for every evaluation script (`--no-gpu`). Training needs one GPU with at
 least 40 GB.
 
-Expected cost on that machine: one policy 2.5 to 3.7 hours; emission of fifteen
+Expected cost on that machine: one policy 2.3 to 3.2 hours (train_runtime of the completed single-launch runs in `results/corrected/training_provenance.json`); emission of fifteen
 committees 15 minutes; matched downstream evaluation of fifteen committees on one dataset
 75 minutes; six-qubit fusion grid, five splits, under an hour per dataset; ten-qubit
 realistic family, five splits, about 10 hours per dataset (CPU bound). Storage: about
@@ -226,7 +226,7 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 | Table 6, tau at six qubits | same runs as Table 3 (`NWE3@<tau>` keys) | as Table 3 |
 | Table 8, device-derived noise models | `eval_fusion_full.py ... --device-noise <snapshot> --no-ablation` for each of six snapshots | `supplement/fusion_6q_<snapshot>_{IoT,UNSW,Bot}.json`, metadata in `supplement/device_snapshots.json` |
 | Table 9, six-qubit confirmation splits 5 to 14 | `eval_fusion_full.py ... --seeds 5,...,14 --noise-grid 0.0,0.002,0.005,0.01,0.03,0.05,0.1 --no-ablation` | `supplement/fusion_6q_splits5to14_{IoT,UNSW,Bot}.json` |
-| Table 10, fifteen splits at ten qubits | three runs merged | `fusion_10q_merged15.json` (its `source_files` key), `fusion_10q_confirmatory10.json` |
+| Table 10, fifteen splits at ten qubits | three runs merged; exact tests by `exact_tenq_tests.py` | `fusion_10q_merged15.json` (its `source_files` key), `fusion_10q_confirmatory10.json`, `corrected/tenq15_exact_tests.json` |
 | Table 11, Fig. 3, Table A1, member agreement | `analyze_member_agreement.py` | `member_agreement.json` |
 | Table 12, classical baselines | `eval_classical_baseline.py`, `eval_classical_fullfeat.py` | `classical_baseline_200.json`, `classical_baseline_fullfeat_200.json` |
 | Table A2, submitted policies | as Table 13 on `results/replicate_circuits/` | `replicates_structure.json`, `effective_params.json` |
@@ -236,7 +236,7 @@ directory. Tables are emitted as LaTeX by `scripts/make_revision_tables.py`; fig
 | Supplement tables as LaTeX and statistics | `scripts/analyze_supplement.py` | `supplement/summary_supplement.json`, `supplement/tex/*.tex` |
 | Manuscript tables as LaTeX | `scripts/make_revision_tables.py` | `corrected/tex/*.tex` |
 | Whole campaigns, unattended | `scripts/run_revision.sh`, `scripts/run_supplement.sh` | `results/corrected/`, `results/supplement/` (protocols frozen before launch) |
-| Fig. 1 | TikZ schematic in the manuscript source | none |
+| Fig. 1 | `figures/Fig1.tex` in the manuscript's figures folder (TikZ), compiled to Fig1.pdf | none |
 
 ## 9. Run the main experiments
 

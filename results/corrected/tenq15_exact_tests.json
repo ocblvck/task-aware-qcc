@@ -1,0 +1,47 @@
+{
+ "sequential_n15": {
+  "NWE3_vs_QVE3": {
+   "n": 15,
+   "mean_delta": 0.18165659736374878,
+   "wins": 12,
+   "ties": 3,
+   "losses": 0,
+   "p_exact_ties_dropped": 0.00048828125,
+   "p_holm": 0.0009765625
+  },
+  "NWE3_vs_QWE3": {
+   "n": 15,
+   "mean_delta": 0.0894602690051057,
+   "wins": 6,
+   "ties": 9,
+   "losses": 0,
+   "p_exact_ties_dropped": 0.03125,
+   "p_holm": 0.03125
+  }
+ },
+ "confirmation_n10": {
+  "NWE3_vs_QVE3": {
+   "n": 10,
+   "mean_delta": 0.1903357868466705,
+   "wins": 8,
+   "ties": 2,
+   "losses": 0,
+   "p_exact_ties_dropped": 0.0078125,
+   "p_holm": 0.015625
+  },
+  "NWE3_vs_QWE3": {
+   "n": 10,
+   "mean_delta": 0.09533207272667525,
+   "wins": 4,
+   "ties": 6,
+   "losses": 0,
+   "p_exact_ties_dropped": 0.125,
+   "p_holm": 0.125
+  }
+ },
+ "means_n15": {
+  "QVE3": 0.4819075107150769,
+  "QWE3": 0.57410383907372,
+  "NWE3@0.05": 0.6635641080788257
+ }
+}

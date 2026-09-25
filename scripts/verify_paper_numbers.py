@@ -203,6 +203,18 @@ def check_corrected(c):
             c.eq(f"S3 s{m.group(1)} total", v["total_2q"], int(m.group(5)), 0); c.eq(f"S3 s{m.group(1)} reduction", v["reduction_pct"], float(m.group(6)), 0.06); n += 3
         print(f"table_s3_structure.tex  {n} cells checked")
 
+    # Table 10 (fifteen-split ten-qubit comparison): exact tests with ties dropped, stored by
+    # scripts/exact_tenq_tests.py; the merged file keeps the zero-split variant computed at run time
+    ex = c.load("corrected/tenq15_exact_tests.json")
+    if ex:
+        want = {("sequential_n15", "NWE3_vs_QVE3"): (0.182, 0.0005, 0.0010, 12, 3, 0), ("sequential_n15", "NWE3_vs_QWE3"): (0.089, 0.031, 0.031, 6, 9, 0),
+                ("confirmation_n10", "NWE3_vs_QVE3"): (0.190, 0.0078, 0.016, 8, 2, 0), ("confirmation_n10", "NWE3_vs_QWE3"): (0.095, 0.125, 0.125, 4, 6, 0)}
+        for (blk, cmp_), (md, p, ph, w, t, l) in want.items():
+            r = ex[blk][cmp_]
+            c.eq(f"T10 {blk} {cmp_} delta", r["mean_delta"], md); c.eq(f"T10 {blk} {cmp_} p", r["p_exact_ties_dropped"], p, 0.0006)
+            c.eq(f"T10 {blk} {cmp_} holm", r["p_holm"], ph, 0.0006); c.eq(f"T10 {blk} {cmp_} wtl", (r["wins"], r["ties"], r["losses"]) == (w, t, l), True, 0)
+        print("Table 10 (exact tests)  16 values checked")
+
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__,

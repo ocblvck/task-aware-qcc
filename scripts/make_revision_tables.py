@@ -42,8 +42,7 @@ different circuits; effective counts parameters passing the perturbation test of
 \eqref{eq:effective}, which every policy was trained against. ``Warm-up'' marks committees
 whose two entangling members are byte-identical to the linear-entanglement Pauli circuit
 the supervised warm-up teaches; ``Substituted'' names members whose greedy decoding was
-invalid and for which the emission script substituted the source circuit. Reference arms
-are those of Table~\ref{tab:compstructure-pre}.}
+invalid and for which the emission script substituted the source circuit.}
 \label{tab:compstructure}
 \footnotesize
 \setlength{\tabcolsep}{2pt}
@@ -53,7 +52,7 @@ Arm & Seed & $g_2$ per member & Total & Reduction & Distinct & Effective & Warm-
 \midrule
 Uncompressed & n/a & $0/60/30$ & $90$ & $0\%$ & $3$ & $18/18$ & no & none \\
 Hand-designed linear & n/a & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ & no & none \\
-Supervised warm-up & 42 & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ & yes & none \\
+Supervised warm-up & 42 & $0/20/10$ & $30$ & $66.7\%$ & $3$ & $18/18$ & no & none \\
 \midrule
 """ + "\n".join(body) + r"""
 \bottomrule
@@ -142,7 +141,7 @@ cs=[]
 for tag,(dsf,dsn) in DS.items():
     bn=json.load(open(OUT/f"c_sweep_{tag}.json"))["datasets"][dsf]["by_noise"]
     cs.append(f"\\multirow{{8}}{{*}}{{{dsn}}}")
-    for nk in ("0.005","0.01"):
+    for nk in ("0.002","0.005","0.01"):
         byc=bn[nk]["by_C"]
         for lab,name in (("ZZ2","$ZZ$"),("Pauli1","Pauli")):
             cs.append(f" & ${nk}$ & {name} & "+" & ".join(f"${byc[c]['branch'][lab]['mcc_mean']:.3f}$" for c in ("0.1","1.0","10.0","100.0"))+" \\\\")
